@@ -2,9 +2,11 @@ package ex1;
 
 import java.util.Scanner;
 public class Competicao {
+
     public int qtdAtletas() {
         Scanner input = new Scanner(System.in);
         System.out.println("--- NOVA COMPETIÇÃO ---");
+
         System.out.print("Digite a quantidade de participantes: ");
         int qtd = input.nextInt();
         return qtd;
@@ -34,6 +36,7 @@ public class Competicao {
         float[][] matrizSaltos = new float[qtdDeAtletas][qtdDeSaltos];
         for(int i=0; i<matrizSaltos.length; i++) {
             System.out.printf("--- Atleta %s ---%n", nomes[i]);
+
             for(int j=0; j<matrizSaltos[i].length; j++) {
                 System.out.printf("Digite o %dº salto: ", j+1);
                 matrizSaltos[i][j] = input.nextFloat();
@@ -44,16 +47,17 @@ public class Competicao {
 
     public float[] mediaSaltos(String[] nome, float[][] saltos) {
         int tam = nome.length;
-        int qtdSaltos = 5;
 
         float[] resultadoMedia = new float[tam];
 
         for(int i=0; i<saltos.length; i++) {
+            int qtdSaltos = 0;
             int soma = 0;
+
             for(int j=0; j<saltos[i].length; j++) {
                 soma += saltos[i][j];
+                qtdSaltos++;
             }
-
             float result = (float) soma / qtdSaltos;
             resultadoMedia[i] = result;
         }
@@ -66,6 +70,7 @@ public class Competicao {
 
         for(int i=0; i<saltos.length; i++) {
             float maior = 0;
+
             for(int j=0; j<saltos[i].length; j++) {
                 if(saltos[i][j] > maior) {
                     maior = saltos[i][j];
@@ -84,6 +89,7 @@ public class Competicao {
         for(int i=0; i<nomes.length; i++) {
             if(i == 0) {
                 maior = maiorSalto[i];
+
             } else if(maiorSalto[i] > maior) {
                 maior = maiorSalto[i];
                 index = i;
@@ -115,9 +121,11 @@ public class Competicao {
 
     public void resultadoFinal(String[] nome, float[][] saltos, float[]mediaSaltos, String nomeVencedor) {
         System.out.println("Resultado Final: ");
+        
         for(int i=0; i<nome.length; i++) {
             System.out.printf("Atleta: %s %n", nome[i]);
             System.out.print("Saltos: ");
+
             for(int j=0; j<saltos[i].length; j++) {
                 if(j == saltos[i].length - 1) {
                     System.out.printf("%.1f%n", saltos[i][j]);
@@ -127,7 +135,7 @@ public class Competicao {
             }
             System.out.printf("Média dos saltos: %.1fm %n%n", mediaSaltos[i]);
         }
-        System.out.printf("O vencedor da competição foi %s", nomeVencedor);
+        System.out.printf("O vencedor da competição com o maior salto foi %s", nomeVencedor);
     }
 
 }
