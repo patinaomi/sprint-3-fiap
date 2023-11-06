@@ -135,7 +135,7 @@ public class Competicao {
             }
             System.out.printf("Média dos saltos: %.1fm %n%n", mediaSaltos[i]);
         }
-        System.out.printf("O vencedor da competição com o maior salto foi %s", nomeVencedor);
+        System.out.printf("O vencedor da competição com o maior salto foi %s.", nomeVencedor);
     }
 
 }
