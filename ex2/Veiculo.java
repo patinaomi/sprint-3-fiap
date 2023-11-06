@@ -67,7 +67,7 @@ public class Veiculo {
     public void relatorioFinal(String[] modelos, float[] km, float[] kmDistancia, float[] gastoTotal) {
         System.out.println("Relatório Final: ");
         for(int i=0; i<km.length; i++) {
-            System.out.printf("%d - %s - %.1f - %.1f litros - R$%.2f%n", i+1, modelos[i], km[i], kmDistancia[i], gastoTotal[i]);
+            System.out.printf("%d - %-10s - %.1f - %.1f litros - R$%.2f%n", i+1, modelos[i], km[i], kmDistancia[i], gastoTotal[i]);
         }
         comparacaoMenor(modelos, gastoTotal);
     }
