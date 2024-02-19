@@ -11,11 +11,11 @@ Repositório criado para a organização e hospedagem dos projetos de Challenge 
 ## Índice
  * [Challenge Salesforce](#challenge-salesforce)
  * [Índice](#índice)
- * [Desafios e Problemas](#desafios-e-problemas)
- * [Solução Apresentada](#solução-apresentada)
- * [Disciplinas](#disciplinas)
- * [Tecnologias Utilizadas](#tecnologias-utilizadas)
- * [Equipe](#equipe)
+ * [Desafios e Problemas](#%EF%B8%8F-desafios-e-problemas)
+ * [Solução Apresentada](#-solução-apresentada)
+ * [Disciplinas](#%EF%B8%8F-disciplinas)
+ * [Tecnologias Utilizadas](#%EF%B8%8F-tecnologias-utilizadas)
+ * [Equipe](#-equipe)
 
 ## ⁉️ Desafios e Problemas
 
