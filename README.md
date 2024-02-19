@@ -6,7 +6,7 @@
 
 ## Challenge Salesforce
 
-Repositório criado para a organização e hospedagem dos projetos de Challenge da FIAP, correspondentes às sprints 3 e 4.
+Repositório criado para a organização e hospedagem dos projetos de Challenge da FIAP, correspondentes à sprint 3.
 
 ## Índice
  * [Challenge Salesforce](#challenge-salesforce)
