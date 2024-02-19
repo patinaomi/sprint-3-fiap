@@ -14,20 +14,14 @@ Repositório criado para a organização e hospedagem dos projetos de Challenge 
  * [Desafios e Problemas](#desafios-e-problemas)
  * [Solução Apresentada](#solução-apresentada)
  * [Disciplinas](#disciplinas)
-   * [AI & Chatbot](#tecnologias-utilizadas)
-   * [Building Relational Database](#tecnologias-utilizadas)
-   * [Computational Thinking Using Python](#tecnologias-utilizadas)
-   * [Domain Driven Design](#tecnologias-utilizadas)
-   * [Responsive Web Development](#tecnologias-utilizadas)
-   * [Software Design & Total Experience](#tecnologias-utilizadas) 
  * [Tecnologias Utilizadas](#tecnologias-utilizadas)
  * [Equipe](#equipe)
 
-## 📜 Desafios e Problemas
+## ⁉️ Desafios e Problemas
 
 ## 🚩 Solução Apresentada
 
-## Disciplinas
+## 🗂️ Disciplinas
 * [AI & Chatbot](https://github.com/patinaomi/sprint-3-fiap/tree/main/AI%20%26%20Chatbot)
 * [Building Relational Database](https://github.com/patinaomi/sprint-3-fiap/tree/main/Building%20Relational%20Database)
 * [Computational Thinking Using Python](https://github.com/patinaomi/sprint-3-fiap/tree/main/Computational%20Thinking%20Using%20Python)
@@ -35,7 +29,7 @@ Repositório criado para a organização e hospedagem dos projetos de Challenge 
 * [Responsive Web Development](https://github.com/patinaomi/sprint-3-fiap/tree/main/Responsive%20Web%20Development)
 * [Software Design & Total Experience](https://github.com/patinaomi/sprint-3-fiap/tree/main/Software%20Design%20%26%20Total%20Experience)   
 
-## Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
 ## 🧑‍🤝‍🧑 Equipe
