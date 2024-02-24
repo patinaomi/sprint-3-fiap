@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+  
+body {
+    margin: 0;
+    padding: 0;
+    color: #3d3d3d;
+    font-family: 'Source Sans Pro', sans-serif;
+    background-blend-mode: #fff;
+  
+}
+
+.max-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* CARROSEL COM OS PRODUTOS */
+
+.carousel-container.max-container h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+    color: #3d3d3d;
+    padding-top: 30px;
+}
+
+
+
+.carousel {
+    position: relative;
+    max-width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-container {
+    max-width: 70%; /* Ajuste conforme necessário */
+    margin: 0 auto;
+}
+
+.carousel-item {
+    text-align: center;
+    flex: 0 0 100%;
+}
+
+.carousel-item img {
+    width: 20%;
+    height: auto;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+.carousel-indicators {
+    display: none;
+}
+
+.carousel-caption.d-none.d-md-block {
+    height: 200px;
+}
+
+/* Coletar Likes - Satisfação do cliente */
+
+ h2 {
+    font-size: 18px;
+    text-align: center;
+    margin: 50px;
+}
+
+.like {
+    text-align: center;
+    font-size: 48px;
+    align-items: center;
+    
+}
+
+.like i {
+    gap: 50px;
+    justify-content: space-evenly;
+    padding-left: 50px;
+    padding-bottom: 50px;
+}
