@@ -2,6 +2,8 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
   
 body {
@@ -23,23 +25,26 @@ body {
 /* PRIMEIRO BLOCO */ 
 
 section#intro {
-    background-color: #afc7eb;
+    background-color: #7ECECA;
     height: 100vh;
+
     
 }
 
 
 .content-intro {
     text-align: center;
+    align-items: center;
 }
   
 .content-intro h1 {
     font-size: 3rem;
-    padding-top: 45px;
+    padding-top: 60px;
 }
   
 .content-intro p {
     font-size: 20px;
+    padding-top: 50px;
 }
   
 .content-intro p:nth-of-type(2) {
@@ -49,7 +54,6 @@ section#intro {
 .intro-img {
     display: flex;
     justify-content: space-between;
-  
     margin: 20px;
 }
   

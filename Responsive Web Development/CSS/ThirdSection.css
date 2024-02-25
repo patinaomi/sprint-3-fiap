@@ -18,6 +18,11 @@ body {
     margin: 0 auto;
 }
 
+#intro {
+    background-color: #A0DED6;
+    height: 100vh;
+}
+
 /* CARROSEL COM OS PRODUTOS */
 
 .carousel-container.max-container h1 {
@@ -26,9 +31,8 @@ body {
     text-align: center;
     color: #3d3d3d;
     padding-top: 30px;
+    padding-bottom: 30px;
 }
-
-
 
 .carousel {
     position: relative;
@@ -55,6 +59,7 @@ body {
 .carousel-item img {
     width: 20%;
     height: auto;
+    padding-bottom: 30px;
 }
 
 .carousel-caption {
@@ -95,10 +100,12 @@ body {
 
 /* Coletar Likes - Satisfação do cliente */
 
- h2 {
+h2 {
     font-size: 18px;
     text-align: center;
     margin: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .like {
