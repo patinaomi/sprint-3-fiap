@@ -1,17 +1,24 @@
 
+import './style_Navbar.css'
+import imagem1 from '../../assets/Navbar/logo-removebg-preview_1.png'
+import imagem2 from '../../assets/Navbar/logo2-removebg-preview.png'
+
 
 export default function Navbar() {
     return (
-
         <header id="content-top">
             <div className="content-top--div max-container">
                 <div className="nav-wrapper">
 
-                 
-                    <div className="nav-wrapper--logo">
-                        <a href="index.html" className="top-nav--logo">Sales<span>force</span></a>
-                    </div> 
+                    <div className="nav-wrapper--logo--Tokito">
+                        <img  className="nav-wrapper--logo--Tokito" src={imagem2} alt="Logo da Tokito Techs" />
+                    </div>
 
+                    <div className="nav-wrapper--logo">
+                        <a href="index.html" className="top-nav--logo">Salesforce</a>
+                    </div>
+
+                    <div className="nav-wrapper--lista">
                     <nav className="nav-items">
                         <ul className="nav-items-list">
                             <li className="nav-items-list--1"><a href="produto.html">Produtos</a></li>
@@ -21,25 +28,24 @@ export default function Navbar() {
                             <li className="nav-items-list--1"><a href="equipe.html">Equipe</a></li>
                         </ul>
                     </nav>
-                    
+                    </div>
+
                     <div className="nav-util">
                         <div className="input-wrapper">
                             <button className="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="25px"
                                     width="25px">
-                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff"
+                                    <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="1.5" stroke="#fff"
                                         d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z">
                                     </path>
-                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#fff"
+                                    <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="1.5" stroke="#fff"
                                         d="M22 22L20 20">
 
                                     </path>
                                 </svg>
                             </button>
-                            <input placeholder="pesquisar.." className="input" name="text" type="text"/>
+                            <input placeholder="pesquisar.." className="input" name="text" type="text" />
                         </div>
-
-                        
 
                         <button className="Btn">
                             <div className="sign idioma">
@@ -47,17 +53,27 @@ export default function Navbar() {
                             </div>
                             <div className="text">
                                 <a href="#">Idioma</a>
-                            </div> 
+                            </div>
                         </button>
 
                         <button className="Btn">
                             <div className="sign mode">
                                 <i className="fa-solid fa-moon"></i>
-                            </div> 
+                            </div>
 
                             <div className="text">
                                 <a href="#">Mode</a>
-                            </div> 
+                            </div>
+                        </button>
+
+                        <button className="Btn">
+                            <div className="sign mode">
+                                <i className="fa-solid fa-robot"></i>
+                            </div>
+
+                            <div className="text">
+                                <a href="#">Chat</a>
+                            </div>
                         </button>
 
                         <button className="Btn">
@@ -74,10 +90,9 @@ export default function Navbar() {
                                 </a>
                             </div>
                         </button>
-                    </div> 
-                </div> 
-            </div> 
+                    </div>
+                </div>
+            </div>
         </header>
     )
 }
-
