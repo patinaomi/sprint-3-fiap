@@ -1,0 +1,327 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+}
+  
+
+:root {
+
+    /* Configuração para o menu */
+    --font-family-menu: Georgia, 'Times New Roman', Times, serif;
+    --font-size-menu-desktop: 22px;
+    --font-size-menu-tablet: 20px;
+    --font-size-menu-celular-medio: 18px;
+    --font-size-menu-celular-pequeno: 16px;
+
+    /* Configuração para os textos, começando do H1 até paragrafos. */
+    --font-family-titulo-pagina: Georgia, 'Times New Roman', Times, serif;
+    --font-family-subtitulo-pagina: Georgia, 'Times New Roman', Times, serif;
+    --font-family-titulos-boxs: Georgia, 'Times New Roman', Times, serif;
+    --font-family-paragrafos: 'Montserrat', sans-serif;
+    --font-family-spaan: 'Montserrat', sans-serif;
+    --font-family-frases-efeitos: 'Verdana', sans-serif;
+
+    /* Configuração para o tamanho das fontes */
+    --font-size-titulos: 48px; /* Tamanho dos títulos */
+    --font-size-subtitulos: 24px; /* Tamanho dos subtítulos */
+    --font-size-titulos-boxs: 18px; /* Tamanho dos títulos */
+    --font-size-paragrafos: 14px; /* Tamanho dos parágrafos */
+    --font-size-spaan: 18px; /* Tamanho dos elementos especiais */
+    --font-size-frases-efeitos: 20px; /* Tamanho das frases de efeito */
+
+    /* Configuração para as cores das sessões - primeira opção */
+    --backcolor-basico: #fff; /* Cor de fundo do menu */
+    --backcolor-primeira-sessao: #1693A5; /* Cor de fundo da primeira sessão */
+    --backcolor-segunda-sessao: #45B5C4; /* Cor de fundo da segunda sessão */
+    --backcolor-terceira-sessao: #7ECECA; /* Cor de fundo da terceira sessão */
+    --backcolor-quarta-sessao: #A0DED6;; /* Cor de fundo da quarta sessão */
+    --backcolor-quinta-sessao: #C7EDE8; /* Cor de fundo da quinta sessão */
+    --backcolor-footer: #a0a0a0; /* Cor de fundo da sétima sessão */
+    --backcolor-boxs-sessao: #9fc6ce; /* Cor de fundo da primeira sessão */
+
+    /* Configuração para as cores das sessões - segunda opção */
+    --backcolor-basico: #fff; /* Cor de fundo do menu */
+    --backcolor-primeira-opcao: #F1EBEB; /* Cor de fundo da primeira sessão */
+    --backcolor-segunda-opcao: #EEE8E8; /* Cor de fundo da segunda sessão */
+    --backcolor-terceira-opcao: #CACACA; /* Cor de fundo da terceira sessão */
+    --backcolor-quarta-opcao: #24C0EB;; /* Cor de fundo da quarta sessão */
+    --backcolor-quinta-opcao: #5CCEEE; /* Cor de fundo da quinta sessão */
+    --backcolor-sexta-opcao: #a0a0a0; /* Cor de fundo da sétima sessão */
+    --backcolor-setima-opcao: #9fc6ce; /* Cor de fundo da primeira sessão */
+
+    /* Configuração para as cores das sessões - terceira opção */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-azul-primeira-opcao: #C9E8FC; 
+    --backcolor-azul-segunda-opcao: #8CCAF3; 
+    --backcolor-azul-terceira-opcao: #4CAAEC; 
+    --backcolor-azul-quarta-opcao: #399BDC; 
+    --backcolor-azul-quinta-opcao: #47A8EC; 
+
+
+    /* Configuração para o espaçamento entre os textos e conteúdos */
+    --spacamento-um: 10px; 
+    --spacamento-dois: 20px;
+    --spacamento-tres: 30px; 
+
+    /* Configuração para as cores das fontes - Cinza */
+    --color-font-basico: #fff;
+    --color-font-um: #3c3c3c;
+    --color-font-dois:#515151;
+    --color-font-tres:#666666;
+    --color-font-quatro:#8c8c8c;
+    --color-font-cinco:#b5b5b5;
+
+    /* Configuração para as cores das fontes - Azul */
+    --color-font-titulos: #666f88;
+    --color-font-subtitulos:#788199;
+    --color-font-titulos-boxs:#8990a2;
+    --color-font-paragrafos:#a3a8b7;
+    --color-font-span:#b5bac9;
+
+    /* Configuração para os estilos dos boões */
+    --cor-botao-primeiro: #9fc6ce; /* Cor principal do botão */
+    --cor-botao-primeiro-hover: #076DB5; /* Cor de hover do botão */
+    --cor-botao-font: #ffffff; /* Cor do texto do botão */
+
+    --cor-botao-secundario: #679C43; /* Cor principal do botão */
+    --cor-botao-secundario-hover: #076DB5; /* Cor de hover do botão */
+    --cor-botao-secundario-font: #ffffff; /* Cor do texto do botão */
+
+    --cor-botao-terceiro: #2F4263; /* Cor principal do botão */
+    --cor-botao-terceiro-hover: #076DB5; /* Cor de hover do botão */
+    --cor-botao-terceiro-font: #ffffff; /* Cor do texto do botão */
+}
+
+
+
+/* HEADER STYLES */
+
+#content-top {
+    width: 100%;
+    position: fixed;
+    background-color: var(--backcolor-azul-quinta-opcao);
+    box-shadow: 0px 0px 40px 1px rgba(10, 0, 0, 0.2);
+    top: 0;
+    z-index: 1;
+    
+  }
+  
+.content-top--div {
+    max-width: 1280px;
+}
+  
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-be;
+    padding: 25px;
+}
+
+/* LOGO DA TOKITO TECHS */
+
+img.nav-wrapper--logo--Tokito {
+    width: 70px;
+    height: 70px;
+    margin-right: 30px;
+}
+
+/* LOGO MENU */
+  
+.top-nav--logo {
+    font-family: var(--font-family-titulo-pagina);
+    color: var(--color-font-basico);
+    font-size: var(--font-size-titulos);
+}
+  
+  
+.top-nav--logo span {
+    color: var(--color-font-basico);
+}
+
+.nav-wrapper--logo {
+    flex: 0 0 auto; /* O logo não deve crescer nem encolher */
+}
+
+/* NAV LIST PAGES */
+
+.nav-items-list {
+    display: flex;
+    justify-content: center;
+}
+  
+.nav-items-list--1 {
+    justify-content: space-between;
+  
+}
+  
+.nav-items-list--1 a {
+    font-family: var(--font-family-menu);
+    color: var(--color-font-basico);
+    font-size: var(--font-size-menu-desktop);
+    padding: 10px;
+  
+}
+  
+.nav-items-list--1 a:hover {
+    margin-top: 10px;
+    border-bottom: 3px solid var(--backcolor-azul-quinta-opcao);
+    transform-origin: 1%;
+}
+
+.nav-wrapper--lista{
+    padding-left: 50px;
+}
+
+/* INPUT HEADER */
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+  
+.input {
+    border-style: none;
+    height: 50px;
+    width: 250px;
+    padding: 10px;
+    outline: none;
+    transition: .5s ease-in-out;
+    background-color: var(--backcolor-azul-quinta-opcao);
+    padding-right: 40px;
+    color: var(--color-font-basico);
+}
+  
+.input::placeholder,
+.input {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: var(--font-size-paragrafos);
+    text-align: center;
+    margin-left: 50px;
+}
+  
+.input::placeholder {
+    color: #d1cbcb;
+}
+  
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    border-style: none;
+    border-radius: 50%;
+    pointer-events: painted;
+    background-color: transparent;
+    transition: .2s linear;
+}
+  
+.icon:focus~.input,
+.input:focus {
+    box-shadow: none;
+    width: 250px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 3px solid var(--backcolor-azul-primeira-opcao);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+/* BOTOES MENU*/
+
+.nav-util {
+    display: flex;
+    gap: 20px;
+}
+  
+.Btn {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: var(--backcolor-azul-segunda-opcao);
+    gap: 50px;
+}
+  
+  
+.sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.sign svg {
+    width: 17px;
+}
+  
+.sign svg path {
+    fill: white;
+}
+  
+.text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+}
+  
+.text a {
+    color: var(--color-font-basico);
+}
+  
+.Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
+}
+  
+.Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+}
+  
+.Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+}
+  
+.Btn:active {
+    transform: translate(2px, 2px);
+}
+
+/* CONFIGURAÇÃO DOS ICONS DO MENU */
+
+.fa-solid {
+    color: var(--color-font-basico);
+    font-size: 18px;
+}
+
+
+
