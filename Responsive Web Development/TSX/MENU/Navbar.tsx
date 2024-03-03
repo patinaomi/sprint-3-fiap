@@ -1,8 +1,7 @@
 
-import './style_Navbar.css'
+import './styleNavbar.css'
 import imagem1 from '../../assets/Navbar/logo-removebg-preview_1.png'
 import imagem2 from '../../assets/Navbar/logo2-removebg-preview.png'
-
 
 export default function Navbar() {
     return (
