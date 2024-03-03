@@ -1,0 +1,65 @@
+.banner-container {
+    position: relative;
+    max-width: 100%;
+    
+}
+
+.banner-image {
+    width: 100%;
+    height: 100vh;
+    
+}
+
+.logo-banner-content {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1; /* Para garantir que o conteúdo esteja sobre a imagem */
+    width: 80%;
+}
+
+.banner-content h1 {
+    font-size: 7em;
+    text-transform: uppercase;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding-top: 80px;
+    padding-left: 50px;
+}
+
+
+/* FRASE DE EFEITO DO SLOGAN */
+
+
+.frase-efeito {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 3em;
+    color: #fff;
+    overflow-x: hidden; 
+    white-space: nowrap; /* Evita quebrar as linhas */
+    animation: typing 5s steps(40, end), forwards, blink-caret .1s step-end infinite alternate;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Keyframes para o efeito de digitação */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Keyframes para o efeito de piscar do cursor */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: blue; }
+}
+
