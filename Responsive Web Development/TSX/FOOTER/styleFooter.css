@@ -35,7 +35,7 @@
     --font-size-spaan: 18px; /* Tamanho dos elementos especiais */
     --font-size-frases-efeitos: 20px; /* Tamanho das frases de efeito */
 
-    /* Configuração para as cores das sessões */
+    /* Configuração para as cores das sessões - primeira opção */
     --backcolor-basico: #fff; /* Cor de fundo do menu */
     --backcolor-primeira-sessao: #1693A5; /* Cor de fundo da primeira sessão */
     --backcolor-segunda-sessao: #45B5C4; /* Cor de fundo da segunda sessão */
@@ -44,6 +44,25 @@
     --backcolor-quinta-sessao: #C7EDE8; /* Cor de fundo da quinta sessão */
     --backcolor-footer: #a0a0a0; /* Cor de fundo da sétima sessão */
     --backcolor-boxs-sessao: #9fc6ce; /* Cor de fundo da primeira sessão */
+
+    /* Configuração para as cores das sessões - segunda opção */
+    --backcolor-basico: #fff; /* Cor de fundo do menu */
+    --backcolor-primeira-opcao: #F1EBEB; /* Cor de fundo da primeira sessão */
+    --backcolor-segunda-opcao: #EEE8E8; /* Cor de fundo da segunda sessão */
+    --backcolor-terceira-opcao: #CACACA; /* Cor de fundo da terceira sessão */
+    --backcolor-quarta-opcao: #24C0EB;; /* Cor de fundo da quarta sessão */
+    --backcolor-quinta-opcao: #5CCEEE; /* Cor de fundo da quinta sessão */
+    --backcolor-sexta-opcao: #a0a0a0; /* Cor de fundo da sétima sessão */
+    --backcolor-setima-opcao: #9fc6ce; /* Cor de fundo da primeira sessão */
+
+    /* Configuração para as cores das sessões - terceira opção */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-azul-primeira-opcao: #C9E8FC; 
+    --backcolor-azul-segunda-opcao: #8CCAF3; 
+    --backcolor-azul-terceira-opcao: #4CAAEC; 
+    --backcolor-azul-quarta-opcao: #399BDC; 
+    --backcolor-azul-quinta-opcao: #47A8EC; 
+
 
     /* Configuração para o espaçamento entre os textos e conteúdos */
     --spacamento-um: 10px; 
@@ -79,13 +98,15 @@
     --cor-botao-terceiro-font: #ffffff; /* Cor do texto do botão */
 }
 
+
 /* FOOTER CONTENT */
 
 footer {
-    background-color: #657eae;
-    box-shadow: -1px 0px 10px 1px rgb(0, 0, 0);
+    background-color: var(--backcolor-azul-quinta-opcao);
     width: 100%;
     color: rgb(255, 255, 255);
+    height: 30vh;
+
 }
   
 .footer-content {
@@ -94,12 +115,13 @@ footer {
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
+    padding-top: 50px;
+    align-items: center;
 }
   
 .footer-content a {
     color: #ffffff;
 }
-  
   
   
 .footer-content h4 {
@@ -110,20 +132,39 @@ footer {
 .footer-info {
     display: flex;
     align-items: center;
-  
-  
     gap: 10px;
-  
     width: calc((100% / 4) - 50px);
+    padding-bottom: 30px;
 }
   
 .footer-copyright {
     text-align: center;
     border-top: 2px solid #6f7579b3;
-  
     padding: 20px;
+    padding-top: 30px;
 }
   
 .footer-copyright img {
     width: 17%;
+}
+
+/* LOGO DA TOKITO TECHS*/
+
+.footer-copyright.max-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+img.nav-wrapper--logo--Tokito {
+    width: 100px;
+    height: 100px;
+    margin-right: 30px;
+}
+
+.logo-tokito-techs {
+    font-family: var(--font-family-titulo-pagina);
+    font-size: var(--font-size-titulos);
+    
 }
