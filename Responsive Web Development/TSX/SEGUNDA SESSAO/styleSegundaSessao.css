@@ -1,15 +1,3 @@
-* {
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-  
-.max-container {
-    max-width: 1280px;
-}
-
 :root {
 
     /* Configuração para o menu */
@@ -29,7 +17,7 @@
 
     /* Configuração para o tamanho das fontes */
     --font-size-titulos: 48px; /* Tamanho dos títulos */
-    --font-size-subtitulos: 28px; /* Tamanho dos subtítulos */
+    --font-size-subtitulos: 24px; /* Tamanho dos subtítulos */
     --font-size-titulos-boxs: 18px; /* Tamanho dos títulos */
     --font-size-paragrafos: 14px; /* Tamanho dos parágrafos */
     --font-size-spaan: 18px; /* Tamanho dos elementos especiais */
@@ -99,69 +87,108 @@
 }
 
 
-
-/* SEGUNDA SESSAO */
-
-/* PRIMEIRO BLOCO ONDE VAI CONSTAR OS PRODUTOS */ 
-
-.content-banner.max-container {
-    align-items: center;
-    text-align: center;
-
-}
-
-.img-banner {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    position: relative;
+/* SESSÃO PRINCIPAL */
+.container-fluid {
     height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: var(--backcolor-azul-primeira-opcao);
-}
-
-.content-banner.second {
-    color: black;
-    font-size: 28px;
-    background-color: var(--backcolor-azul-primeira-opcao);
-    padding: 0 20px;
+    justify-content: left;
     text-align: center;
-    border-radius: 15px;
+    padding-left: 200px;
+    
 }
 
-.content-banner.max-container .titutlo-pagina {
-    font-family: var(--font-family-titulo-pagina);
-    font-size: var(--font-size-titulos);
-    color: var(--color-font-titulos);
-    padding-bottom: 30px;
-}
-
-.text_produto {
-    font-family: var(--font-family-frases-efeitos);
-    font-size: var(--font-size-frases-efeitos);
-    color: var(--color-font-dois);
-    text-align: center;
-    margin: 20px;
-    padding-top: 30px;
-}
-
-/* SEGUNDO BLOCO */
-
-/* DETALHES DO PRODUTO */
-
-.content-banner.second {
-    background-color: var(--backcolor-basico);
-    height: 70vh;
-    align-items: center;
-    justify-content: center;
+.circle-container {
     display: grid;
-    flex-direction: column;
-    width: 50%;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(4, auto);
+    gap: 10px; /* Espaçamento entre as imagens */
+    width: 400px; /* Largura do contêiner */
+    height: 500px; /* Altura do contêiner */
+    border: 2px; /* Borda do contêiner */
+    border-radius: 10px; /* Arredondamento da borda */
+    padding: 10px; /* Espaçamento interno */
+    position: relative;
 }
 
-.titulo-pagina-segundo-bloco {
+.circle-image {
+    width: 100%; /* Largura da imagem */
+    height: 100%; /* Altura da imagem */
+    object-fit: cover; /* Redimensiona a imagem para preencher o contêiner */
+    border-radius: 50%;
+}
+
+.empty-space {
+    width: 100%; /* Largura do espaço vazio */
+    height: 100%; /* Altura do espaço vazio */
+}
+
+
+/* BOX COM OPÇÕES PARA DESCRIÇÃO, VÍDEO, OU CHAT*/
+
+.content-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+
+}
+
+.menu span {
+    margin-left: 10px;
+    cursor: pointer;
+    font-family: var(--font-family-titulo-pagina);
+    color: var(--color-font-dois);
+    text-transform: uppercase;
+    padding-left: 30px;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 80%;
+}
+
+.btn-vsl img {
+    width: 100px; /* Ajuste conforme necessário */
+    height: auto;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    height: 40px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+
+/* TITULO DO BOX */
+
+.titulo-pagina {
     font-family: var(--font-family-titulo-pagina);
     font-size: var(--font-size-titulos);
     color: var(--color-font-titulos);
@@ -175,12 +202,11 @@
     font-size: var(--font-size-frases-efeitos);
     color: var(--color-font-paragrafos);
     text-align: center;
-    margin: 20px;
+    margin: 40px;
     padding-bottom: 30px;
 }
 
-/* VIDEO SOBRE O PRODUTO */
-
+/* IMAGEM DO VÍDEO */
 .btn-vsl img {
     width: 30%;
     background-color: black;
@@ -194,40 +220,3 @@
     padding-bottom: 20px;
     text-transform: uppercase;
 }
-
-.text_video {
-    font-family: var(--font-family-frases-efeitos);
-    font-size: var(--font-size-frases-efeitos);
-    color: var(--color-font-paragrafos);
-    text-align: center;
-    margin: 20px;
-    padding-bottom: 30px;
-    padding-top: 20px;
-}
-
-/* CHATBOT*/
-
-.titulo-pagina-chatbot {
-    font-family: var(--font-family-subtitulo-pagina);
-    font-size: var(--font-size-titulos);
-    color: var(--color-font-titulos);
-    padding-bottom: 20px;
-    text-transform: uppercase;
-}
-
-/* BOTÃO PARA ENTRAR EM CONTATO */
-.button {
-    background-color: var(--backcolor-azul-quinta-opcao);
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 30px;
-}
-
-.button:hover {
-    background-color: #C7EDE8;
-}
-
