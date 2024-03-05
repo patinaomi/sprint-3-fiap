@@ -107,7 +107,7 @@
 
 /* Título da página */
 
-.carousel-container.max-container h1 {
+.titulo-pagina-carrosel {
     font-family: var(--font-family-titulo-pagina);
     font-size: var(--font-size-titulos);
     color: var(--color-font-titulos);
@@ -115,6 +115,7 @@
     text-align: center;
     padding-top: 100px;
     padding-bottom: 20px;
+
 }
 
 /* TEXTO DO CARROSEL */

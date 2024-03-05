@@ -94,7 +94,7 @@ export default function QuartaSessao() {
             </div>
             
             <div className='frase-feedback'>
-            <h2> Curtiu o nosso conteúdo? Clica em gostei, esse feedback vai nos ajudar a melhorar nossos conteúdos e serviços. </h2>
+            <h2> Curtiu o nosso conteúdo? Clica em AMEI, esse feedback vai nos ajudar a melhorar nossos conteúdos e serviços. </h2>
             </div>
             
             <div className="like">
