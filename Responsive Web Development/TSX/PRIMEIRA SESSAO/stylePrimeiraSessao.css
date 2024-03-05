@@ -63,3 +63,200 @@
     50% { border-color: blue; }
 }
 
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px)  {
+
+    /* TAMANHO DA IMAGEM BANNER */
+    .banner-image {
+        width: 100%;
+    }
+
+    * LOGO TOKITO TECHS */
+    .logo-tokito {
+        height: 200px;
+    }
+
+    /* TÍTULO DA SALES FORCE */
+    .banner-content h1 {
+        font-size: 80px;
+        padding-top: 100px;
+    }
+
+    /* FRASE DE EFEITO */
+    .frase-efeito {
+        font-size: 42px;
+    }
+
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1280px) and (max-width: 1399px) {
+
+    /* TAMANHO DA IMAGEM BANNER */
+    .banner-image {
+        max-width: 1280px;
+    }
+
+
+    /* LOGO TOKITO TECHS */
+    .logo-tokito {
+        height: 200px;
+    }
+
+    /* TÍTULO DA SALES FORCE */
+    .banner-content h1 {
+        font-size: 70px;
+    }
+
+    /* FRASE DE EFEITO */
+    .frase-efeito {
+        font-size: 38px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1279px) {
+    /* TAMANHO DA IMAGEM BANNER */
+    .banner-image {
+        max-width: 1279px;
+    }
+
+    /* LOGO TOKITO TECHS */
+    .logo-tokito {
+        height: 200px;
+    }
+
+    /* TÍTULO DA SALES FORCE */
+    .banner-content h1 {
+        font-size: 60px;
+    }
+
+    /* FRASE DE EFEITO */
+    .frase-efeito {
+        font-size: 34px;
+    }
+}
+
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+    
+    /* TAMANHO DA IMAGEM BANNER */
+    .banner-image {
+        max-width: 991px;
+    }
+
+    .logo-banner-content {
+        align-items: center;
+
+    }
+
+    /* LOGO TOKITO TECHS */
+    .logo-tokito {
+        height: 100px;
+    }
+
+    /* TÍTULO DA SALES FORCE */
+    .banner-content h1 {
+        font-size: 50px;
+        padding: 0;
+        padding-top: 20px;
+    }
+
+    /* FRASE DE EFEITO */
+    .frase-efeito {
+        font-size: 24px;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+
+    /* TAMANHO DA IMAGEM BANNER */
+    .banner-image {
+        max-width: 767px;
+    }
+
+    .logo-banner-content {
+        align-items: center;
+
+    }
+
+    /* LOGO TOKITO TECHS */
+    .logo-tokito {
+        height: 100px;
+    }
+
+    /* TÍTULO DA SALES FORCE */
+    .banner-content h1 {
+        font-size: 30px;
+        padding: 0;
+        padding-top: 10px;
+    }
+
+    /* FRASE DE EFEITO */
+    .frase-efeito {
+        font-size: 20px;
+    
+    }
+}
+
+/* X-Small devices (portrait phones, less than 576px)*/
+@media (min-width: 391px) and (max-width: 575px) {
+    /* TAMANHO DA IMAGEM BANNER */
+    .banner-image {
+        max-width: 100%;
+    }
+
+    .logo-banner-content {
+        align-items: center;
+
+    }
+
+    /* LOGO TOKITO TECHS */
+    .logo-tokito {
+        height: 100px;
+    }
+
+    /* TÍTULO DA SALES FORCE */
+    .banner-content h1 {
+        font-size: 30px;
+        padding: 0;
+        padding-top: 10px;
+    }
+
+    /* FRASE DE EFEITO */
+    .frase-efeito {
+        font-size: 16px;
+    }
+}
+
+/* X-Small devices (portrait phones, less than 576px)*/
+@media (max-width: 390px){
+    /* TAMANHO DA IMAGEM BANNER */
+    .banner-image {
+        max-width: 100%;
+    }
+
+    .logo-banner-content {
+        align-items: center;
+
+    }
+
+    /* LOGO TOKITO TECHS */
+    .logo-tokito {
+        height: 70px;
+    }
+
+    /* TÍTULO DA SALES FORCE */
+    .banner-content h1 {
+        font-size: 20px;
+        padding: 0;
+        padding-top: 5px;
+    }
+
+    /* FRASE DE EFEITO */
+    .frase-efeito {
+        font-size: 12px;
+    }
+}
