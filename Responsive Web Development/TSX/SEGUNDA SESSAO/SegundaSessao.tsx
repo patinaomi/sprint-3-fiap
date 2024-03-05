@@ -34,6 +34,12 @@ export default function SegundaSessao() {
     <div className='container-fluid'>
     
         <div className='container-fluid-imagens'>
+
+            <div>
+                <h1 className='título-produtos-selecao'> Produtos </h1>
+                <h2 className='subtitulo-produtos-selecao'>Selecione um produto e conheça  as vantagens para o seu negócio:</h2>
+            </div>
+
             <div className="circle-container">
                 <img src={imagem1} alt="Imagem 1" className="circle-image" />
                 <img src={imagem2} alt="Imagem 2" className="circle-image" />
@@ -59,6 +65,13 @@ export default function SegundaSessao() {
         </div>
 
     <div className="content-banner second max-container">
+
+        <div>
+            <h1 className='titulo-descricao-produto'> descricao do produto </h1>
+            
+            <h2 className='subtitulo-descricao-produto'>"Esclareça suas dúvidas da maneira que preferir, seja por texto, vídeo ou interagindo com o Tokito BOT, nosso assistente virtual."</h2>
+        </div>
+
                 <div className="menu">
                     <span className={selectedOption === 'produto' ? 'active' : ''} onClick={() => handleOptionClick('produto')}>Produto</span>
                     <span className={selectedOption === 'video' ? 'active' : ''} onClick={() => handleOptionClick('video')}>Vídeo</span>
@@ -77,7 +90,7 @@ export default function SegundaSessao() {
                     )}
                     {selectedOption === 'video' && (
                         <>
-                            <h1 className='titulo-pagina'>Vídeo explicativo</h1>
+                            <h1 className='titulo-pagina-video'>Vídeo explicativo</h1>
                             <div className="btn-vsl"><img src={imagem15} alt="VSL" title="VSL - não introduzida pelo bloqueio de JS nessa sprint" /></div>
                             <p className="text_caracteristica">Ver demonstrações simples, rápida e com descrição no vídeo.</p>
                             <p className="text_caracteristica">Aqui teremos o vídeo acima e abaixo a descrição correspondente, para aqueles que não puderem assistir, não tiverem a capacidade de ouvir ou não puderem clicar para reproduzir o vídeo.</p>
@@ -85,8 +98,16 @@ export default function SegundaSessao() {
                     )}
                     {selectedOption === 'chatbot' && (
                         <>
-                            <h1 className='titulo-pagina'>ChatBot independente</h1>
+                            <h1 className='titulo-pagina-chatbot'>ChatBot independente</h1>
                             <button className="button">Tire suas dúvidas a qualquer momento, sem limite de tempo ou de perguntas!</button>
+
+                            <div className='container-chatbot'>
+                                <div>
+                                    <h1 className='texto-box-chat'>Caixa de conversa com o bot</h1>
+                                </div>
+                            </div>
+
+
                             <p className="text_caracteristica">Vai abrir a caixa de conversa com o chatbot, será necessário logar sendo criando a conta ou usando uma existente. Aqui vamos mapear a experiência e questionamentos para cada produto e visitante.</p>
                         </>
                     )}
