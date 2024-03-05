@@ -105,7 +105,7 @@ footer {
     background-color: var(--backcolor-azul-quinta-opcao);
     width: 100%;
     color: rgb(255, 255, 255);
-    height: 30vh;
+    height: 40vh;
 
 }
   
@@ -167,4 +167,54 @@ img.nav-wrapper--logo--Tokito {
     font-family: var(--font-family-titulo-pagina);
     font-size: var(--font-size-titulos);
     
+}
+
+/* REDES SOCIAIS */
+
+.box-redes-sociais {
+    display: flex;
+    gap: 30px;
+    align-items: start;
+}
+
+
+/* TÍTULO DO FOOTER */
+
+.footer_social_title {
+    font-family: var(--font-family-titulo-pagina);
+    font-size: 24px;
+    color: black;
+    
+}
+
+.col.footer nav {
+    font-size: 12px;
+   
+}
+
+.icons_rede_social {
+    justify-content: center;
+    gap: 30px;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    display: flex;
+
+}
+
+.rede_social {
+    font-size: 35px;
+    color: #fff;
+}
+
+/* TITULO DAS REDES SOCIAIS */
+
+.titulo-dois-redes-sociais {
+    font-family: var(--font-family-frases-efeitos);
+    font-size: 18px;
+    
+}
+
+.footer-copyright.max-container.redes-sociais {
+    justify-content: start;
 }

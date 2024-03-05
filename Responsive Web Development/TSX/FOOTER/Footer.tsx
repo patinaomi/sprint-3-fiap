@@ -32,6 +32,40 @@ export default function Footer() {
 
         </div>
 
+        <div className="footer-copyright max-container redes-sociais"> 
+            <div className="box-redes-sociais">
+
+                <div className='titulo-dois-redes-sociais'>
+                    <h1 className="titulo-dois-redes-sociais">Siga nossa empresa nas redes sociais:</h1>
+                </div> 
+
+                <div className='icones-redes-sociais'>
+                    <ul className="icons_rede_social">
+                        <li>
+                            <a className="rede_social instagram" href="#" target="_blank"><i className="fab fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a className="rede_social facebook" href="#" target="_blank"><i className="fab fa-facebook"></i></a>
+                        </li>
+
+                        <li>
+                            <a className="rede_social telefone" href="tel:+11958757740"><i className="fas fa-phone-volume"></i></a>
+                        </li>
+                        <li>
+                            <a className="rede_social sms" href="sms:+11958757740"><i className="fas fa-comment-sms"></i></a>
+                        </li>
+                        <li>
+                            <a className="rede_social email" href="mailto:rm553472@fiap.com.br"><i className="fas fa-envelope"></i></a>
+                        </li>
+                        <li>
+                            <a className="rede_social whatsapp" href="https://wa.me/11958757740"><i className="fab fa-whatsapp"></i></a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div className="footer-copyright max-container"> 
             <img  className="nav-wrapper--logo--Tokito" src={imagem1} alt="Logo da Tokito Techs" />
             <p className='logo-tokito-techs'>Tokito Techs | Challenge SalesForce </p>
