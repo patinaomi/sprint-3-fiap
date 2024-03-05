@@ -115,17 +115,24 @@
     font-family: var(--font-family-titulo-pagina);
     font-size: var(--font-size-titulos);
     color: var(--color-font-basico);
-    padding-top: 120px;
+    padding-top: 150px;
     text-transform: uppercase;
     padding-bottom: 20px;
 }
   
 .content-intro p {
     font-family: var(--font-family-subtitulo-pagina);
-    font-size: var(--font-size-subtitulos);
+    font-size: var(--font-size-frases-efeitos);
     color: var(--color-font-subtitulos);
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     margin: 30px;
+}
+
+/* FRASE SOBRE O PROJETO */
+
+p.subtitulo-projeto {
+    font-family: var(--font-family-subtitulo-pagina);
+    color: #000000;
 }
   
 .content-intro p:nth-of-type(2) {

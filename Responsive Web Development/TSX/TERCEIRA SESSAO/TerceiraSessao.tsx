@@ -10,9 +10,11 @@ export default function TerceiraSessao() {
 
                 <h1>seja bem vindo!</h1>
 
-                <p>Iremos apresentar o nosso projeto desenvolvido para a Salesforce, com o objetivo de proporcionar simplicidade na resolução de dúvidas, agilidade no contato e gerar leads com maior eficácia, sempre priorizando a experiência do cliente.</p>
+                <p className='subtitulo-projeto'>Apresentação do nosso projeto desenvolvido para a Salesforce,</p> 
+                
+                <p> Nosso objetivo de proporcionar simplicidade na resolução de dúvidas, agilidade no contato e gerar leads com maior eficácia, sempre priorizando a experiência do cliente.</p>
 
-                <p className='texto-pitch'>Abaixo teremos nosso PITCH explicando o projeto com as nossas soluções </p>
+                <p className='texto-pitch'>Abaixo teremos nosso PITCH explicando o projeto com as nossas soluções</p>
                 
                 <div className="content-vsl">
                     
