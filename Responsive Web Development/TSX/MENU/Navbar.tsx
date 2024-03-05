@@ -1,11 +1,19 @@
-
+// Import do CSS
 import './styleNavbar.css'
-import imagem1 from '../../assets/Navbar/logo-removebg-preview_1.png'
+
+// Import das imagens
+//import imagem1 from '../../assets/Navbar/logo-removebg-preview_1.png'
 import imagem2 from '../../assets/Navbar/logo2-removebg-preview.png'
 
+// Import dos comenentes complementares
+//import { Link } from 'react-router-dom';
+//import React, { useState } from 'react';
+
 export default function Navbar() {
+
+
     return (
-        <header id="content-top">
+        <div id="content-top" className='content-fluid'>
             <div className="content-top--div max-container">
                 <div className="nav-wrapper">
 
@@ -20,11 +28,26 @@ export default function Navbar() {
                     <div className="nav-wrapper--lista">
                     <nav className="nav-items">
                         <ul className="nav-items-list">
-                            <li className="nav-items-list--1"><a href="produto.html">Produtos</a></li>
-                            <li className="nav-items-list--1"><a href="empresa.html">Empresa</a></li>
-                            <li className="nav-items-list--1"><a href="#">Industria</a></li>
-                            <li className="nav-items-list--1"><a href="#">Contato</a></li>
-                            <li className="nav-items-list--1"><a href="equipe.html">Equipe</a></li>
+                        <li className="nav-items-list--1">
+                            <a href="produto.html">Home</a>
+                        </li>
+                            
+                        <li className="nav-items-list--1">
+                            <a href="empresa.html">Produtos</a>
+                        </li>
+                            
+                        <li className="nav-items-list--1">
+                            <a href="#">Projeto</a>
+                        </li>
+
+                        <li className="nav-items-list--1">
+                            <a href="#">Contato</a>
+                        </li>
+                            
+                        <li className="nav-items-list--1">
+                            <a href="equipe.html">Equipe</a>
+                        </li>
+
                         </ul>
                     </nav>
                     </div>
@@ -92,6 +115,6 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
     )
 }

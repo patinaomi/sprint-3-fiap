@@ -1,13 +1,13 @@
+/* AJUSTE PARA A TELA COMPLETA */
 * {
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
     margin: 0;
     padding: 0;
-    
 }
   
-
+/* CONFIGURAÇÃO PARA PADRONIZAR FONTES, TAMANHOS, ESTILOS */
 :root {
 
     /* Configuração para o menu */
@@ -96,37 +96,40 @@
     --cor-botao-terceiro-font: #ffffff; /* Cor do texto do botão */
 }
 
+/* AJUSTES GERAIS DO MENU */
+.content-fluid {
+    width: 100%;
+    background-color: var(--backcolor-azul-quinta-opcao)
+}
 
+.max-container {
+    max-width: 1280px; /* Defina a largura máxima para o conteúdo */
+    margin: auto;
+}
 
 /* HEADER STYLES */
 
 #content-top {
-    width: 100%;
     position: fixed;
     background-color: var(--backcolor-azul-quinta-opcao);
     box-shadow: 0px 0px 40px 1px rgba(10, 0, 0, 0.2);
     top: 0;
     z-index: 1;
-    
+
   }
   
-.content-top--div {
-    max-width: 1280px;
-}
   
 .nav-wrapper {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-be;
-    padding: 25px;
+    padding: 25px 0;
 }
 
 /* LOGO DA TOKITO TECHS */
 
 img.nav-wrapper--logo--Tokito {
-    width: 70px;
     height: 70px;
-    margin-right: 30px;
 }
 
 /* LOGO MENU */
@@ -142,9 +145,6 @@ img.nav-wrapper--logo--Tokito {
     color: var(--color-font-basico);
 }
 
-.nav-wrapper--logo {
-    flex: 0 0 auto; /* O logo não deve crescer nem encolher */
-}
 
 /* NAV LIST PAGES */
 
@@ -172,9 +172,11 @@ img.nav-wrapper--logo--Tokito {
     transform-origin: 1%;
 }
 
+
 .nav-wrapper--lista{
-    padding-left: 50px;
+    padding-left: 20px;
 }
+
 
 /* INPUT HEADER */
 
@@ -188,12 +190,9 @@ img.nav-wrapper--logo--Tokito {
 .input {
     border-style: none;
     height: 50px;
-    width: 250px;
-    padding: 10px;
     outline: none;
     transition: .5s ease-in-out;
     background-color: var(--backcolor-azul-quinta-opcao);
-    padding-right: 40px;
     color: var(--color-font-basico);
 }
   
@@ -202,7 +201,6 @@ img.nav-wrapper--logo--Tokito {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: var(--font-size-paragrafos);
     text-align: center;
-    margin-left: 50px;
 }
   
 .input::placeholder {
@@ -216,7 +214,6 @@ img.nav-wrapper--logo--Tokito {
     position: absolute;
     right: 0px;
     cursor: pointer;
-    width: 50px;
     height: 50px;
     outline: none;
     border-style: none;
@@ -229,7 +226,6 @@ img.nav-wrapper--logo--Tokito {
 .icon:focus~.input,
 .input:focus {
     box-shadow: none;
-    width: 250px;
     border-radius: 0px;
     background-color: transparent;
     border-bottom: 3px solid var(--backcolor-azul-primeira-opcao);
@@ -258,7 +254,6 @@ img.nav-wrapper--logo--Tokito {
     transition-duration: .3s;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
     background-color: var(--backcolor-azul-segunda-opcao);
-    gap: 50px;
 }
   
   
@@ -322,6 +317,208 @@ img.nav-wrapper--logo--Tokito {
     color: var(--color-font-basico);
     font-size: 18px;
 }
+
+/* BOTÃO DO MENU PARA DISPOSITIVO MOBILE */
+
+/* Logo do menu */
+
+.navbar-brand .imagem_logo {
+    width: 170px; 
+    height: 80px;
+}
+
+/* Responsividade*/
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+    
+    /* AJUSTES GERAIS DO MENU */
+    .content-fluid {
+        width: 100%;
+        background-color: var(--backcolor-azul-quinta-opcao)
+    }
+
+
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1280px) and (max-width: 1399px) {
+    
+    /* AJUSTES GERAIS DO MENU */
+    .content-fluid {
+        width: 100%;
+        background-color: var(--backcolor-azul-quinta-opcao)
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1279px) {
+    
+    .nav-wrapper {
+        justify-content: space-evenly;
+    }
+
+    /* LOGO MENU */
+  
+    .top-nav--logo {
+        font-size: 32px;
+    }
+
+    /* LISTA DE OPÇÕES */
+    .nav-items-list a {
+        font-size: 18px;
+    }
+
+    /* INPUT HEADER */
+
+    .input-wrapper {
+        padding: 0;
+    }
+
+    /* DESENHO DA PESQUISA */
+
+    .icon {
+        padding-right: 20px;
+    }
+
+    /* BOTÕES */
+    .nav-util {
+        display: flex;
+        gap: 5px;
+    }
+      
+    .Btn {
+        width: 45px;
+    }
+
+    
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+
+    
+    .nav-wrapper {
+        justify-content: space-evenly;
+    }
+
+    .nav-wrapper {
+        flex-wrap: wrap;
+    }
+
+    /* INPUT HEADER */
+
+    /*
+    .input-wrapper {
+        display: none;
+    }*/
+
+    /* Lista de opções */
+
+    .nav-items-list--1 a {
+        display: none;
+    }
+
+    /* Criar aqui uma lista em suspensa, como se fosse o hamburguer */
+
+
+    /* BOTÕES */
+    .nav-util {
+        display: flex;
+        gap: 20px;
+    }
+      
+    .Btn {
+        width: 45px;
+    }
+
+    
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+
+    .nav-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* LOGO SALES FORCE */
+    .top-nav--logo {
+        padding-left: 30px;
+    }
+
+    /* Lista de opções */
+
+    .nav-items-list--1 a {
+        display: none;
+    }
+
+    /* Criar aqui uma lista em suspensa, como se fosse o hamburguer */
+
+
+    /* BOTÕES */
+    .nav-util {
+        display: flex;
+        
+    }
+      
+    .Btn {
+        width: 45px;
+    }
+}
+
+/* X-Small devices (portrait phones, less than 576px)*/
+@media (min-width: 391px) and (max-width: 575px) {
+
+    /* LOGO SALES FORCE */
+
+    .top-nav--logo {
+        font-size: 48px;
+        padding-left: 30px;
+    }
+
+    /* BARRA DE PESQUISA E BOTÕES */
+    .nav-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+
+    /* LISTA DE OPÇÕES */
+
+    .nav-items-list {
+        display: none;
+    }
+}
+
+/* X-Small devices (portrait phones, less than 390px)*/
+@media (max-width: 390px) {
+
+    /* CONFIGURAÇÃO DA TELA */
+
+    .nav-wrapper {
+        max-width: 390px;
+        justify-content: space-around;
+    }
+
+
+    /* LISTA DO MENU */
+    .nav-items-list--1 a {
+        display: none;
+    }
+
+    .nav-util {
+        display: none;
+    }
+
+
+}
+
+
+
+
 
 
 
