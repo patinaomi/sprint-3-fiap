@@ -9,7 +9,7 @@ export default function FormularioVocacional() {
         <div className='container'>
             
                 <div className='texto-descritivo-formulario'>
-                    <h1>Fomulário Vocacional</h1>
+                    <h1>Formulário Vocacional</h1>
                 </div>
 
                 <div className='formulario-contato'>
@@ -18,8 +18,8 @@ export default function FormularioVocacional() {
                         <form action="">
 
                             <div>
-                            <h1 className='Subtitulo-pagina-formulario'>Sobre esse formulário:</h1>
-                            <p className='frase-razao-formulario'>Se você não conhece sobre o que é CRM ou as melhores soluções para sua empresa, responda o questionário abaixo para te conhecermos melhor e te direcionar com as melhores soluções. Teremos uma IA e um time comprometido para entender suas necessidades e preocupações.</p>
+                                <h1 className='Subtitulo-pagina-formulario'>Sobre esse formulário:</h1>
+                                <p className='frase-razao-formulario'>Se você não conhece sobre o que é CRM ou as melhores soluções para sua empresa, responda o questionário abaixo para te conhecermos melhor e te direcionar com as melhores soluções. Teremos uma IA e um time comprometido para entender suas necessidades e preocupações.</p>
                             </div>
 
                             <div>
