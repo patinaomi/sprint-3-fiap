@@ -13,8 +13,9 @@ export default function Equipe() {
             <div className="content-banner">
                 <div id="info">
 
-                    <h1>time</h1>
-                    <h2>Conheça o coração e a alma por trás das conquistas - apresentamos orgulhosamente o nosso time, onde cada membro é uma peça fundamental do nosso sucesso.</h2>
+                    <h1 className='titulo-pagina'>time</h1>
+
+                    <h2 className='subtitulo-pagina'>Conheça o coração e a alma por trás das conquistas - apresentamos orgulhosamente o nosso time, onde cada membro é uma peça fundamental do nosso sucesso.</h2>
 
                     <div className="content-info--cont">
                         <div className="card">
@@ -131,7 +132,7 @@ export default function Equipe() {
                         
                         </div>
                     </div>
-                <h2>"O sucesso profissional é construído sobre a base sólida do trabalho em equipe, onde cada membro contribui com suas habilidades únicas para alcançar objetivos comuns."</h2>
+                <h2 className='frase-efeito'>"O sucesso profissional é construído sobre a base sólida do trabalho em equipe, onde cada membro contribui com suas habilidades únicas para alcançar objetivos comuns."</h2>
                 </div>
             </div>
     </div>
