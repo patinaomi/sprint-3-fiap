@@ -9,7 +9,7 @@ import 'swiper/css/scrollbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 /* IMPORT DO CSS */
-import './styleQuartaSessao.css'
+import './StyleQuartaSessao.css'
 
 /* IMPORTAR AS IMAGENS */
 import imagem1 from '../../assets/TerceiraSessao/ATENDIMENTO_CLIENTE.svg'
