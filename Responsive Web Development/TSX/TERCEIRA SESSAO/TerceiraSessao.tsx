@@ -1,4 +1,4 @@
-import './styleTerceiraSessao.css'
+import './StyleTerceiraSessao.css'
 
 import imagem1 from '../../assets/TerceiraSessao/button-vsl.png'
 
@@ -8,9 +8,9 @@ export default function TerceiraSessao() {
     
             <div className="content-intro">
 
-                <h1>seja bem vindo!</h1>
-
-                <p className='subtitulo-projeto'>Apresentação do nosso projeto desenvolvido para a Salesforce,</p> 
+                <div className='container-titulo-pagina'>
+                    <h1>Apresentação do nosso projeto</h1>
+                </div>
                 
                 <p> Nosso objetivo de proporcionar simplicidade na resolução de dúvidas, agilidade no contato e gerar leads com maior eficácia, sempre priorizando a experiência do cliente.</p>
 
