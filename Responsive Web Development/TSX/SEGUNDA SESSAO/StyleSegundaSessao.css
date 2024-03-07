@@ -1,0 +1,415 @@
+:root {
+
+    /* Configuração para o menu */
+    --font-family-menu: Georgia, 'Times New Roman', Times, serif;
+    --font-size-menu-desktop: 22px;
+    --font-size-menu-tablet: 20px;
+    --font-size-menu-celular-medio: 18px;
+    --font-size-menu-celular-pequeno: 16px;
+
+    /* Configuração para os textos, começando do H1 até paragrafos. */
+    --font-family-titulo-pagina: Georgia, 'Times New Roman', Times, serif;
+    --font-family-subtitulo-pagina: Georgia, 'Times New Roman', Times, serif;
+    --font-family-titulos-boxs: Georgia, 'Times New Roman', Times, serif;
+    --font-family-paragrafos: 'Montserrat', sans-serif;
+    --font-family-spaan: 'Montserrat', sans-serif;
+    --font-family-frases-efeitos: 'Verdana', sans-serif;
+
+    /* Configuração para o tamanho das fontes */
+    --font-size-titulos: 48px; /* Tamanho dos títulos */
+    --font-size-subtitulos: 24px; /* Tamanho dos subtítulos */
+    --font-size-titulos-boxs: 18px; /* Tamanho dos títulos */
+    --font-size-paragrafos: 14px; /* Tamanho dos parágrafos */
+    --font-size-spaan: 18px; /* Tamanho dos elementos especiais */
+    --font-size-frases-efeitos: 20px; /* Tamanho das frases de efeito */
+
+    /* Configuração para as cores das sessões - primeira opção */
+    --backcolor-basico: #fff; /* Cor de fundo do menu */
+    --backcolor-primeira-sessao: #1693A5; /* Cor de fundo da primeira sessão */
+    --backcolor-segunda-sessao: #45B5C4; /* Cor de fundo da segunda sessão */
+    --backcolor-terceira-sessao: #7ECECA; /* Cor de fundo da terceira sessão */
+    --backcolor-quarta-sessao: #A0DED6;; /* Cor de fundo da quarta sessão */
+    --backcolor-quinta-sessao: #C7EDE8; /* Cor de fundo da quinta sessão */
+    --backcolor-footer: #a0a0a0; /* Cor de fundo da sétima sessão */
+    --backcolor-boxs-sessao: #9fc6ce; /* Cor de fundo da primeira sessão */
+
+    /* Configuração para as cores das sessões - segunda opção */
+    --backcolor-basico: #fff; /* Cor de fundo do menu */
+    --backcolor-primeira-opcao: #F1EBEB; /* Cor de fundo da primeira sessão */
+    --backcolor-segunda-opcao: #EEE8E8; /* Cor de fundo da segunda sessão */
+    --backcolor-terceira-opcao: #CACACA; /* Cor de fundo da terceira sessão */
+    --backcolor-quarta-opcao: #24C0EB;; /* Cor de fundo da quarta sessão */
+    --backcolor-quinta-opcao: #5CCEEE; /* Cor de fundo da quinta sessão */
+    --backcolor-sexta-opcao: #a0a0a0; /* Cor de fundo da sétima sessão */
+    --backcolor-setima-opcao: #9fc6ce; /* Cor de fundo da primeira sessão */
+
+    /* Configuração para as cores das sessões - terceira opção */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-azul-primeira-opcao: #C9E8FC; 
+    --backcolor-azul-segunda-opcao: #8CCAF3; 
+    --backcolor-azul-terceira-opcao: #4CAAEC; 
+    --backcolor-azul-quarta-opcao: #399BDC; 
+    --backcolor-azul-quinta-opcao: #47A8EC; 
+
+
+    /* Configuração para o espaçamento entre os textos e conteúdos */
+    --spacamento-um: 10px; 
+    --spacamento-dois: 20px;
+    --spacamento-tres: 30px; 
+
+    /* Configuração para as cores das fontes - Cinza */
+    --color-font-basico: #fff;
+    --color-font-um: #3c3c3c;
+    --color-font-dois:#515151;
+    --color-font-tres:#666666;
+    --color-font-quatro:#8c8c8c;
+    --color-font-cinco:#b5b5b5;
+
+    /* Configuração para as cores das fontes - Azul */
+    --color-font-titulos: #666f88;
+    --color-font-subtitulos:#788199;
+    --color-font-titulos-boxs:#8990a2;
+    --color-font-paragrafos:#a3a8b7;
+    --color-font-span:#b5bac9;
+
+    /* Configuração para os estilos dos boões */
+    --cor-botao-primeiro: #9fc6ce; /* Cor principal do botão */
+    --cor-botao-primeiro-hover: #076DB5; /* Cor de hover do botão */
+    --cor-botao-font: #ffffff; /* Cor do texto do botão */
+
+    --cor-botao-secundario: #679C43; /* Cor principal do botão */
+    --cor-botao-secundario-hover: #076DB5; /* Cor de hover do botão */
+    --cor-botao-secundario-font: #ffffff; /* Cor do texto do botão */
+
+    --cor-botao-terceiro: #2F4263; /* Cor principal do botão */
+    --cor-botao-terceiro-hover: #076DB5; /* Cor de hover do botão */
+    --cor-botao-terceiro-font: #ffffff; /* Cor do texto do botão */
+}
+
+/* SESSÃO PRINCIPAL */
+.container-fluid {
+    height: 55rem;
+    display: flex;
+    align-items: center;
+    border: 10px solid blue;
+    flex-direction: column;
+}
+
+/* SESSÃO SECUNDÁRIA */
+.container-secundario {
+    display: flex;
+    border: 10px solid green;
+}
+
+/* TÍTULOS DA PÁGINA */
+
+.container-titulos {
+    border: 10px solid red;
+    display: flex;
+    
+}
+
+/* PRIMEIRO TÍTULO */
+
+.box-primeiro-titulo {
+    border: 10px solid yellow;
+    width: 65rem;
+}
+
+/* SEGUNDO TÍTULO */
+
+.box-segndo-titulo {
+    border: 10px solid gray;
+}
+
+
+/* PRIMEIRO BOX CONTENDO IMAGENS */
+
+.container-fluid-imagens {
+    display: flex;
+    /*flex-direction: column;*/
+    /*border: 10px solid black;*/
+    /*height: 100vh;*/  
+    justify-content: center;
+    align-items: center;
+    /*width: 40%;*/
+    border: 10px solid orange   ;
+}
+
+/* TÍTULO DO MENU */
+
+.título-produtos-selecao {
+    font-family: var(--font-family-titulos-boxs);
+    font-size: var(--font-size-titulos);
+    color: var(--color-font-titulos);
+    text-align: center;
+    text-transform: uppercase;
+    /*padding-top: 90px;*/
+}
+
+.subtitulo-produtos-selecao {
+    font-family: var(--font-size-frases-efeitos);
+    font-size: var(--font-size-frases-efeitos);
+    color: var(--color-font-span);
+}
+
+/* IMAGENS */
+
+.circle-container {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(4, auto);
+    gap: 20px; /* Espaçamento entre as imagens */
+    width: 70%; /* Largura do contêiner */
+    height: 600px; /* Altura do contêiner */
+    border: 2px; /* Borda do contêiner */
+    border-radius: 30px; /* Arredondamento da borda */
+    padding: 10px; /* Espaçamento interno */
+    position: relative;
+    /*border: 10px solid red;*/
+    /*margin-left: 100px;*/
+}
+
+
+.circle-image {
+    width: 80%; /* Largura da imagem */
+    object-fit: cover; /* Redimensiona a imagem para preencher o contêiner */
+    border-radius: 10%;
+    transition: transform 0.3s ease;
+}
+
+.circle-image:hover {
+    transform: scale(1.1);
+    background-color: var(--backcolor-azul-segunda-opcao);
+  }
+
+.empty-space {
+    width: 100%; /* Largura do espaço vazio */
+    height: 100%; /* Altura do espaço vazio */
+}
+
+
+/* BOX COM OPÇÕES PARA DESCRIÇÃO, VÍDEO, OU CHAT*/
+
+.content-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*border: 10px solid orange;*/
+    /*height: 80vh;*/
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border: 10px solid pink;
+}
+
+/* BOX COM DETALHES DO PRODUTO */
+.content-box {
+    border: 10px solid #ccc;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    /*margin-top: 10px;
+    margin-right: 20px;*/
+}
+
+
+.menu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /*padding: 10px;*/
+    border-bottom: 1px solid #ccc;
+    border: 10px solid rgb(214, 210, 210);
+    /*top: 0;
+    left: 0;
+    border-radius: 5px;
+    margin-right: 20px;*/
+}
+
+.menu span {
+    margin-left: 10px;
+    cursor: pointer;
+    font-family: var(--font-family-titulo-pagina);
+    color: var(--color-font-dois);
+    text-transform: uppercase;
+    padding-left: 30px;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 80%;
+    
+}
+
+.btn-vsl img {
+    width: 100px; /* Ajuste conforme necessário */
+    height: auto;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    height: 40px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+
+/* TITULO DO TERCEIRO BOX - DESCRIÇÃO DO PRODUTO */
+
+.titulo-pagina {
+    font-family: var(--font-family-titulo-pagina);
+    font-size: var(--font-size-subtitulos);
+    color: var(--color-font-titulos);
+    padding-top: 10px;
+    text-transform: uppercase;
+}
+
+.text_caracteristica {
+    font-family: var(--font-size-frases-efeitos);
+    font-size: var(--font-size-frases-efeitos);
+    color: var(--color-font-paragrafos);
+    text-align: center;
+    /*margin: 10px;*/
+}
+
+
+.titulo-descricao-produto {
+    font-family: var(--font-family-titulo-pagina);
+    font-size: var(--font-size-titulos);
+    color: var(--color-font-titulos);
+    text-transform: uppercase;
+}
+
+.subtitulo-descricao-produto {
+    font-family: var(--font-size-frases-efeitos);
+    font-size: var(--font-size-frases-efeitos);
+    color: var(--color-font-span);
+    margin: 20px;
+}
+
+/* TITULO DO SEGUNDO BOX - VIDEOS */
+
+.titulo-pagina-video {
+    font-family: var(--font-family-titulo-pagina);
+    font-size: var(--font-size-subtitulos);
+    color: var(--color-font-titulos);
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* IMAGEM DO VÍDEO */
+.btn-vsl img {
+    width: 30%;
+    background-color: black;
+    border-radius: 20px;
+    
+}
+
+.subtitulo-pagina-produtos {
+    font-family: var(--font-family-titulo-pagina);
+    font-size: var(--font-size-titulos);
+    color: var(--color-font-titulos);
+    padding-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* TITULO DO SEGUNDO BOX - CHATBOT */
+
+.titulo-pagina-chatbot {
+    font-family: var(--font-family-titulo-pagina);
+    font-size: var(--font-size-subtitulos);
+    color: var(--color-font-titulos);
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* CAIXA DE CONVERSA COM O BOT */
+
+.container-chatbot {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.texto-box-chat {
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-family-paragrafos);
+    font-size: var(--font-size-paragrafos);
+    padding-top: 50px;
+}
+
+/* RESPONSIVIDADE DA PÁGINA */
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px)  {
+
+    /* AJUSTE GERAL DA PÁGINA */
+    .container-fluid {
+        max-width: 100%;
+    }
+
+
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1280px) and (max-width: 1399px) {
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1279px) {
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+
+}
+
+/* X-Small devices (portrait phones, less than 576px)*/
+@media (min-width: 391px) and (max-width: 575px) {
+
+}
+
+
+/* X-Small devices (portrait phones, less than 576px)*/
+@media (max-width: 390px){
+
+}
+
+

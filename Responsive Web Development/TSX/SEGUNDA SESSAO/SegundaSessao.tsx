@@ -1,5 +1,5 @@
 /* IMPORT CSS*/
-import './styleSegundaSessao.css'
+import './StyleSegundaSessao.css'
 
 /* DEMAIS IMPORTAÇÕES */
 import { useState } from 'react';
@@ -33,50 +33,56 @@ export default function SegundaSessao() {
     return ( 
     <div className='container-fluid'>
     
-        <div className='container-fluid-imagens'>
+        
 
-            <div>
-                <h1 className='título-produtos-selecao'> Produtos </h1>
-                <h2 className='subtitulo-produtos-selecao'>Selecione um produto e conheça  as vantagens para o seu negócio:</h2>
-            </div>
+            <div className='container-titulos'>
+                <div className='box-primeiro-titulo'>
+                    <h1 className='título-produtos-selecao'> Produtos </h1>
+                    <h2 className='subtitulo-produtos-selecao'>Selecione um produto e conheça  as vantagens para o seu negócio:</h2>
+                </div>
 
-            <div className="circle-container">
-                <img src={imagem1} alt="Imagem 1" className="circle-image" />
-                <img src={imagem2} alt="Imagem 2" className="circle-image" />
-                <img src={imagem3} alt="Imagem 3" className="circle-image" />
-                <img src={imagem4} alt="Imagem 4" className="circle-image" />
-                <img src={imagem5} alt="Imagem 5" className="circle-image" />
-                <div className="empty-space"></div>
-                <div className="empty-space"></div>
-                <img src={imagem6} alt="Imagem 6" className="circle-image" />
-                <img src={imagem7} alt="Imagem 7" className="circle-image" />
-                <div className="empty-space"></div>
-                <div className="empty-space"></div>
-                <img src={imagem8} alt="Imagem 8" className="circle-image" />
-                <img src={imagem9} alt="Imagem 9" className="circle-image" />
-                <div className="empty-space"></div>
-                <div className="empty-space"></div>
-                <img src={imagem10} alt="Imagem 10" className="circle-image" />
-                <img src={imagem11} alt="Imagem 11" className="circle-image" />
-                <img src={imagem12} alt="Imagem 12" className="circle-image" />
-                <img src={imagem13} alt="Imagem 13" className="circle-image" />
-                <img src={imagem14} alt="Imagem 14" className="circle-image" />
-            </div>
-        </div>
-
-    <div className="content-banner second max-container">
-
-        <div>
-            <h1 className='titulo-descricao-produto'> descricao do produto </h1>
+                <div className='box-segndo-titulo'>
+                    <h1 className='titulo-descricao-produto'> descricao do produto </h1>
             
-            <h2 className='subtitulo-descricao-produto'>"Esclareça suas dúvidas da maneira que preferir, seja por texto, vídeo ou interagindo com o Tokito BOT, nosso assistente virtual."</h2>
-        </div>
+                    <h2 className='subtitulo-descricao-produto'>"Esclareça suas dúvidas da maneira que preferir, seja por texto, vídeo ou interagindo com o Tokito BOT, nosso assistente virtual."</h2>
+                </div>
+            </div>
+            
+            <div className='container-secundario'>
+                <div className='container-fluid-imagens'>
+
+                    <div className="circle-container">
+                        <img src={imagem1} alt="Imagem 1" className="circle-image" />
+                        <img src={imagem2} alt="Imagem 2" className="circle-image" />
+                        <img src={imagem3} alt="Imagem 3" className="circle-image" />
+                        <img src={imagem4} alt="Imagem 4" className="circle-image" />
+                        <img src={imagem5} alt="Imagem 5" className="circle-image" />
+                        <div className="empty-space"></div>
+                        <div className="empty-space"></div>
+                        <img src={imagem6} alt="Imagem 6" className="circle-image" />
+                        <img src={imagem7} alt="Imagem 7" className="circle-image" />
+                        <div className="empty-space"></div>
+                        <div className="empty-space"></div>
+                        <img src={imagem8} alt="Imagem 8" className="circle-image" />
+                        <img src={imagem9} alt="Imagem 9" className="circle-image" />
+                        <div className="empty-space"></div>
+                        <div className="empty-space"></div>
+                        <img src={imagem10} alt="Imagem 10" className="circle-image" />
+                        <img src={imagem11} alt="Imagem 11" className="circle-image" />
+                        <img src={imagem12} alt="Imagem 12" className="circle-image" />
+                        <img src={imagem13} alt="Imagem 13" className="circle-image" />
+                        <img src={imagem14} alt="Imagem 14" className="circle-image" />
+                    </div>
+                </div>
+
+            <div className="content-banner second max-container">
 
                 <div className="menu">
                     <span className={selectedOption === 'produto' ? 'active' : ''} onClick={() => handleOptionClick('produto')}>Produto</span>
                     <span className={selectedOption === 'video' ? 'active' : ''} onClick={() => handleOptionClick('video')}>Vídeo</span>
                     <span className={selectedOption === 'chatbot' ? 'active' : ''} onClick={() => handleOptionClick('chatbot')}>ChatBot</span>
                 </div>
+
                 <div className="content-box">
                     {selectedOption === 'produto' && (
                         <>
@@ -111,6 +117,7 @@ export default function SegundaSessao() {
                             <p className="text_caracteristica">Vai abrir a caixa de conversa com o chatbot, será necessário logar sendo criando a conta ou usando uma existente. Aqui vamos mapear a experiência e questionamentos para cada produto e visitante.</p>
                         </>
                     )}
+            </div>
             </div>
     </div>
 
