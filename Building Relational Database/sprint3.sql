@@ -29,3 +29,20 @@ CREATE TABLE Visitante(id_visit NUMBER(10) GENERATED ALWAYS as IDENTITY START WI
                        -- !!! Armazenando como 'HH:MM:SS pois não tem TIME no Oracle
                        tempo_visit NUMBER(10) CONSTRAINT visitante_tempo_nn NOT NULL)
 
+
+
+-- Deleta a tabela caso já exista
+DROP TABLE Plataforma_Login CASCADE CONSTRAINTS;
+
+-- Criação da Tabela Plataforma_Login
+CREATE TABLE Plataforma_Login(id_login NUMBER(10) GENERATED ALWAYS as IDENTITY START WITH 1 INCREMENT BY 1
+                              CONSTRAINT login_id_nn NOT NULL
+                              CONSTRAINT login_id_pk PRIMARY KEY,
+                              id_visit_fk NUMBER(10) CONSTRAINT login_idvisit_nn NOT NULL,
+                              nome_login VARCHAR(40) CONSTRAINT login_nome_nn NOT NULL,
+                              status_login VARCHAR(10) CONSTRAINT login_status_nn NOT NULL,
+                              data_implementacao DATE CONSTRAINT login_data_nn NOT NULL,
+                              email_login VARCHAR(40) CONSTRAINT login_email_nn NOT NULL,
+                              CONSTRAINT platlogin_visitante_fk FOREIGN KEY (id_visit_fk) REFERENCES Visitante(id_visit));
+
+
