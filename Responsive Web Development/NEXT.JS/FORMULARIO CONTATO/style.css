@@ -1,0 +1,141 @@
+:root {
+
+    /* Fontes - Familia */
+    --font-family-titulos: Georgia, 'Times New Roman', Times, sans-serif;
+    --font-family-paragrafos: 'Montserrat', sans-serif;
+    --font-family-spaan: Segoe;
+    --font-family-frases: Brush Script MT, Brush Script Std, cursive;
+
+    /* Fontes - Cores */
+    --color-font-um: #3c3c3c;
+    --color-font-dois:#515151;
+    --color-font-tres: #666f88;
+    --color-font-quatro:#788199;
+    --color-font-cinco:#8990a2;
+    --color-font-seis:#a3a8b7;
+    --color-font-sete:#b5bac9;
+
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira-opcao: #C9E8FC; 
+    --backcolor-segunda-opcao: #8CCAF3; 
+    --backcolor-terceira-opcao: #4CAAEC; 
+    --backcolor-quarta-opcao: #399BDC; 
+    --backcolor-quinta-opcao: #47A8EC; 
+}
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Configuração geral da página */
+.container {
+    height: 100vh;
+    background-color: var(--backcolor-primeira-opcao);
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.texto-descritivo-formulario {
+    border: 10px solid #fff;
+    width: 80%;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: var(--backcolor-basico);
+    font-family: var(--font-family-titulos);
+    font-size: 18px;
+    text-transform: uppercase;
+    color: var(--color-font-titulos);
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Icones do formulário */
+
+.icones-formulario {
+    font-size: 60px;
+    padding-right: 10px;
+    width: 40px;
+}
+
+/* Formulário - Dados pessoais */
+
+.box-dados-pessoais, .box-dados-empresa, .box-dados-produto {
+    display: flex;
+    /*border: 10px solid yellow;*/
+    padding: 30px;
+    justify-content: space-around;
+    color: var(--color-font-titulos);
+    gap: 40px;
+}
+
+
+/* DIVISÃO ENTRE O ICONE E OS CAMPOS DE INPUT DE DADOS */
+.dados-pessoais, .dados-empresa, .dados-produtos {
+    /*border: 3px solid gray;*/
+    display: flex;
+    align-items: center;
+}
+
+label {
+    font-family: var(--font-family-paragrafos);
+    color: var(--color-font-titulos);
+}
+
+input, .form-select {
+    font-family: var(--font-family-paragrafos);
+    font-size: 15px;
+    /*text-transform: uppercase;*/
+    padding: 20px;
+    border-radius: 5px;
+    border: #fff;
+    width: 350px;
+
+}
+
+/* Inputs com seleções */
+.form-select {  
+    font-family: var(--font-family-paragrafos);
+    font-size: 15px;
+    padding: 20px;
+    border-radius: 5px;
+    border: #fff;
+    width: 350px;
+    color: var(--color-font-titulos);
+}
+
+/* Botãos de envio */
+
+.btn-formulario {
+    background-color: rgb(255, 212, 59);;
+    color: var(--color-font-basico);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.btn-formulario:hover {
+    background-color: #24C0EB;
+}
+
+/* Logo Tokito Techs */
+
+.logo-tokito-techs img{
+    max-width: 100%;
+}
+
+.logo-tokito-techs {
+    margin-left: auto;
+}
+
