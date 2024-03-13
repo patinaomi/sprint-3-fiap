@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+:root {
+
+    /* Fontes - Familia */
+    --font-family-titulos: Georgia, 'Times New Roman', Times, sans-serif;
+    --font-family-paragrafos: 'Montserrat', sans-serif;
+    --font-family-spaan: Segoe;
+    --font-family-frases: Brush Script MT, Brush Script Std, cursive;
+
+    /* Fontes - Cores */
+    --color-font-um: #3c3c3c;
+    --color-font-dois:#515151;
+    --color-font-tres: #666f88;
+    --color-font-quatro:#788199;
+    --color-font-cinco:#8990a2;
+    --color-font-seis:#a3a8b7;
+    --color-font-sete:#b5bac9;
+
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira-opcao: #C9E8FC; 
+    --backcolor-segunda-opcao: #8CCAF3; 
+    --backcolor-terceira-opcao: #4CAAEC; 
+    --backcolor-quarta-opcao: #399BDC; 
+    --backcolor-quinta-opcao: #47A8EC; 
+}
+
+/* Configuração geral */
+.container-footer {
+    border: 5px solid salmon;
+    height: 20rem;
+}
+
+/* Conteúdo do Footer */
+
+footer {
+    background-color: var(--backcolor-quinta-opcao);
+    width: 100%;
+    color: rgb(255, 255, 255);
+}
+  
+.container-footer {
+    display: grid;
+}
+
+/* Sesão com informações de contato */
+
+.conteudo-contato {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 1em;
+    border: 5px solid blue;
+    gap: 50px;
+    text-wrap: wrap;
+}
+
+/* Blocos com icones e textos */
+.footer-info-endereco, .footer-info-telefone, .footer-info-agendamento {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Título */
+.footer-info-titulo {
+    font-family: var(--font-family-titulos);
+    font-size: 0.6em;
+}
+
+.footer-info-texto-localidade p, .footer-info-texto-telefone p, .footer-info-texto-agendamento p  {
+    font-family: var(--font-family-paragrafos);
+    font-size: 14px;
+}
+
+/* Sessão das redes sociais */
+
+.conteudo-redes-sociais {
+    justify-content: start;
+    display: flex;
+    border: 5px solid red;
+    align-items: center;
+    gap: 50px;
+    text-wrap: wrap;
+    padding: 1em;
+}
+.conteudo-redes-sociais ul {
+    display: flex;
+    gap: 3em;
+    justify-content: center;
+}
+
+/* Icones das redes sociais e de cotato */
+.icones-rede-social-font {
+    color: #FDFEFF;
+    width: 30px;
+    height: 30px;
+}
+
+/* Sessão das logos */
+
+.conteudo-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    border: 5px solid green;
+    padding: 1em;
+}
+
+/* Logo Tokito Techs */
+.nav-wrapper-logo-Tokito {
+    width: 80px;
+    height: 80px;
+}
+
+/* Texto Logo Tokito Techs */
+.logo-tokito-techs {
+    font: var(--font-family-titulos);
+    font-size: 42px;
+    color: #FDFEFF;
+}
+
+/* Logo Challenge - Sales Force */
+.logo-salesforce {
+    font-family: var(--font-family-titulos);
+    font-size: 42px;
+    color: #fff;
+}
