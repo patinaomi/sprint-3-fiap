@@ -25,6 +25,14 @@
 }
 
 /* Ajuste geral da página */
+
+html {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+    overflow-x: hidden; /* Evita a rolagem horizontal */
+}
+
 .container-menu {
     border: 5px solid black;
     display: flex;
@@ -63,7 +71,7 @@
 
 .imagem-tokito-techs {
     height: 4rem;
-    width: 5rem;
+    width: 4rem;
 }
 
 /* Logo Sales Force */
@@ -71,7 +79,7 @@
 .logo-sales-force .texto-logo-salesforce {
     /*border: 5px solid orange;*/
     font-family: var(--font-family-titulos);
-    font-size: 38px;
+    font-size: 20px;
     color: #FDFEFF;
 }
 
