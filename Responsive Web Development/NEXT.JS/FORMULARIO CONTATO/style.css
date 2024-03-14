@@ -24,6 +24,8 @@
     --backcolor-quinta-opcao: #47A8EC; 
 }
 
+/* Configuração geral da página */
+
 * {
     box-sizing: border-box;
     text-decoration: none;
@@ -32,7 +34,13 @@
     padding: 0;
 }
 
-/* Configuração geral da página */
+html {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+    overflow-x: hidden; /* Evita a rolagem horizontal */
+}
+
 .container {
     height: 100vh;
     background-color: var(--backcolor-primeira-opcao);
@@ -44,8 +52,8 @@
 
 .texto-descritivo-formulario {
     border: 10px solid #fff;
-    width: 80%;
-    padding: 20px;
+    width: 70%;
+    padding: 10px;
     margin-bottom: 30px;
     background-color: var(--backcolor-basico);
     font-family: var(--font-family-titulos);
@@ -54,6 +62,14 @@
     color: var(--color-font-titulos);
     text-align: center;
     border-radius: 10px;
+    height: 60px;
+}
+
+/* título do formulário */
+
+.titulo-formulario {
+    font-family: var(--font-family-titulos);
+    font-size: 24px;
 }
 
 /* Icones do formulário */
@@ -64,6 +80,23 @@
     width: 40px;
 }
 
+/* Container das perguntas */
+
+.formulario-contato {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    
+}
+
+.container-formulario {
+    border: 5px solid #fff;
+    background-color: var(--backcolor-segunda-opcao);
+    height: 70vh;
+    padding-top: 50px;
+}
+
 /* Formulário - Dados pessoais */
 
 .box-dados-pessoais, .box-dados-empresa, .box-dados-produto {
@@ -72,11 +105,12 @@
     padding: 30px;
     justify-content: space-around;
     color: var(--color-font-titulos);
-    gap: 40px;
+    gap: 20px;
 }
 
 
-/* DIVISÃO ENTRE O ICONE E OS CAMPOS DE INPUT DE DADOS */
+/* Divisão entre o icone e os campos de input de dados */
+
 .dados-pessoais, .dados-empresa, .dados-produtos {
     /*border: 3px solid gray;*/
     display: flex;
@@ -95,7 +129,7 @@ input, .form-select {
     padding: 20px;
     border-radius: 5px;
     border: #fff;
-    width: 350px;
+    width: 300px;
 
 }
 
@@ -106,7 +140,7 @@ input, .form-select {
     padding: 20px;
     border-radius: 5px;
     border: #fff;
-    width: 350px;
+    width: 300px;
     color: var(--color-font-titulos);
 }
 
@@ -114,7 +148,7 @@ input, .form-select {
 
 .btn-formulario {
     background-color: rgb(255, 212, 59);;
-    color: var(--color-font-basico);
+    color: var(--backcolor-basico);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -123,6 +157,7 @@ input, .form-select {
     width: 200px;
     font-size: 22px;
     font-weight: 700;
+    margin-top: 30px;
 }
 
 .btn-formulario:hover {
