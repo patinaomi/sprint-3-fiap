@@ -36,32 +36,35 @@
     padding: 0;
 }
 
+html {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+    overflow-x: hidden; /* Evita a rolagem horizontal */
+}
+
 .container-formulario-necessidade {
     height: 100vh;
     background-color: var(--backcolor-quarta-opcao);
     justify-content: center;
     display: flex;
     flex-direction: column;
-    border: 10px solid red;
+    /*border: 10px solid red;*/
     align-items: center;
-    padding: 20px;
 }
 
 /* Título da página principal */
 .texto-descritivo-formulario {
     font-family: var(--font-family-titulos);
-    font-size: 18px;
+    font-size: 14px;
     background-color: var(--backcolor-basico);
-    border: 10px solid #fff;
     width: 70%;
-    margin-bottom: 30px;
     text-transform: uppercase;
     color: var(--color-font-tres);
     text-align: center;
-    border-radius: 10px;
-    height: 80px;
+    height: 60px;
     align-items: center;
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 
@@ -70,40 +73,68 @@
 .subtitulo-pagina-formulario {
     font-family: var(--font-family-titulos);
     padding-bottom: 10px;
-    font-size: 22px;
+    font-size: 16px;
     color: var(--backcolor-primeira-opcao);
     text-align: center;
 }
 
 .frase-razao-formulario {
     font-family: var(--font-family-paragrafos);
-    color: var(--backcolor-basico);
+    color: var(--color-font-dois);
     font-size: 16px;
-    padding-bottom: 20px;
     margin: 20px;
     text-align: center;
-    
 }
 
 
 /* Formulário geral */
 
-.formulario-indentificao {
-    /*border: 10px solid green;*/
-    height: 30rem;
-    width: 80%;
+.formulario-contato {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
+
+/* Frase explicando o formulário */
 
 .sobre-formulario {
     text-align: center;
     justify-content: center;
     align-items: center;
+    background-color: var(--backcolor-segunda-opcao);
+    margin-top: 30px;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.sobre-formulario h1 {
+    font-family: var(--font-family-titulos);
+    color: var(--color-font-dois);
+    font-size: 18px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+/* Títulos das sessões do formulário */
+.subtitulo-pagina {
+    padding-top: 10px;
+}
+
+/* Inputs do formulário */
+.container-formulario-secundario {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--backcolor-segunda-opcao);
 }
 
 /* Formulário - Dados de Identificação */
 
-.Subtitulo-pagina-formulario{
-    color: #fff;
+.subtitulo-pagina-formulario{
+    color: var(--color-font-tres);
+    text-transform: uppercase;
+    text-align: start;
+    padding-left: 20px;
 }
 
 .box-dados-indentificao {
@@ -158,40 +189,41 @@
 /* Campos de escrita e inputs */
 
 label {
-    color: var(--color-font-titulos);
+    color: var(--color-font-tres);
 }
 
 input {
     font-family: var(--font-family-paragrafos);
-    font-size: 15px;
+    font-size: 12px;
     /*text-transform: uppercase;*/
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     border: #fff;
     width: 380px;
+    color: var(--color-font-tres);
 }
 
 /* INPUTS COM SELEÇÕES */
 
 .form-select {
     font-family: var(--font-family-paragrafos);
-    font-size: 15px;
+    font-size: 12px;
     /*text-transform: uppercase;*/
-    padding: 14px;
+    padding: 9px;
     border-radius: 5px;
     border: #fff;
     width: 380px;
-    color: var(--color-font-titulos);
+    color: var(--color-font-tres);
 }
 
 .form-select-processos-necessidades {
-    font-size: 15px;
+    font-size: 12px;
     /*text-transform: uppercase;*/
-    padding: 14px;
+    padding: 9px;
     border-radius: 5px;
     border: #fff;
     width: 380px;
-    color: var(--color-font-titulos);
+    color: var(--color-font-tres);
     margin-bottom: 10px;
 }
 
@@ -199,7 +231,7 @@ input {
 
 .btn-formulario {
     background-color: #fff;
-    color: var(--color-font-titulos);
+    color: var(--color-font-tres);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -208,10 +240,15 @@ input {
     width: 200px;
     font-size: 22px;
     font-weight: 700;
-    margin-top: 20px;
+    margin-top: 10px;
 }
+
 
 .btn-formulario:hover {
     background-color: #0056b3;
 }
 
+.botao-formulario {
+    text-align: center;
+    padding-bottom: 10px;
+}
