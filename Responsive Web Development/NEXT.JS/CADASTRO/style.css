@@ -8,6 +8,7 @@
     --font-family-paragrafos: 'Montserrat', sans-serif;
     --font-family-spaan: Segoe;
     --font-family-frases: Brush Script MT, Brush Script Std, cursive;
+    --font-family-subtitulos: 'Inter', sans-serif;
 
     /* Fontes - Cores */
     --color-font-um: #3c3c3c;
@@ -27,6 +28,7 @@
     --backcolor-quinta-opcao: #47A8EC; 
 }
 
+/* Configurações gerais */
 
 * {
     padding: 0;
@@ -35,54 +37,100 @@
     font-family: 'Inter', sans-serif;
 }
 
-body {
+html {
     width: 100%;
+    max-width: 1280px;
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+    overflow-x: hidden; /* Evita a rolagem horizontal */
+}
+
+body {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: var(--backcolor-primeira-opcao);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 /* Ajuste geral da página */
 
 .container-cadastro {
-    width: 80%;
-    height: 80vh;
+    height: 90vh;
     display: flex;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212);
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 /* Imagem do lado esquerdo do fomulário */
+
 .form-image {
-    width: 50%;
-    display: flex;
+    width: 30%;
+    display: grid;
     justify-content: center;
     align-items: center;
     background-color: var(--backcolor-segunda-opcao);
     padding: 1rem;
+    text-align: center;
 }
 
 .form-image img {
     width: 31rem;
 }
 
+.imagem-pagina-cadastro {
+    max-width: 300px;
+    height: 400px;
+    /*border: 5px solid pink;*/
+}
+
+.imagem-pagina-cadastro-sales {
+    max-width: 300px;
+    height: 150px;
+    /*border: 5px solid pink;*/
+}
+
+/* Formulário de Cadastro */
 
 .form {
-    width: 50%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
     padding: 3rem;
+    /*border: 5px solid blue;*/
 }
 
+/* Cabeçalho do formulário */
 .form-header {
     margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
+    /*border: 5px solid green;*/
 }
+
+.title {
+    font-family: var(--font-family-subtitulos);
+    font-size: 14px;
+}
+
+.form-header h1::after {
+    content: '';
+    display: block;
+    width: 5rem;
+    height: 0.3rem;
+    background-color: var(--backcolor-quarta-opcao);
+    margin: 0 auto;
+    position: absolute;
+    border-radius: 10px;
+}
+
+/* Botão para efetuar o Login */
 
 .login-button {
     display: flex;
@@ -107,18 +155,9 @@ body {
     color: #fff;
 }
 
-.form-header h1::after {
-    content: '';
-    display: block;
-    width: 5rem;
-    height: 0.3rem;
-    background-color: var(--backcolor-quarta-opcao);
-    margin: 0 auto;
-    position: absolute;
-    border-radius: 10px;
-}
+/* Campos para inserir informações */
 
-.input-group {
+.input-group-content-person {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -149,42 +188,55 @@ body {
 }
 
 .input-box label,
-.gender-title h6,
-.empresa-title h6 {
+.genero-titulo h6,
+.empresa-titulo h6 {
     font-size: 0.75rem;
     font-weight: 600;
     color: #000000c0;
     padding-top: 20px;
 }
 
+.genero-titulo h6,
+.empresa-titulo h6 {
+    padding-bottom: 20px;
+}
+
 .input-box input::placeholder {
     color: #000000be;
 }
 
-.gender-group, .empresa-group {
+.genero-group, .empresa-group {
     display: flex;
-    justify-content: space-between;
-    margin-top: 0.62rem;
-    padding: 0 .5rem;
+    justify-content: flex-start;
+    text-align: center;
+    align-items: center;
+    gap: 30px;
 }
 
-.gender-input, .empresa-input {
+.genero-input, .empresa-input {
     display: flex;
     align-items: center;
 }
 
-.gender-input input, .empresa-input input {
+.genero-input input, .empresa-input input {
     margin-right: 0.35rem;
+    
 }
 
-.gender-input label, .empresa-input label {
+.genero-input label, .empresa-input label {
     font-size: 0.81rem;
     font-weight: 600;
     color: #000000c0;
 }
 
+/* Botão para realizar o cadastro */
+
+.continue-button {
+    text-align: center;
+}
+
 .continue-button button {
-    width: 100%;
+    width: 50%;
     margin-top: 2.5rem;
     border: none;
     background-color: var(--backcolor-quarta-opcao);
@@ -204,7 +256,10 @@ body {
     color: #fff;
 }
 
-
+/* Título input Empresa */
+.empresa-title {
+    padding-top: 20px;
+}
 
 @media screen and (max-width: 1330px) {
     .form-image {
