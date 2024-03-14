@@ -11,6 +11,8 @@ import './style.css'
 /* Importar UseState*/
 import { useState } from 'react'
 
+/* Importação do LINK para direcionar para outra página */
+import Link from 'next/link';
 
 export default function Cadastro() {
 
@@ -84,7 +86,9 @@ export default function Cadastro() {
                         </div> {/* Fim da div title*/}
 
                         <div className="login-button">
-                            <button><a href="#">Entrar</a></button>
+                            <Link href="/Login">
+                                <button className='botao-login'>Entrar</button>
+                            </Link>
                         </div> {/* Fim da div login-button */}
 
                     </div> {/* Fim da div form-header */}
@@ -97,7 +101,7 @@ export default function Cadastro() {
                         </div> {/* Fim da div input-box */}
 
                         <div className="input-box">
-                            <label htmlFor="sobrenome">Sobrenome</label>
+                            <label className='titulos-inputs' htmlFor="sobrenome">Sobrenome</label>
                             <input id="sobrenome" type="text" name="sobrenome" placeholder="Digite seu sobrenome" required value={InformacoesFormulario.sobrenome} onChange={handleChange}/>
                         </div> {/* Fim da div input-box */}
 
@@ -189,7 +193,7 @@ export default function Cadastro() {
 
 
                     <div className="continue-button">
-                        <button type="submit">Continuar</button>
+                        <button className='botao-continuar' type="submit">Continuar</button>
                     </div> {/* Fim da div continue-button */}
                 </form>
             </div> {/* Fim da div form */}
