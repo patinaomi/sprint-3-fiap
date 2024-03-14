@@ -24,10 +24,19 @@
     --backcolor-quinta-opcao: #47A8EC; 
 }
 
+/* Configuração geral */
+
 * {
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+}
+
+html {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+  overflow-x: hidden; /* Evita a rolagem horizontal */
 }
   
 body {
