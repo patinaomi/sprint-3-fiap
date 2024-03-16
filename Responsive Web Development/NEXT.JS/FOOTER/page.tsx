@@ -21,7 +21,7 @@ export default function Footer() {
                 <div className='conteudo-contato'>
                     
                     <div className="footer-info-titulo">
-                        <h1>Entre em contato conosco:</h1>
+                        <h1 className='titulo-footer-contato'>Entre em contato conosco:</h1>
                     </div> {/* Fim div footer-info */}
 
                     <div className='footer-info-endereco'>
@@ -64,10 +64,13 @@ export default function Footer() {
 
                 </div> {/* Fim div conteudo-contato */}
             
+                <div className="linha">
+                </div> {/* Div da linha */}
+
                 <div className="conteudo-redes-sociais">
 
                     <div className='footer-info-titulo'>
-                        <h1 className="titulo-dois-redes-sociais">Siga nossa empresa nas redes sociais ou entre em contato:</h1>
+                        <h1 className="titulo-footer-contato">Siga nossa empresa nas redes sociais:</h1>
                     </div> {/* Fim div footer-info-titulo */}
 
                     <div className='icones-redes-sociais'>
@@ -95,24 +98,9 @@ export default function Footer() {
                     </div> {/* Fim div icones-redes-sociais */}
                 </div> {/* Fim div conteudo-redes-sociais */}
 
-                <div className="conteudo-logos"> 
-                    
-                    <div className='footer-logo-tokito-techs'>
-                        <img  className="nav-wrapper-logo-Tokito" src={imagem1.src} alt="Logo da Tokito Techs" />
-                    </div> {/* Fim div footer-logo-tokito-techs */}
-
-                    <div className='footer-logo-tokito-texto'>
-                        <p className='logo-tokito-techs'>Tokito Techs</p> 
-                    </div> {/* Fim div footer-logo-tokito-texto */}
-
-
-                    <div className='footer-logo-salesforce'>
-                        <p className='logo-salesforce'>Challenge SalesForce </p>
-                    </div> {/* Fim div footer-logo-salesforce */}
-
-                </div> {/* Fim div conteudo-logos */}
-
             </div> {/* Fim container-footer */}
+
+            <p className='frase-direitos-footer'>&copy; <span id="currentYear"></span> 2024 - Challenge Sales Force - Todos os direitos reservados à Tokito Techs.</p>
 
         </footer>
     );

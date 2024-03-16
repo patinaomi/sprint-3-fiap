@@ -1,19 +1,19 @@
-* {
-    box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
 
+/* Importaçã da font que será utilizada no site todo*/
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
+/* Padronização da fonte,a tamanho, cores, background*/
 :root {
 
     /* Fontes - Familia */
-    --font-family-titulos: Georgia, 'Times New Roman', Times, sans-serif;
-    --font-family-paragrafos: 'Montserrat', sans-serif;
-    --font-family-spaan: Segoe;
-    --font-family-frases: Brush Script MT, Brush Script Std, cursive;
+    --font-family-padrao: Manrope;
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 18px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
 
     /* Fontes - Cores */
     --color-font-um: #3c3c3c;
@@ -34,9 +34,26 @@
 }
 
 /* Configuração geral */
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: Manrope;
+}
+
+html {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
+    overflow-x: hidden; /* Evita a rolagem horizontal */
+}
+
 .container-footer {
-    border: 5px solid salmon;
-    height: 20rem;
+    /*border: 5px solid salmon;*/
+    height: 10rem;
 }
 
 /* Conteúdo do Footer */
@@ -55,11 +72,10 @@ footer {
 
 .conteudo-contato {
     display: flex;
-    justify-content: start;
+    justify-content: space-evenly;
     align-items: center;
     padding: 1em;
-    border: 5px solid blue;
-    gap: 50px;
+    /*border: 5px solid blue;*/
     text-wrap: wrap;
 }
 
@@ -70,15 +86,15 @@ footer {
     gap: 20px;
 }
 
-/* Título */
+/* Título da página */
 .footer-info-titulo {
     font-family: var(--font-family-titulos);
-    font-size: 0.6em;
+    font-size: var(--font-size-textos-pequenos);
 }
 
+/* Textos do box contato */
 .footer-info-texto-localidade p, .footer-info-texto-telefone p, .footer-info-texto-agendamento p  {
-    font-family: var(--font-family-paragrafos);
-    font-size: 14px;
+    font-size: var(--font-size-textos);
 }
 
 /* Sessão das redes sociais */
@@ -86,22 +102,25 @@ footer {
 .conteudo-redes-sociais {
     justify-content: start;
     display: flex;
-    border: 5px solid red;
+    /*border: 5px solid red;*/
     align-items: center;
-    gap: 50px;
+    gap: 20px;
     text-wrap: wrap;
-    padding: 1em;
+    padding: 2em;
 }
+
+/* Icones da Rede social */
+
 .conteudo-redes-sociais ul {
     display: flex;
-    gap: 3em;
-    justify-content: center;
+    gap: 1em;
 }
+
 
 /* Icones das redes sociais e de cotato */
 .icones-rede-social-font {
     color: #FDFEFF;
-    width: 30px;
+    width: 20px;
     height: 30px;
 }
 
@@ -111,8 +130,8 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 80px;
-    border: 5px solid green;
+    gap: 30px;
+    /*border: 5px solid green;*/
     padding: 1em;
 }
 
@@ -135,3 +154,21 @@ footer {
     font-size: 42px;
     color: #fff;
 }
+
+/* Criação de uma div para fazer uma linha */
+
+.linha {
+    width: 95%;
+    height: 1px; /* Altura da linha */
+    background-color: #fff;
+    margin: 0 auto; /* Centralizar horizontalmente */
+}
+
+/* Frase de direitos do projeto */
+.frase-direitos-footer{
+    font-size: 12px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+
