@@ -1,10 +1,18 @@
-:root {
+/* Importação da font que será utilizada no site todo*/
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
+
+/* Padronização da fonte,a tamanho, cores, background*/
+:root {
     /* Fontes - Familia */
-    --font-family-titulos: Georgia, 'Times New Roman', Times, sans-serif;
-    --font-family-paragrafos: 'Montserrat', sans-serif;
-    --font-family-spaan: Segoe;
-    --font-family-frases: Brush Script MT, Brush Script Std, cursive;
+    --font-family-padrao: Manrope;
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 18px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
 
     /* Fontes - Cores */
     --color-font-um: #3c3c3c;
@@ -26,15 +34,24 @@
 
 /* Ajuste geral da página */
 
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: Manrope;
+}
+
 html {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
     overflow-x: hidden; /* Evita a rolagem horizontal */
 }
 
 .container-menu {
-    border: 5px solid black;
+    /*border: 5px solid black;*/
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -44,43 +61,44 @@ html {
     width: 100%;
 }
 
-.container-primario {
+.container-primario-menu {
     display: flex;
     /*border: 5px solid pink;*/
     align-items: center;
 }
 
-.container-secundario {
+.container-secundario-menu {
     display: flex;
     /*border: 5px solid green;*/
 }
 
-.container-terciario {
+.container-terciario-menu {
     display: flex;
     /*border: 5px solid green;*/
-    align-items: center;
-    justify-content: center;
 }
 
 /* Logo tokito Techs */
 
+/*
 .logo-tokito-techs {
     flex: 0 0 20px 20px;
 }
+*/
 
-
+/*
 .imagem-tokito-techs {
     height: 4rem;
     width: 4rem;
 }
+*/
 
 /* Logo Sales Force */
 
 .logo-sales-force .texto-logo-salesforce {
     /*border: 5px solid orange;*/
-    font-family: var(--font-family-titulos);
-    font-size: 20px;
+    font-size: 28px;
     color: #FDFEFF;
+    text-transform: uppercase;
 }
 
 .logo-sales-force .texto-logo-salesforce a {
@@ -97,8 +115,7 @@ html {
 }
 
 .opcoes-menu a {
-    font-family: var(--font-family-titulos);
-    font-size: 20px;
+    font-size: var(--font-size-textos);
     color: #FDFEFF;
 
 }
@@ -109,11 +126,9 @@ html {
     display: flex;
     align-items: center;
     height: 40px;
-    justify-content: center;
     /*border: 5px solid red;*/
-    padding: 20px;
+    
 }
-
 
 .input-pesquisa-menu {
     border-style: none;
@@ -121,14 +136,14 @@ html {
     outline: none;
     transition: .5s ease-in-out;
     background-color: var(--backcolor-quinta-opcao);
-    
+    border-bottom: 1px solid #FDFEFF;
 }
 
 .input-pesquisa-menu::placeholder,
 .input-pesquisa-menu {
-    font-family: var(--font-family-paragrafos);
-    font-size: var(--font-size-paragrafos);
+    font-size: var(--font-size-textos);
     text-align: center;
+    color: var(--backcolor-basico);
     
 }
 
@@ -137,21 +152,20 @@ html {
 }
 
 /* Botão de pesquisa */
+
 .icon-botao-menu {
     display: flex;
     align-items: center;
     justify-content: center;
     right: 0px;
     cursor: pointer;
-    height: 50px;
+    height: 30px;
     outline: none;
     border-style: none;
     border-radius: 50%;
     pointer-events: painted;
     background-color: transparent;
     transition: .2s linear;
-    padding-right: 20px;
-    
 }
 
 .icon-botao-menu:focus {
@@ -173,13 +187,12 @@ html {
 
 /* Botões */
 
-.Btn {
+.Btn-menu {
     margin-top: 4px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -190,51 +203,48 @@ html {
     background-color: var(--backcolor-azul-segunda-opcao);
 }
   
-  
-.sign {
+.sign-menu {
     transition-duration: .3s;
     display: flex;
 }
   
-.sign svg {
-    width: 22px;
+.sign-menu svg {
+    width: 18px;
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin-left: 10px;
+    margin-left: 9px;
 }
   
-.sign svg path {
-    fill: white;
-    
+.sign-menu svg path {
+    fill: white; 
 }
 
-.Btn:hover {
+.Btn-menu:hover {
     width: 125px;
     border-radius: 40px;
     transition-duration: .3s;
 }
   
-.Btn:hover .sign {
+.Btn-menu:hover .sign-menu {
     width: 30%;
     transition-duration: .3s;
-    padding-left: 20px;
 }
   
-.Btn:hover .text {
+.Btn-menu:hover .text-menu {
     opacity: 1;
     width: 70%;
     transition-duration: .3s;
     padding-right: 10px;
 }
   
-.Btn:active {
+.Btn-menu:active {
     transform: translate(2px, 2px);
 }
 
 
-/* Textos */
-.text {
+/* Textos dos botões */
+.text-menu {
     position: absolute;
     right: 0%;
     width: 0%;
@@ -245,7 +255,7 @@ html {
     transition-duration: .3s;
 }
   
-.text a {
+.text-menu a {
     color: var(--color-font-basico);
     
 }
@@ -266,61 +276,5 @@ html {
 
 /* Responsividade */
 
-/* X-Small devices (portrait phones, less than 390px)*/
-@media (max-width: 390px) {
-
-    /* CONFIGURAÇÃO DA TELA */
-
-    .container {
-        max-width: 390px;
-        display: flex;
-        gap: 50px;
-    }
-
-    .container-secundario {
-        display: none;
-    }
-
-    /* Logo tokito Techs */
-
-    .imagem-tokito-techs {
-        height: 3rem;
-        width: 4rem;
-    }
-
-    /* Logo Sales Force */
-    .logo-sales-force .texto-logo-salesforce {
-        font-size: 24px;
-    }
-
-    /* Lista de opções do menu */
-    .opcoes-menu {
-        display: none;
-    }
-
-    /* Barra de pesquisa */
-    .conteudo-pesquisa {
-        display: none;
-    }
-
-    /* Icones */
-    .botoes-opcoes-menu {
-        display: none;
-    }
-
-    /* Menu hamburguer */
-
-    #menu-hamburguer {
-        display: flex;
-    }
-
-    .sign svg {
-        width: 30px;
-
-    }
-
-
-
-}
 
 
