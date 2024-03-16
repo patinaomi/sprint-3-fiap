@@ -1,0 +1,125 @@
+
+/* Importação da font que será utilizada no site todo*/
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+/* Padronização da fonte,a tamanho, cores, background*/
+
+:root {
+    /* Fontes - Familia */
+    --font-family-padrao: Manrope;
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 18px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
+
+    /* Fontes - Cores */
+    --color-font-um: #3c3c3c;
+    --color-font-dois:#515151;
+    --color-font-tres: #666f88;
+    --color-font-quatro:#788199;
+    --color-font-cinco:#8990a2;
+    --color-font-seis:#a3a8b7;
+    --color-font-sete:#b5bac9;
+
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira-opcao: #C9E8FC; 
+    --backcolor-segunda-opcao: #8CCAF3; 
+    --backcolor-terceira-opcao: #4CAAEC; 
+    --backcolor-quarta-opcao: #399BDC; 
+    --backcolor-quinta-opcao: #47A8EC; 
+}
+
+/* Configurações gerais */
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: Manrope;
+}
+
+html {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    /*overflow-x: hidden;*/
+}
+
+.container-home-page {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    height: 100vh;
+    box-shadow: 1px 0px 5px white;
+    background-color: #c7dfff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    position: relative;
+    }
+
+
+/* Imagem de fundo */
+
+.banner-imagem-principal {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Bloco com os logos */
+
+
+.container-logos-tokito {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: black;
+    z-index: 1;
+    width: 60%;
+}
+
+
+/* Texto Logo Tokito Techs */
+.texto-logo-tokito-techs {
+    color: var(--backcolor-basico);
+    font-size: 28px;
+    z-index: 1;
+}
+
+/* Frase de efeito do Slogan */
+
+.frase-efeito {
+    font-size: 3em;
+    color: var(--backcolor-basico);
+    overflow-x: hidden; 
+    white-space: nowrap;
+    animation: typing 5s steps(40, end), forwards, blink-caret .1s step-end infinite alternate;
+    text-align: center;
+    position: relative;
+}
+/* Keyframes para o efeito de digitação */
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Keyframes para o efeito de piscar do cursor */
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: blue; }
+}
