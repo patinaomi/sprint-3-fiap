@@ -54,13 +54,15 @@ html {
 .container-footer {
     /*border: 5px solid salmon;*/
     height: 10rem;
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Conteúdo do Footer */
 
 footer {
     background-color: var(--backcolor-quinta-opcao);
-    width: 100%;
     color: rgb(255, 255, 255);
 }
   
@@ -72,9 +74,7 @@ footer {
 
 .conteudo-contato {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 1em;
+    padding: 2em;
     /*border: 5px solid blue;*/
     text-wrap: wrap;
 }
@@ -83,7 +83,6 @@ footer {
 .footer-info-endereco, .footer-info-telefone, .footer-info-agendamento {
     display: flex;
     align-items: center;
-    gap: 20px;
 }
 
 /* Título da página */
@@ -94,7 +93,14 @@ footer {
 
 /* Textos do box contato */
 .footer-info-texto-localidade p, .footer-info-texto-telefone p, .footer-info-texto-agendamento p  {
-    font-size: var(--font-size-textos);
+    font-size: var(--font-size-textos-sem-foco);
+}
+
+/* Icones */
+
+.footer-icone {
+    padding-left: 30px;
+    padding-right: 10px;
 }
 
 /* Sessão das redes sociais */
@@ -168,7 +174,8 @@ footer {
 .frase-direitos-footer{
     font-size: 12px;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 
