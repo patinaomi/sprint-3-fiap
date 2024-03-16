@@ -59,6 +59,7 @@ html {
     background-color: var(--backcolor-quinta-opcao);
     padding: 10px;
     width: 100%;
+    height: 5rem;
 }
 
 .container-primario-menu {
@@ -99,6 +100,7 @@ html {
     font-size: 28px;
     color: #FDFEFF;
     text-transform: uppercase;
+    padding-left: 40px;
 }
 
 .logo-sales-force .texto-logo-salesforce a {
