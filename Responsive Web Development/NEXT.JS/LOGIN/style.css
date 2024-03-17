@@ -1,12 +1,20 @@
+/* Importação da font que será utilizada no site todo*/
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+/* Padronização da fonte,a tamanho, cores, background*/
 
 :root {
 
     /* Fontes - Familia */
-    --font-family-titulos: Georgia, 'Times New Roman', Times, sans-serif;
-    --font-family-paragrafos: 'Montserrat', sans-serif;
-    --font-family-spaan: Segoe;
-    --font-family-frases: Brush Script MT, Brush Script Std, cursive;
+    --font-family-padrao: Manrope;
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 18px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
 
     /* Fontes - Cores */
     --color-font-um: #3c3c3c;
@@ -32,63 +40,53 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: Manrope;
 }
 
 html {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
-    overflow-x: hidden; /* Evita a rolagem horizontal */
 }
 
-
-body {
-    /*background-image: url(../img/fundo-login.svg);*/
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    margin: -20px 0 50px;
-    margin: 0;
-    padding: 0;
-    color: #3d3d3d;
-    font-family: 'Source Sans Pro', sans-serif;
-    background-blend-mode: #fff;
-    background-color: var(--backcolor-primeira-opcao);
-}
 
 /* Conteúdo do Login */
 
-.container-login {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-        0 10px 10px rgba(0, 0, 0, 0.22);
-    position: relative;
-    overflow: hidden;
-    width: 900px;
-    max-width: 100%;
+/* Configuração geral */
+.container-login-principal {
+    background-color: var(--backcolor-primeira-opcao);
     min-height: 480px;
+    display: flex;
+    margin:auto;
+    justify-content: center;
+    height: 100vh;
 }
 
-/* Lado esquerdo - para fazer o Login */
+/* Container com a parte de Login e de Cadastro*/
+.container-primario-login {
+    display: flex;
+    /*border: 10px solid green;*/
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    padding: 10px;
+    height: 80vh;
+    width: 80%;
+}
+
+
+/* Ajuste do lado esquerdo - Login */
 
 .form-container-login {
-    position: absolute;
-    top: 0;
-    height: 100%;
+    /*border: 5px solid blue;*/
     transition: all 0.6s ease-in-out;
-    left: 0;
-    width: 50%;
-    z-index: 2;
-    font-family: var(--font-family-titulos);
     color: var(--color-font-tres);
+    height: 70vh;
+    width: 50%;
 }
+
 
 .formulario-login {
     background-color: var(--backcolor-basico);
@@ -103,11 +101,12 @@ body {
 
 /* Login com as Redes sociais */
 
-.social-container {
+.social-container-login {
     margin: 20px 0;
+    
 }
 
-.social-container a {
+.social-container-login a {
     border: 1px solid #DDDDDD;
     border-radius: 50%;
 
@@ -119,12 +118,10 @@ body {
     width: 40px;
 }
 
-
 /* Campos de inputs do Login */
 
 .input-login-email, .input-login-senha {
     background-color: #eee;
-
     border: none;
     padding: 12px 15px;
     margin: 8px 0;
@@ -133,7 +130,6 @@ body {
 
 .frase-login {
     font-size: 12px;
-    font-family: var(--font-family-paragrafos);
 }
 
 /* Frase esqueceu a senha */
@@ -144,10 +140,9 @@ body {
     margin: 15px 0;
 }
 
-
 /* Botão para fazer o Login */
 
-.botao-login, .botao-cadastro {
+.botao-login, .botao-cadastro-pagina-login {
     border-radius: 20px;
     border: 1px solid var(--backcolor-basico);
     background-color: var(--backcolor-quinta-opcao);
@@ -160,7 +155,7 @@ body {
     transition: transform 80ms ease-in;
 }
 
-.botao-login:active, .botao-cadastro:active {
+.botao-login:active, .botao-cadastro-pagina-login:active {
     transform: scale(0.95);
 }
 
@@ -168,44 +163,37 @@ body {
     outline: none;
 }
 
-button.botao-cadastro {
+button.botao-cadastro-pagina-login {
     background-color: transparent;
     border-color: #FFFFFF;
 }
 
 
 
-/* Lado direito - para realizar o cadastro*/
+/********************************************************/
+
+/* Ajuste do lado direito - Cadastro */
+
 .container-overlay {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    transition: transform 0.6s ease-in-out;
-    z-index: 100;
-    transform: translateX(-100%);
     background-color: var(--backcolor-quinta-opcao);
     display: flex; /* Adicionando display flex */
     justify-content: center; /* Centralizando horizontalmente */
     align-items: center; /* Centralizando verticalmente */
     text-align: center;
-    
+    height: 70vh;
+    width: 50%;
 }
 
+
 .titulo-sessao-cadastro{
-    font-family: var(--font-family-titulos);
     color: var(--backcolor-basico);
     padding-bottom: 20px;
 
 }
 
 .paragrafo-sessao-cadastro {
-    font-family: var(--font-family-paragrafos);
     font-size: 14px;
     padding-bottom: 20px;
 }
-
 
 
