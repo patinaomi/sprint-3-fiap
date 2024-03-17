@@ -1,14 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600&display=swap');
 
+/* Importação da font que será utilizada no site todo*/
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600&display=swap');
 
 :root {
 
     /* Fontes - Familia */
-    --font-family-titulos: Georgia, 'Times New Roman', Times, sans-serif;
-    --font-family-paragrafos: 'Montserrat', sans-serif;
-    --font-family-spaan: Segoe;
-    --font-family-frases: Brush Script MT, Brush Script Std, cursive;
-    --font-family-subtitulos: 'Inter', sans-serif;
+    --font-family-padrao: Manrope;
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 18px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
 
     /* Fontes - Cores */
     --color-font-um: #3c3c3c;
@@ -34,51 +40,42 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: Manrope;
 }
 
 html {
     width: 100%;
     max-width: 1280px;
     margin: 0 auto; /* Centraliza o conteúdo horizontalmente */
-    overflow-x: hidden; /* Evita a rolagem horizontal */
 }
 
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--backcolor-primeira-opcao);
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
+
 
 /* Ajuste geral da página */
 
 .container-cadastro {
-    height: 90vh;
+    background-color: var(--backcolor-primeira-opcao);
+    height: 100vh;
     display: flex;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212);
     margin: 0 auto;
     padding: 0 20px;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Imagem do lado esquerdo do fomulário */
 
-.form-image {
-    width: 30%;
+.form-image-cadastro {
+    /*width: 30%;*/
     display: grid;
     justify-content: center;
     align-items: center;
     background-color: var(--backcolor-segunda-opcao);
-    padding: 1rem;
+    /*padding: 1rem;*/
     text-align: center;
-}
-
-.form-image img {
-    width: 31rem;
+    height: 70vh;
 }
 
 .imagem-pagina-cadastro {
@@ -95,31 +92,35 @@ body {
 
 /* Formulário de Cadastro */
 
-.form {
-    width: 70%;
+.form-cadastro {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
-    padding: 3rem;
     /*border: 5px solid blue;*/
+    /*padding: 5rem;*/
+}
+
+.formulario-cadastro {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    height: 70vh;
 }
 
 /* Cabeçalho do formulário */
-.form-header {
+
+.form-header-cadastro {
     margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
     /*border: 5px solid green;*/
 }
 
-.title {
-    font-family: var(--font-family-subtitulos);
-    font-size: 14px;
-}
-
-.form-header h1::after {
+.form-header-cadastro h1::after {
     content: '';
     display: block;
     width: 5rem;
@@ -130,44 +131,61 @@ body {
     border-radius: 10px;
 }
 
+.title-pagina-cadastro {
+    font-family: var(--font-family-titulos);
+    font-size: 14px;
+}
+
+
 /* Botão para efetuar o Login */
 
-.login-button {
+.login-button-pagina-cadastro {
     display: flex;
     align-items: center;
 }
 
-.login-button button {
+.login-button-pagina-cadastro button {
     border: none;
     background-color: var(--backcolor-quinta-opcao);
     padding: 0.4rem 1rem;
     border-radius: 5px;
     cursor: pointer;
+    font-family: var(--font-family-paragrafos);
+    font-size: 18px;
+    color: #fff;
 }
 
-.login-button button:hover {
+.login-button-pagina-cadastro button:hover {
     background-color: var(--backcolor-segunda-opcao);
 }
 
-.login-button button a {
+.login-button-pagina-cadastro button a {
     text-decoration: none;
     font-weight: 500;
     color: #fff;
 }
 
+/******************************************************************/
+
 /* Campos para inserir informações */
 
-.input-group-content-person {
+.box-info-pessoais-cadastro {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 1rem 0;
+    
 }
+
+/* Títulos dos campos inputs */
 
 .input-box {
     display: flex;
     flex-direction: column;
     margin-bottom: 1.1rem;
+    font-size: 14px;
+    font-weight: 500;
+    flex-basis: 30%;
 }
 
 .input-box input {
@@ -190,10 +208,12 @@ body {
 .input-box label,
 .genero-titulo h6,
 .empresa-titulo h6 {
+    font-family: var(--font-family-titulos);
     font-size: 0.75rem;
     font-weight: 600;
     color: #000000c0;
     padding-top: 20px;
+    font-size: 14px;
 }
 
 .genero-titulo h6,
@@ -211,6 +231,8 @@ body {
     text-align: center;
     align-items: center;
     gap: 30px;
+    font-family: var(--font-family-paragrafos);
+    font-size: 14px;
 }
 
 .genero-input, .empresa-input {
@@ -233,6 +255,7 @@ body {
 
 .continue-button {
     text-align: center;
+
 }
 
 .continue-button button {
@@ -243,6 +266,9 @@ body {
     padding: 0.62rem;
     border-radius: 5px;
     cursor: pointer;
+    font-family: var(--font-family-paragrafos);
+    font-size: 18px;
+    color: #fff;
 }
 
 .continue-button button:hover {
@@ -259,43 +285,4 @@ body {
 /* Título input Empresa */
 .empresa-title {
     padding-top: 20px;
-}
-
-@media screen and (max-width: 1330px) {
-    .form-image {
-        display: none;
-    }
-    .container {
-        width: 50%;
-    }
-    .form {
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 1064px) {
-    .container {
-        width: 90%;
-        height: auto;
-    }
-    .input-group {
-        flex-direction: column;
-        z-index: 5;
-        padding-right: 5rem;
-        max-height: 10rem;
-        overflow-y: scroll;
-        flex-wrap: nowrap;
-    }
-    .gender-inputs {
-        margin-top: 2rem;
-    }
-    .gender-group {
-        flex-direction: column;
-    }
-    .gender-title h6 {
-        margin: 0;
-    }
-    .gender-input {
-        margin-top: 0.5rem;
-    }
 }

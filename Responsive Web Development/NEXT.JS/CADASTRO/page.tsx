@@ -64,10 +64,10 @@ export default function Cadastro() {
     return (
         <div className="container-cadastro">
             
-            <div className="form-image">
+            <div className="form-image-cadastro">
 
                 <div>
-                    <img className='imagem-pagina-cadastro-sales' src={imagem2.src} alt="Logo da Sales Force" />
+                    <img className='imagem-pagina-cadastro-sales' src={imagem2.src} alt="Logo do Tokito Tech" />
                 </div>
 
                 <div>
@@ -76,16 +76,16 @@ export default function Cadastro() {
 
             </div> {/* Fim da div form-image */}
             
-            <div className="form">
-                <form action="#" onSubmit={handleSubmit}>
+            <div className="form-cadastro">
+                <form className='formulario-cadastro' action="#" onSubmit={handleSubmit}>
                     
-                    <div className="form-header">
+                    <div className="form-header-cadastro">
                         
-                        <div className="title">
+                        <div className="title-pagina-cadastro">
                             <h1>Cadastre-se</h1>
                         </div> {/* Fim da div title*/}
 
-                        <div className="login-button">
+                        <div className="login-button-pagina-cadastro">
                             <Link href="/Login">
                                 <button className='botao-login'>Entrar</button>
                             </Link>
@@ -93,7 +93,7 @@ export default function Cadastro() {
 
                     </div> {/* Fim da div form-header */}
                     
-                    <div className="input-group-content-person">
+                    <div className="box-info-pessoais-cadastro">
                         
                         <div className="input-box">
                             <label htmlFor="nome">Primeiro Nome</label>
