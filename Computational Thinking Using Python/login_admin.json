@@ -1,3 +1,17 @@
-[
-    
-]
+{
+  "patricianaomi": {
+    "senha": "soufofinha",
+    "email": "patrician@exemplo.com",
+    "cargo": "Admin"
+  },
+  "saraingrid": {
+    "senha": "morango",
+    "email": "sarai@exemplo.com",
+    "cargo": "Consultor"
+  },
+  "claudiobispo": {
+    "senha": "palhacinho",
+    "email": "claudiob@exemplo.com",
+    "cargo": "Analista"
+  }
+}
