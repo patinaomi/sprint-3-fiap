@@ -1,0 +1,66 @@
+[   {
+      "id": 1,
+      "nome": "João",
+      "sobrenome": "Silva",
+      "cargo": "Gerente de Projetos",
+      "email": "joaosilva@exemplo.com",
+      "telefone": "1123456789",
+      "empresa": "ExemploCorp",
+      "segmento": "Tecnologia",
+      "tamanhoEmpresa": "Pequena",
+      "perguntas": "Como posso integrar o CRM ao meu sistema atual?",
+      "status": false
+    },
+    {
+      "id": 2,
+      "nome": "Maria",
+      "sobrenome": "Pereira",
+      "cargo": "CEO",
+      "email": "mariap@exemploempresa.com",
+      "telefone": "11987654321",
+      "empresa": "ExemploEmpresa",
+      "segmento": "Financeiro",
+      "tamanhoEmpresa": "Média",
+      "perguntas": "Vocês oferecem treinamento para a equipe?",
+      "status": false
+    },
+    {
+    "id": 3,
+    "nome": "Carlos",
+    "sobrenome": "Andrade",
+    "cargo": "Diretor de Marketing",
+    "email": "carlosa@empresaexemplo.com",
+    "telefone": "21987654321",
+    "empresa": "Marketing Solutions",
+    "segmento": "Publicidade",
+    "tamanhoEmpresa": "Grande",
+    "perguntas": "Existem integrações de CRM com plataformas de automação de marketing?",
+    "status": true
+  },
+  {
+    "id": 4,
+    "nome": "Fernanda",
+    "sobrenome": "Machado",
+    "cargo": "Analista de Sistemas",
+    "email": "fernandam@tecnologiaexemplo.com",
+    "telefone": "31965432198",
+    "empresa": "Tecnologia Exemplo",
+    "segmento": "Desenvolvimento de Software",
+    "tamanhoEmpresa": "Média",
+    "perguntas": "Como o CRM pode ajudar na gestão de projetos de software?",
+    "status": true
+  },
+  {
+    "id": 5,
+    "nome": "Roberto",
+    "sobrenome": "Silveira",
+    "cargo": "Gerente de Vendas",
+    "email": "robertos@vendascorp.com",
+    "telefone": "11987609876",
+    "empresa": "Vendas Corp",
+    "segmento": "Varejo",
+    "tamanhoEmpresa": "Pequena",
+    "perguntas": "É possível usar o CRM para gerenciar o funil de vendas de forma eficiente?",
+    "status": false
+  }
+]
