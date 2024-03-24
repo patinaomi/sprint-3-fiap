@@ -1,4 +1,6 @@
+import csv
 import json
+import os
 import re
 
 
@@ -178,13 +180,16 @@ def criar_usuario():
             break
 
     while True:
-        print('\n[1] Consultor\n[2] Analista')
+        print('\n[1] Consultor\n[2] Analista\n[3] Admin')
         op_cargo = input('Digite o cargo: ')
         if op_cargo == '1':
             dados_user['cargo'] = 'Consultor'
             break
         elif op_cargo == '2':
             dados_user['cargo'] = 'Analista'
+            break
+        elif op_cargo == '3':
+            dados_user['cargo'] = 'Admin'
             break
 
     dados_user['status'] = True
@@ -221,12 +226,14 @@ def alterar_usuario():
             elif op == '2':
                 info['email'] = input('\nDigite o novo e-mail: ')
             elif op == '3':
-                print('\n[1] Consultor\n[2] Analista')
+                print('\n[1] Consultor\n[2] Analista\n[3] Admin')
                 op_cargo = input('Selecione o novo cargo: ')
                 if op_cargo == '1':
                     info['cargo'] = 'Consultor'
                 elif op_cargo == '2':
                     info['cargo'] = 'Analista'
+                elif op_cargo == '3':
+                    info['cargo'] = 'Admin'
                 else:
                     print('Opção inválida.')
                     return
@@ -357,7 +364,6 @@ def alterar_ticket():
                 else:
                     print(f"O chamado do ID #{info['id']} já está encerrado.")
                     break
-
         else:
             print(f"ID não encontrado.")
 
@@ -365,4 +371,182 @@ def alterar_ticket():
         print('Digite um valor válido.')
         return
 
+
+def cadastrar_dados():
+    print('\n>>>>> Cadastrar Lead <<<<<')
+    leads_arquivo = 'leads.json'
+    leads = carregar_dados(leads_arquivo)
+
+    novo_lead = {'id': len(leads) + 1, 'nome': input('Digite o nome: '), 'telefone': input('Digite o telefone: '),
+                 'email': input('Digite o e-mail: '), 'segmento': input('Digite o segmento: '),
+                 'cargo': input('Digite o cargo: '), 'tamanhoDaEmpresa': input('Digite o tamanho da empresa: '),
+                 'produto': input('Digite o produto: '), 'regiao': input('Digite a região: ')}
+
+    leads.append(novo_lead)
+
+    escrever_dados(leads_arquivo, leads)
+    print('Novo lead cadastrado')
+    return
+
+
+def listar_dados():
+    print('\n>>>>> Listar Dados <<<<<')
+    leads_arquivo = 'leads.json'
+    leads = carregar_dados(leads_arquivo)
+
+    if not leads:
+        print('Não há leads cadastrados.')
+        return
+
+    for info in leads:
+        print(f"---------- ID #{info['id']} ----------")
+        print(f"Nome: {info['nome']}")
+        print(f"Telefone: {info['telefone']}")
+        print(f"E-mail: {info['email']}")
+        print(f"Segmento: {info['segmento']}")
+        print(f"Cargo: {info['cargo']}")
+        print(f"Tamanho da Empresa: {info['tamanhoDaEmpresa']}")
+        print(f"Produto: {info['produto']}")
+        print(f"Região: {info['regiao']}")
+        print('----------------------------')
+
+
+def editar_dados():
+    print('\n>>>>> Editar Dados <<<<<')
+    leads_arquivo = 'leads.json'
+    leads = carregar_dados(leads_arquivo)
+
+    if not leads:
+        print('Não há leads cadastrados.')
+        return
+
+    try:
+        num_lead = int(input('Digite o número do lead que deseja alterar: '))
+
+        for i, lead in enumerate(leads):
+            if lead['id'] == num_lead:
+                op = input('\nDigite o número correspondente ao dado que deseja alterar:'
+                           '\n [1] Nome'
+                           '\n [2] Telefone'
+                           '\n [3] E-mail'
+                           '\n [4] Segmento'
+                           '\n [5] Cargo'
+                           '\n [6] Tamanho da Empresa'
+                           '\n [7] Produto'
+                           '\n [8] Região'
+                           '\n [0] Cancelar'
+                           '\n Opção: ')
+                if op == '1':
+                    print(f"Nome atual {lead['nome']}")
+                    lead['nome'] = input('Digite o novo nome: ')
+                elif op == '2':
+                    print(f"Telefone atual {lead['telefone']}")
+                    lead['telefone'] = input('Digite o novo telefone: ')
+                elif op == '3':
+                    print(f"E-mail atual {lead['email']}")
+                    lead['email'] = input('Digite o novo e-mail: ')
+                elif op == '4':
+                    print(f"Segmento atual {lead['segmento']}")
+                    lead['segmento'] = input('Digite o novo segmento: ')
+                elif op == '5':
+                    print(f"Cargo atual {lead['cargo']}")
+                    lead['cargo'] = input('Digite o novo cargo: ')
+                elif op == '6':
+                    print(f"Tamanho da empresa atual {lead['tamanhoDaEmpresa']}")
+                    lead['tamanhoDaEmpresa'] = input('Digite o novo tamanho da empresa: ')
+                elif op == '7':
+                    print(f"Produto atual {lead['produto']}")
+                    lead['produto'] = input('Digite o novo produto: ')
+                elif op == '8':
+                    print(f"Região atual {lead['regiao']}")
+                    lead['regiao'] = input('Digite o novo região: ')
+                elif op == '0':
+                    return
+                else:
+                    print('Opção inválida')
+                    break
+
+                escrever_dados(leads_arquivo, leads)
+                print('Lead alterado com sucesso')
+                return
+
+        else:
+            print('Id não encontrado')
+
+    except ValueError:
+        print('Digite somente números')
+
+
+def deletar_dados():
+    print('\n>>>>> Deletar Dados <<<<<')
+    leads_arquivo = 'leads.json'
+    leads = carregar_dados(leads_arquivo)
+
+    if not leads:
+        print('Não há leads cadastrados.')
+        return
+
+    op = input('Digite o ID do lead: ')
+
+    try:
+        busca = int(op)
+        encontrado = False
+
+        for i, lead in enumerate(leads):
+            if lead['id'] == busca:
+                del leads[i]
+                print('Lead deletado com sucesso.')
+                escrever_dados(leads_arquivo, leads)
+                encontrado = True
+                break
+
+        if not encontrado:
+            print('Lead não foi encontrado.')
+
+    except ValueError:
+        print('Digite somente números.')
+
+
+
+def menu_analista():
+    while True:
+        print('\n====== Menu Analista =====')
+        print(' [1] Converter Dados')
+        print(' [2] Listar Dados')
+        print(' [3] Editar Dados')
+        print(' [4] Deletar Dados')
+        print(' [5] Menu Principal')
+        print(' [0] Sair do Programa')
+        print('===============================')
+
+        try:
+            op = int(input(' Digite uma opção: '))
+            if op in range(0, 5):
+                if op == 1:
+                    cadastrar_dados()
+                elif op == 2:
+                    listar_dados()
+                elif op == 3:
+                    editar_dados()
+                elif op == 4:
+                    deletar_dados()
+                elif op == 5:
+                    break
+                elif op == 0:
+                    exit()
+            else:
+                print(' Opção inválida, digite novamente.\n')
+
+        except ValueError:
+            print('Digite somente números.')
+
+
+# tirar pontos finais
+# ver onde pode ter try except
+# usar validacao do email em tudo q dar
+# validacao de espacos em branco
+# organizar codigo, principais no inicio
+#funcoes do menu primeiro
+#menu
+deletar_dados()
 menu_principal()
