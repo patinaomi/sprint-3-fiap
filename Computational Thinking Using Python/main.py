@@ -38,6 +38,16 @@ def carregar_dados(dados):
         return
 
 
+def escrever_dados(nome_arquivo, dados):
+    try:
+        with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
+            # pra acentuação etc, ficar correta
+            json.dump(dados, arquivo, indent=2, ensure_ascii=False)
+    except FileNotFoundError:
+        print('Não foi encontrado o arquivo.')
+        return
+
+
 def esqueci_a_senha():
     dados = 'login_admin.json'
     dados_login = carregar_dados(dados)
@@ -57,8 +67,8 @@ def esqueci_a_senha():
                 return
 
             dados_login[login]['senha'] = nova_senha
-            with open(dados, 'w') as arquivo:
-                json.dump(dados_login, arquivo, indent=2)
+
+            escrever_dados(dados, dados_login)
             print('Senha alterada com sucesso!')
             return
 
@@ -127,11 +137,82 @@ def menu_admin(login):
 
 
 def criar_usuario():
+    print('\n>>>>> Novo Usuário <<<<<')
+    usuario_dados = 'login_admin.json'
+    usuarios = carregar_dados(usuario_dados)
+
+    novo_user = input('Digite o usuário: ')
+    dados_user = {}
+    dados_user['senha'] = input('Digite a senha: ')
+    dados_user['email'] = input('Digite o e-mail: ')
+
+    while True:
+        print('\n[1] Consultor\n[2] Analista')
+        op_cargo = input('Digite o cargo: ')
+        if op_cargo == '1':
+            dados_user['cargo'] = 'Consultor'
+            break
+        elif op_cargo == '2':
+            dados_user['cargo'] = 'Analista'
+            break
+        else:
+            print('Opção inválida.')
+            return
+
+    dados_user['status'] = True
+
+    usuarios[novo_user] = dados_user
+
+    escrever_dados(usuario_dados, usuarios)
+    print('Novo usuário cadastrado')
     return
 
 
 def alterar_usuario():
-    return
+    print('\n>>>>> Alterar Dados do Usuário <<<<<')
+    usuario_dados = 'login_admin.json'
+    usuarios = carregar_dados(usuario_dados)
+
+    if not usuarios:
+        print('Não há usuários cadastrados.')
+        return
+
+    user = input('Digite o usuário que deseja alterar: ')
+    user_enc = False
+    for nome, info in usuarios.items():
+        if user.lower() == nome:
+            op = input(' Digite o dado que deseja alterar:'
+                       '\n [1] Usuário'
+                       '\n [2] E-mail'
+                       '\n [3] Cargo'
+                       '\n [0] Cancelar'
+                       '\n Opção: ')
+
+            if op == '1':
+                novo_nome = input('\nDigite o novo usuário: ')
+                # Aqui vai tirar o usuário antigo com o pop e coloca o nome atualizado
+                usuarios[novo_nome] = usuarios.pop(user.lower())
+            elif op == '2':
+                info['email'] = input('\nDigite o novo e-mail: ')
+            elif op == '3':
+                print('\n[1] Consultor\n[2] Analista')
+                op_cargo = input('Selecione o novo cargo: ')
+                if op_cargo == '1':
+                    info['cargo'] = 'Consultor'
+                elif op_cargo == '2':
+                    info['cargo'] = 'Analista'
+                else:
+                    print('Opção inválida.')
+                    return
+            else:
+                return
+
+            escrever_dados(usuario_dados, usuarios)
+            print('Dados alterados com sucesso!')
+            return
+
+    if not user_enc:
+        print(f'Usuário não encontrado.')
 
 
 def listar_usuario():
@@ -167,12 +248,12 @@ def desativar_usuario():
             if info['status']:
                 user_enc = True
                 info['status'] = False
+                escrever_dados(usuario_dados, usuarios)
                 print(f'Usuário {nome} desativado.')
-                with open(usuario_dados, 'w') as arquivo:
-                    json.dump(usuarios, arquivo, indent=2)
+
             else:
                 print(f'Usuário {nome} já está desativado da empresa.')
-                break
+                return
 
     if not user_enc:
         print(f'Usuário não encontrado.')
