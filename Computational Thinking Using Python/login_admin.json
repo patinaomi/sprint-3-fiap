@@ -1,12 +1,6 @@
 {
-  "a": {
-    "senha": "a",
-    "email": "patrician@exemplo.com",
-    "cargo": "Admin",
-    "status": false
-  },
   "saraingrid": {
-    "senha": "morango",
+    "senha": "123456",
     "email": "sarai@exemplo.com",
     "cargo": "Consultor",
     "status": true
@@ -15,6 +9,12 @@
     "senha": "palhacinho",
     "email": "claudiob@exemplo.com",
     "cargo": "Analista",
+    "status": true
+  },
+  "patinaomi": {
+    "senha": "654321",
+    "email": "patrician@exemplo.com",
+    "cargo": "Admin",
     "status": true
   }
 }
