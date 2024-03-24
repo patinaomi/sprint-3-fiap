@@ -1,5 +1,4 @@
 import json
-from datetime import datetime
 
 
 def menu_principal():
@@ -89,9 +88,10 @@ def realizar_login():
             # o Admin é responsável por administrar os logins dos funcionarios
             if dados_login[login]['cargo'] == 'Admin':
                 menu_admin(login)
-            #
+
+            # o Consultor irá verificar todos as solicitações de contato por parte dos clientes
             elif dados_login[login]['cargo'] == 'Consultor':
-                print('Menu consultor')
+                menu_consultor(login)
             # irá ver as msgs deixadas no formulario dos leads
             else:
                 print('menu analista')
@@ -113,12 +113,13 @@ def menu_admin(login):
         print(' [2] Alterar Dados')
         print(' [3] Listar Usuários')
         print(' [4] Desativar Usuário')
+        print(' [5] Menu Principal')
         print(' [0] Sair do Programa')
         print('===============================')
 
         try:
             op = int(input(' Digite uma opção: '))
-            if op in range(0, 5):
+            if op in range(0, 6):
                 if op == 1:
                     criar_usuario()
                 elif op == 2:
@@ -127,6 +128,8 @@ def menu_admin(login):
                     listar_usuario()
                 elif op == 4:
                     desativar_usuario()
+                elif op == 5:
+                    break
                 elif op == 0:
                     exit()
             else:
@@ -259,4 +262,82 @@ def desativar_usuario():
         print(f'Usuário não encontrado.')
 
 
+def menu_consultor(login):
+    while True:
+        print('\n====== Menu de Consultor =====')
+        print(' [1] Consultar Tickets')
+        print(' [2] Finalizar Ticket')
+        print(' [3] Menu Principal')
+        print(' [0] Sair do Programa')
+        print('===============================')
+
+        try:
+            op = int(input(' Digite uma opção: '))
+            if op in range(0, 4):
+                if op == 1:
+                    consultar_ticket()
+                elif op == 2:
+                    alterar_ticket()
+                elif op == 3:
+                    break
+                elif op == 0:
+                    exit()
+            else:
+                print(' Opção inválida, digite novamente.\n')
+
+        except ValueError:
+            print('Digite somente números.')
+
+
+def consultar_ticket():
+    print('\n>>>>> Consulta Ticket <<<<<')
+    ticket_arquivo = 'tickets.json'
+    ticket_dados = carregar_dados(ticket_arquivo)
+
+    if not ticket_dados:
+        print('Não há tickets cadastrados.')
+        return
+
+    for info in ticket_dados:
+        print(f"Id #{info['id']} - {info['data']}")
+        print(f"Nome: {info['nome']} {info['sobrenome']}")
+        print(f"Cargo: {info['cargo']}")
+        print(f"Contato: {info['email']} - Tel: {info['telefone']}")
+        print(f"Empresa: {info['empresa']}")
+        print(f"Segmento: {info['segmento']} - Tamanho: {info['tamanhoEmpresa']}")
+        print(f"Pergunta: {info['pergunta']}")
+        print(f"Status: {'Em Aberto' if info['status'] else 'Fechada'}")
+
+        print('----------------------------')
+
+
+def alterar_ticket():
+    print('\n>>>>> Alterar Status Ticket <<<<<')
+    ticket_arquivo = 'tickets.json'
+    ticket_dados = carregar_dados(ticket_arquivo)
+    id_encontrado = False
+
+    if not ticket_dados:
+        print('Não há tickets cadastrados.')
+        return
+
+    op = int(input('Digite o id do chamado: '))
+    for info in ticket_dados:
+        if op == info['id']:
+            id_encontrado = True
+            print(f"Status: {'Em Aberto' if info['status'] else 'Fechada'}")
+            if info['status']:
+                info['status'] = False
+                print(f"O chamado do id {info['id']} foi encerrado.")
+
+            break
+#falta colocar pra escrever
+    # se ta aberto vai fechar
+    # se ta fechado pode reabrir
+
+    else:
+        print('Id não encontrado')
+
+
+alterar_ticket()
 menu_principal()
