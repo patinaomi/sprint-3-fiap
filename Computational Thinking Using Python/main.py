@@ -1,4 +1,5 @@
 import json
+import re
 
 
 def menu_principal():
@@ -35,6 +36,17 @@ def carregar_dados(dados):
     except FileNotFoundError:
         print(f'O arquivo {dados} não foi encontrado.')
         return
+
+
+def validar_email(email):
+    # o e-mail deve conter pelo menos
+    regex_email = r'^[\w\.-]+@[\w\.-]+\.\w+'
+
+    if re.match(regex_email, email):
+        return True
+    else:
+        print('Email inválido, digite novamente. ')
+        return False
 
 
 def escrever_dados(nome_arquivo, dados):
@@ -87,11 +99,11 @@ def realizar_login():
             print('Login efetuado com sucesso!')
             # o Admin é responsável por administrar os logins dos funcionarios
             if dados_login[login]['cargo'] == 'Admin':
-                menu_admin(login)
+                menu_admin()
 
             # o Consultor irá verificar todos as solicitações de contato por parte dos clientes
             elif dados_login[login]['cargo'] == 'Consultor':
-                menu_consultor(login)
+                menu_consultor()
             # irá ver as msgs deixadas no formulario dos leads
             else:
                 print('menu analista')
@@ -106,7 +118,7 @@ def realizar_login():
 
 
 # Menu do Administrador - para ver os usuários já cadastrados, acessar o arquivo json - login_admin
-def menu_admin(login):
+def menu_admin():
     while True:
         print('\n====== Menu de Administrador =====')
         print(' [1] Criar Novo Usuário')
@@ -144,10 +156,26 @@ def criar_usuario():
     usuario_dados = 'login_admin.json'
     usuarios = carregar_dados(usuario_dados)
 
-    novo_user = input('Digite o usuário: ')
+    novo_user = ''
+    while not novo_user.strip():
+        novo_user = input('Digite o usuário: ')
+        if not novo_user.strip():
+            print('O nome de usuário não pode ficar em branco.')
+
     dados_user = {}
-    dados_user['senha'] = input('Digite a senha: ')
-    dados_user['email'] = input('Digite o e-mail: ')
+
+    senha = ''
+    while not senha.strip():
+        senha = input('Digite a senha: ')
+        if not senha.strip():
+            print('A senha não pode ficar em branco.')
+    dados_user['senha'] = senha
+
+    while True:
+        email = input('Digite seu e-mail: ')
+        if validar_email(email):
+            dados_user['email'] = email
+            break
 
     while True:
         print('\n[1] Consultor\n[2] Analista')
@@ -158,14 +186,9 @@ def criar_usuario():
         elif op_cargo == '2':
             dados_user['cargo'] = 'Analista'
             break
-        else:
-            print('Opção inválida.')
-            return
 
     dados_user['status'] = True
-
     usuarios[novo_user] = dados_user
-
     escrever_dados(usuario_dados, usuarios)
     print('Novo usuário cadastrado')
     return
@@ -262,7 +285,7 @@ def desativar_usuario():
         print(f'Usuário não encontrado.')
 
 
-def menu_consultor(login):
+def menu_consultor():
     while True:
         print('\n====== Menu de Consultor =====')
         print(' [1] Consultar Tickets')
@@ -315,29 +338,31 @@ def alterar_ticket():
     print('\n>>>>> Alterar Status Ticket <<<<<')
     ticket_arquivo = 'tickets.json'
     ticket_dados = carregar_dados(ticket_arquivo)
-    id_encontrado = False
 
     if not ticket_dados:
         print('Não há tickets cadastrados.')
         return
+    try:
+        op = int(input('Digite o id do chamado: '))
+        for info in ticket_dados:
+            if op == info['id']:
 
-    op = int(input('Digite o id do chamado: '))
-    for info in ticket_dados:
-        if op == info['id']:
-            id_encontrado = True
-            print(f"Status: {'Em Aberto' if info['status'] else 'Fechada'}")
-            if info['status']:
-                info['status'] = False
-                print(f"O chamado do id {info['id']} foi encerrado.")
+                print(f"Status: {'Em Aberto' if info['status'] else 'Fechada'}")
+                if info['status']:
+                    info['status'] = False
+                    print(f"O chamado do ID #{info['id']} foi encerrado.")
+                    escrever_dados(ticket_arquivo, ticket_dados)
+                    break
 
-            break
-#falta colocar pra escrever
-    # se ta aberto vai fechar
-    # se ta fechado pode reabrir
+                else:
+                    print(f"O chamado do ID #{info['id']} já está encerrado.")
+                    break
 
-    else:
-        print('Id não encontrado')
+        else:
+            print(f"ID não encontrado.")
 
+    except ValueError:
+        print('Digite um valor válido.')
+        return
 
-alterar_ticket()
 menu_principal()
