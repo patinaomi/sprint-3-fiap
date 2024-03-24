@@ -1,6 +1,4 @@
-import csv
 import json
-import os
 import re
 
 
@@ -29,7 +27,7 @@ def menu_principal():
             print('Digite somente números.')
 
 
-# Para reaproveitamento das funções, optei por mandar por parâmetro o json pois será aberto outros arquivos depois
+# Para reaproveitamento das funções, optei por mandar por parâmetro o json, pois será aberto outros arquivos depois
 def carregar_dados(dados):
     try:
         with open(dados, 'r') as arquivo:
@@ -41,13 +39,13 @@ def carregar_dados(dados):
 
 
 def validar_email(email):
-    # o e-mail deve conter pelo menos
+    # o e-mail deve conter pelo menos um '@' e um '.'
     regex_email = r'^[\w\.-]+@[\w\.-]+\.\w+'
 
     if re.match(regex_email, email):
         return True
     else:
-        print('Email inválido, digite novamente. ')
+        print('Email inválido, digite novamente.')
         return False
 
 
@@ -61,6 +59,14 @@ def escrever_dados(nome_arquivo, dados):
         return
 
 
+def verifica_input(msg):
+    valor = input(msg).strip()  # o strip remove espaços em branco do começo e fim
+    while not valor:
+        print("Este campo não pode ficar vazio. Por favor, insira um valor.")
+        valor = input(msg).strip()
+    return valor
+
+
 def esqueci_a_senha():
     dados = 'login_admin.json'
     dados_login = carregar_dados(dados)
@@ -72,11 +78,11 @@ def esqueci_a_senha():
 
     for login, info_usuario in dados_login.items():
         if info_usuario['email'].lower() == email.lower():
-            nova_senha = input('Digite a nova senha: ')
+            nova_senha = verifica_input('Digite a nova senha: ')
 
             # Vai verificar se a senha é diferente da original
             if nova_senha == info_usuario['senha']:
-                print('A nova senha não pode ser igual à senha atual. Tente novamente.')
+                print('A nova senha não pode ser igual à senha atual, tente novamente.')
                 return
 
             dados_login[login]['senha'] = nova_senha
@@ -103,13 +109,13 @@ def realizar_login():
             if dados_login[login]['cargo'] == 'Admin':
                 menu_admin()
 
-            # o Consultor irá verificar todos as solicitações de contato por parte dos clientes
+            # o Consultor irá verificar todos mensagens de contato do formulário do site
             elif dados_login[login]['cargo'] == 'Consultor':
                 menu_consultor()
-            # irá ver as msgs deixadas no formulario dos leads
+
+            # o Analista tem acesso aos dados dos leads
             else:
-                print('menu analista')
-                # irá analisar os dados dos clientes
+                menu_analista()
         else:
             print('Usuário desativado. Não foi possível efetuar o login.')
             return
@@ -132,7 +138,7 @@ def menu_admin():
         print('===============================')
 
         try:
-            op = int(input(' Digite uma opção: '))
+            op = int(input('Digite uma opção: '))
             if op in range(0, 6):
                 if op == 1:
                     criar_usuario()
@@ -147,41 +153,32 @@ def menu_admin():
                 elif op == 0:
                     exit()
             else:
-                print(' Opção inválida, digite novamente.\n')
+                print('Opção inválida, digite novamente.\n')
 
         except ValueError:
             print('Digite somente números.')
 
 
 def criar_usuario():
-    print('\n>>>>> Novo Usuário <<<<<')
+    print('\n>>>>> Novo Login <<<<<')
     usuario_dados = 'login_admin.json'
     usuarios = carregar_dados(usuario_dados)
 
-    novo_user = ''
-    while not novo_user.strip():
-        novo_user = input('Digite o usuário: ')
-        if not novo_user.strip():
-            print('O nome de usuário não pode ficar em branco.')
-
+    novo_user = verifica_input('Digite o usuário: ')
     dados_user = {}
 
-    senha = ''
-    while not senha.strip():
-        senha = input('Digite a senha: ')
-        if not senha.strip():
-            print('A senha não pode ficar em branco.')
+    senha = verifica_input('Digite a senha: ')
     dados_user['senha'] = senha
 
     while True:
-        email = input('Digite seu e-mail: ')
+        email = verifica_input('Digite seu e-mail: ')
         if validar_email(email):
             dados_user['email'] = email
             break
 
+    print('\n[1] Consultor\n[2] Analista\n[3] Admin')
     while True:
-        print('\n[1] Consultor\n[2] Analista\n[3] Admin')
-        op_cargo = input('Digite o cargo: ')
+        op_cargo = verifica_input('Digite o cargo: ')
         if op_cargo == '1':
             dados_user['cargo'] = 'Consultor'
             break
@@ -191,11 +188,13 @@ def criar_usuario():
         elif op_cargo == '3':
             dados_user['cargo'] = 'Admin'
             break
+        else:
+            print('Opção inválida.')
 
     dados_user['status'] = True
     usuarios[novo_user] = dados_user
     escrever_dados(usuario_dados, usuarios)
-    print('Novo usuário cadastrado')
+    print('Novo usuário cadastrado!')
     return
 
 
@@ -220,14 +219,14 @@ def alterar_usuario():
                        '\n Opção: ')
 
             if op == '1':
-                novo_nome = input('\nDigite o novo usuário: ')
+                novo_nome = verifica_input('\nDigite o novo usuário: ')
                 # Aqui vai tirar o usuário antigo com o pop e coloca o nome atualizado
                 usuarios[novo_nome] = usuarios.pop(user.lower())
             elif op == '2':
-                info['email'] = input('\nDigite o novo e-mail: ')
+                info['email'] = verifica_input('\nDigite o novo e-mail: ')
             elif op == '3':
                 print('\n[1] Consultor\n[2] Analista\n[3] Admin')
-                op_cargo = input('Selecione o novo cargo: ')
+                op_cargo = verifica_input('Selecione o novo cargo: ')
                 if op_cargo == '1':
                     info['cargo'] = 'Consultor'
                 elif op_cargo == '2':
@@ -238,6 +237,7 @@ def alterar_usuario():
                     print('Opção inválida.')
                     return
             else:
+                print('Opção inválida.')
                 return
 
             escrever_dados(usuario_dados, usuarios)
@@ -283,7 +283,6 @@ def desativar_usuario():
                 info['status'] = False
                 escrever_dados(usuario_dados, usuarios)
                 print(f'Usuário {nome} desativado.')
-
             else:
                 print(f'Usuário {nome} já está desativado da empresa.')
                 return
@@ -292,6 +291,7 @@ def desativar_usuario():
         print(f'Usuário não encontrado.')
 
 
+# Menu do Consultor - para ver os tickets já cadastrados, acessar o arquivo json - tickets
 def menu_consultor():
     while True:
         print('\n====== Menu de Consultor =====')
@@ -337,7 +337,6 @@ def consultar_ticket():
         print(f"Segmento: {info['segmento']} - Tamanho: {info['tamanhoEmpresa']}")
         print(f"Pergunta: {info['pergunta']}")
         print(f"Status: {'Em Aberto' if info['status'] else 'Fechada'}")
-
         print('----------------------------')
 
 
@@ -377,15 +376,27 @@ def cadastrar_dados():
     leads_arquivo = 'leads.json'
     leads = carregar_dados(leads_arquivo)
 
-    novo_lead = {'id': len(leads) + 1, 'nome': input('Digite o nome: '), 'telefone': input('Digite o telefone: '),
-                 'email': input('Digite o e-mail: '), 'segmento': input('Digite o segmento: '),
-                 'cargo': input('Digite o cargo: '), 'tamanhoDaEmpresa': input('Digite o tamanho da empresa: '),
-                 'produto': input('Digite o produto: '), 'regiao': input('Digite a região: ')}
+    novo_lead = {
+        'id': len(leads) + 1,
+        'nome': verifica_input('Digite o nome: '),
+        'telefone': verifica_input('Digite o telefone: '),
+        'segmento': verifica_input('Digite o segmento: '),
+        'cargo': verifica_input('Digite o cargo: '),
+        'tamanhoDaEmpresa': verifica_input('Digite o tamanho da empresa: '),
+        'produto': verifica_input('Digite o produto: '),
+        'regiao': verifica_input('Digite a região: ')
+    }
+
+    while True:
+        email = verifica_input('Digite o e-mail: ')
+        if validar_email(email):
+            novo_lead['email'] = email
+            break
 
     leads.append(novo_lead)
 
     escrever_dados(leads_arquivo, leads)
-    print('Novo lead cadastrado')
+    print('Novo lead cadastrado.')
     return
 
 
@@ -422,6 +433,7 @@ def editar_dados():
 
     try:
         num_lead = int(input('Digite o número do lead que deseja alterar: '))
+        alterado = False  # Variável para controle de alterações
 
         for i, lead in enumerate(leads):
             if lead['id'] == num_lead:
@@ -438,43 +450,56 @@ def editar_dados():
                            '\n Opção: ')
                 if op == '1':
                     print(f"Nome atual {lead['nome']}")
-                    lead['nome'] = input('Digite o novo nome: ')
+                    lead['nome'] = verifica_input('Digite o novo nome: ')
+                    alterado = True
                 elif op == '2':
                     print(f"Telefone atual {lead['telefone']}")
-                    lead['telefone'] = input('Digite o novo telefone: ')
+                    lead['telefone'] = verifica_input('Digite o novo telefone: ')
+                    alterado = True
                 elif op == '3':
                     print(f"E-mail atual {lead['email']}")
-                    lead['email'] = input('Digite o novo e-mail: ')
+                    email = verifica_input('Digite o novo e-mail: ')
+                    if validar_email(email):
+                        lead['email'] = email
+                        alterado = True
+                    else:
+                        return
                 elif op == '4':
                     print(f"Segmento atual {lead['segmento']}")
-                    lead['segmento'] = input('Digite o novo segmento: ')
+                    lead['segmento'] = verifica_input('Digite o novo segmento: ')
+                    alterado = True
                 elif op == '5':
                     print(f"Cargo atual {lead['cargo']}")
-                    lead['cargo'] = input('Digite o novo cargo: ')
+                    lead['cargo'] = verifica_input('Digite o novo cargo: ')
+                    alterado = True
                 elif op == '6':
                     print(f"Tamanho da empresa atual {lead['tamanhoDaEmpresa']}")
-                    lead['tamanhoDaEmpresa'] = input('Digite o novo tamanho da empresa: ')
+                    lead['tamanhoDaEmpresa'] = verifica_input('Digite o novo tamanho da empresa: ')
+                    alterado = True
                 elif op == '7':
                     print(f"Produto atual {lead['produto']}")
-                    lead['produto'] = input('Digite o novo produto: ')
+                    lead['produto'] = verifica_input('Digite o novo produto: ')
+                    alterado = True
                 elif op == '8':
                     print(f"Região atual {lead['regiao']}")
-                    lead['regiao'] = input('Digite o novo região: ')
+                    lead['regiao'] = verifica_input('Digite o novo região: ')
+                    alterado = True
                 elif op == '0':
                     return
+
+                if alterado:
+                    escrever_dados(leads_arquivo, leads)
+                    print('Lead alterado com sucesso.')
+                    return
                 else:
-                    print('Opção inválida')
-                    break
+                    print('Nenhuma alteração realizada.')
 
-                escrever_dados(leads_arquivo, leads)
-                print('Lead alterado com sucesso')
-                return
-
+                break
         else:
-            print('Id não encontrado')
+            print('Id não encontrado.')
 
     except ValueError:
-        print('Digite somente números')
+        print('Digite somente números.')
 
 
 def deletar_dados():
@@ -507,11 +532,11 @@ def deletar_dados():
         print('Digite somente números.')
 
 
-
+# Menu do Analista - para ver os dados já cadastrados, acessar o arquivo json - leads
 def menu_analista():
     while True:
         print('\n====== Menu Analista =====')
-        print(' [1] Converter Dados')
+        print(' [1] Cadastrar Dados')
         print(' [2] Listar Dados')
         print(' [3] Editar Dados')
         print(' [4] Deletar Dados')
@@ -521,7 +546,7 @@ def menu_analista():
 
         try:
             op = int(input(' Digite uma opção: '))
-            if op in range(0, 5):
+            if op in range(0, 6):
                 if op == 1:
                     cadastrar_dados()
                 elif op == 2:
@@ -535,18 +560,10 @@ def menu_analista():
                 elif op == 0:
                     exit()
             else:
-                print(' Opção inválida, digite novamente.\n')
+                print('Opção inválida, digite novamente.\n')
 
         except ValueError:
             print('Digite somente números.')
 
 
-# tirar pontos finais
-# ver onde pode ter try except
-# usar validacao do email em tudo q dar
-# validacao de espacos em branco
-# organizar codigo, principais no inicio
-#funcoes do menu primeiro
-#menu
-deletar_dados()
 menu_principal()
