@@ -32,10 +32,10 @@ Após o login, o usuário terá acesso a funcionalidades específicas baseadas n
 
 ## Tratamento de Erros
 
-O sistema inclui tratamento de erros para garantir a entrada correta dos dados, como validação de e-mail e verificação de campos obrigatórios.
+O sistema inclui tratamento de erros para garantir a entrada correta dos dados, validação de e-mail e verificação de campos obrigatórios.
 
 ## Autores
 
 -   Claudio Bispo - RM553472
 -   Patricia Naomi - RM552981
--  Sara Ingrid - RM554021
+-   Sara Ingrid - RM554021
