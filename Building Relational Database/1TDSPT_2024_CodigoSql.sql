@@ -15,15 +15,17 @@ DROP TABLE Experiencia_Usuario CASCADE CONSTRAINTS;
 -- para verificar o padrão da data
 SELECT SYSDATE FROM DUAL;
 
+-- alterando o formato da data
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY HH24:MI:SS';
+
 
 -- Criação da tabela Visitante
 CREATE TABLE Visitante(id_visit NUMBER(10) GENERATED ALWAYS as IDENTITY START WITH 1 INCREMENT BY 1
                        CONSTRAINT visitante_id_pk PRIMARY KEY, 
                        nome_visit VARCHAR2(30) CONSTRAINT visitante_nome_nn NOT NULL,
                        email_visit VARCHAR2(40) CONSTRAINT visitante_email_nn NOT NULL,
-                       data_visit DATE CONSTRAINT visitante_data_nn NOT NULL,
-                       -- será armazenado nesse padrão 14:30:00
-                       hora_visit VARCHAR2(8) CONSTRAINT visitante_hora_nn NOT NULL,
+                       -- tive que colocar os dois juntos pois não tem o dado Time no oracle
+                       data_hora_visit DATE CONSTRAINT visitante_datahora_nn NOT NULL,
                        tempo_visit NUMBER(10) CONSTRAINT visitante_tempo_nn NOT NULL);
 
 -- Criação da Tabela Plataforma_Login
@@ -92,10 +94,10 @@ CREATE TABLE Experiencia_Usuario(id_exp NUMBER(10)GENERATED ALWAYS as IDENTITY S
                                  tempo_visita_exp NUMBER(8) CONSTRAINT exp_tempo_visita_nn NOT NULL,
                                  CONSTRAINT exp_visit_fk FOREIGN KEY(visit_id_visit_fk) REFERENCES Visitante(id_visit));
             
-                                                   
+                                               
 -- TESTE INSERT
-insert into Visitante (nome_visit, email_visit, data_visit, hora_visit, tempo_visit) VALUES
-('Pati', 'pati@pi.com', '25/03/24', '14:30:00', 0034)
+insert into Visitante (nome_visit, email_visit, data_hora_visit, tempo_visit) VALUES
+('Pati', 'pati@pi.com', TO_DATE('25/03/2024 11:30:00', 'DD/MM/YYYY HH24:MI:SS'), 0034);
 
 INSERT INTO Plataforma_Login(visit_id_visit_fk, nome_login, status_login, data_implementacao_login, email_login) VALUES
 (1, 'patinaomi', 'Ativo', '25/03/25', 'pat@oi.com') 
