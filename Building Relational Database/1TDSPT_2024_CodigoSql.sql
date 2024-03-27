@@ -15,7 +15,7 @@ DROP TABLE Experiencia_Usuario CASCADE CONSTRAINTS;
 -- para verificar o padrão da data
 SELECT SYSDATE FROM DUAL;
 
--- alterando o formato da data
+-- alterando o formato da data e hora
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY HH24:MI:SS';
 
 
@@ -24,7 +24,6 @@ CREATE TABLE Visitante(id_visit NUMBER(10) GENERATED ALWAYS as IDENTITY START WI
                        CONSTRAINT visitante_id_pk PRIMARY KEY, 
                        nome_visit VARCHAR2(30) CONSTRAINT visitante_nome_nn NOT NULL,
                        email_visit VARCHAR2(40) CONSTRAINT visitante_email_nn NOT NULL,
-                       -- tive que colocar os dois juntos pois não tem o dado Time no oracle
                        data_hora_visit DATE CONSTRAINT visitante_datahora_nn NOT NULL,
                        tempo_visit NUMBER(10) CONSTRAINT visitante_tempo_nn NOT NULL);
 
@@ -88,12 +87,14 @@ CREATE TABLE Pergunta_Chatbot(id_pergunta_chatbot NUMBER(10),
 CREATE TABLE Experiencia_Usuario(id_exp NUMBER(10)GENERATED ALWAYS as IDENTITY START WITH 1 INCREMENT BY 1
                                  CONSTRAINT exp_id_pk PRIMARY KEY,
                                  visit_id_visit_fk NUMBER(10) CONSTRAINT exp_id_visit_nn NOT NULL,
+                                 chatbot_id_perg_fk NUMBER(10) CONSTRAINT exp_id_perg_chatbot_nn NOT NULL,
+                                 chatbot_id_resp_fk NUMBER(10) CONSTRAINT exp_id_resp_chatbot_nn NOT NULL,
                                  data_hora_vis_exp DATE CONSTRAINT exp_data_hora_vis_nn NOT NULL,
                                  prod_pesquisado_exp VARCHAR2(50),
                                  pag_visitada_exp VARCHAR2(50),
                                  tempo_visita_exp NUMBER(8) CONSTRAINT exp_tempo_visita_nn NOT NULL,
-                                 CONSTRAINT exp_visit_fk FOREIGN KEY(visit_id_visit_fk) REFERENCES Visitante(id_visit));
-            
+                                 CONSTRAINT exp_visit_fk FOREIGN KEY(visit_id_visit_fk) REFERENCES Visitante(id_visit),
+                                 CONSTRAINT exp_chatbot_fk FOREIGN KEY(chatbot_id_perg_fk, chatbot_id_resp_fk) REFERENCES Pergunta_Chatbot(id_pergunta_chatbot, id_resposta_chatbot));
                                                
 -- TESTE INSERT
 insert into Visitante (nome_visit, email_visit, data_hora_visit, tempo_visit) VALUES
@@ -108,7 +109,7 @@ INSERT INTO Questionario(visit_id_visit_fk, data_hora_visita_quest, email_quest)
 INSERT INTO Leads(quest_num_quest_fk, platlog_id_login_fk, nome_leads, email_leads, empresa_leads, data_hora_login_leads) VALUES
 (1, 1, 'Claudio Bispo', 'clau@oi.com', 'Tokito', (TO_DATE('01/03/2024 14:30:00', 'DD-MM-YYYY HH24:MI:SS')));
 
-INSERT INTO Pergunta_Chatbot VALUES (1, 1, 1, 'Lorem ipsum', 'Entidade', 'Intenção', 'Produto', 'Satisfeito', '20/03/24');
+INSERT INTO Pergunta_Chatbot VALUES (1, 1, 1, 'Lorem ipsum', 'Entidade', 'Intenção', 'Produto', 'Satisfeito', (TO_DATE('01/03/2024 14:30:00', 'DD-MM-YYYY HH24:MI:SS')));
 
-INSERT INTO Experiencia_Usuario(visit_id_visit_fk, data_hora_vis_exp, prod_pesquisado_exp, pag_visitada_exp, tempo_visita_exp)
-VALUES (1, '20/03/24', 'Tableau', 'Contato', 23);
+INSERT INTO Experiencia_Usuario(visit_id_visit_fk, chatbot_id_perg_fk, chatbot_id_resp_fk, data_hora_vis_exp, prod_pesquisado_exp, pag_visitada_exp, tempo_visita_exp)
+VALUES (1, 1, 1, (TO_DATE('20/03/2024 14:30:00', 'DD-MM-YYYY HH24:MI:SS')), 'Tableau', 'Contato', 23);
