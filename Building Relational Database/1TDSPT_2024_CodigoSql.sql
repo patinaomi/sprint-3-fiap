@@ -35,6 +35,7 @@ CREATE TABLE Plataforma_Login(id_login NUMBER(10) GENERATED ALWAYS as IDENTITY S
                               status_login VARCHAR2(10) CONSTRAINT login_status_nn NOT NULL,
                               data_implementacao_login DATE CONSTRAINT login_data_nn NOT NULL,
                               email_login VARCHAR2(40) CONSTRAINT login_email_nn NOT NULL,
+                              -- Inserção da Foreign Key
                               CONSTRAINT platlogin_visitante_fk FOREIGN KEY (visit_id_visit_fk) REFERENCES Visitante(id_visit));
 
 
@@ -53,6 +54,7 @@ CREATE TABLE Questionario(num_quest NUMBER(10) GENERATED ALWAYS as IDENTITY STAR
                           solucao_emp_quest VARCHAR2(40),
                           orcamento_emp_quest NUMBER(10),
                           email_quest VARCHAR2(40) CONSTRAINT quest_email_nn NOT NULL,
+                          -- Inserção da Foreign Key
                           CONSTRAINT quest_visitante_fk FOREIGN KEY(visit_id_visit_fk) REFERENCES Visitante(id_visit));
                       
 
@@ -66,6 +68,7 @@ CREATE TABLE Leads(id_leads NUMBER(10) GENERATED ALWAYS as IDENTITY START WITH 1
                    email_leads VARCHAR2(40) CONSTRAINT leads_email_nn NOT NULL,
                    empresa_leads VARCHAR2(30),
                    data_hora_login_leads DATE CONSTRAINT leads_data_hora_login_nn NOT NULL,
+                   -- Inserção da Foreign Key
                    CONSTRAINT leads_quest_fk FOREIGN KEY(quest_num_quest_fk) REFERENCES Questionario(num_quest),
                    CONSTRAINT leads_platlog_fk FOREIGN KEY(platlog_id_login_fk) REFERENCES Plataforma_Login(id_login));
 
@@ -79,7 +82,9 @@ CREATE TABLE Pergunta_Chatbot(id_pergunta_chatbot NUMBER(10),
                               produto_chatbot VARCHAR2(100),
                               satisfacao_chatbot VARCHAR2(30),
                               data_hora_chatbot DATE CONSTRAINT chatbot_data_hora_nn NOT NULL,
+                              -- Inserção da Primary Key
                               PRIMARY KEY (id_pergunta_chatbot, id_resposta_chatbot),
+                              -- Inserção da Foreign Key
                               CONSTRAINT perguntachatbot_visitante_fk FOREIGN KEY (visit_id_visit_fk) REFERENCES Visitante(id_visit));
                               
 
@@ -93,6 +98,7 @@ CREATE TABLE Experiencia_Usuario(id_exp NUMBER(10)GENERATED ALWAYS as IDENTITY S
                                  prod_pesquisado_exp VARCHAR2(50),
                                  pag_visitada_exp VARCHAR2(50),
                                  tempo_visita_exp NUMBER(8) CONSTRAINT exp_tempo_visita_nn NOT NULL,
+                                 -- Inserção da Foreign Key
                                  CONSTRAINT exp_visit_fk FOREIGN KEY(visit_id_visit_fk) REFERENCES Visitante(id_visit),
                                  CONSTRAINT exp_chatbot_fk FOREIGN KEY(chatbot_id_perg_fk, chatbot_id_resp_fk) REFERENCES Pergunta_Chatbot(id_pergunta_chatbot, id_resposta_chatbot));
                                                
