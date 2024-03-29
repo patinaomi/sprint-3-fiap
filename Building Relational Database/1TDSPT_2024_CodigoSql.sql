@@ -20,6 +20,7 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY HH24:MI:SS';
 
 
 -- Criação da tabela Visitante
+                                                      -- para gerar o id sozinho de 1 em 1
 CREATE TABLE Visitante(id_visit NUMBER(10) GENERATED ALWAYS as IDENTITY START WITH 1 INCREMENT BY 1
                        CONSTRAINT visitante_id_pk PRIMARY KEY, 
                        nome_visit VARCHAR2(30) CONSTRAINT visitante_nome_nn NOT NULL,
