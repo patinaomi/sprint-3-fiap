@@ -1,6 +1,6 @@
 package model.vo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class ExperienciaUsuario {
     //atributos
@@ -8,20 +8,20 @@ public class ExperienciaUsuario {
     private int visitFk;
     private int pergChatbotFk;
     private int respChatbotFk;
-    private Date dataHoraVisita;
+    private Timestamp dataHoraVisita;
     private String prodPesquisado;
     private String pagVisitada;
-    private int tempoVisitada;
+    private int tempoVisita;
 
     //construtores
-    public ExperienciaUsuario(int visitFk, int pergChatbotFk, int respChatbotFk, Date dataHoraVisita, String prodPesquisado, String pagVisitada, int tempoVisitada) {
+    public ExperienciaUsuario(int visitFk, int pergChatbotFk, int respChatbotFk, Timestamp dataHoraVisita, String prodPesquisado, String pagVisitada, int tempoVisita) {
         this.visitFk = visitFk;
         this.pergChatbotFk = pergChatbotFk;
         this.respChatbotFk = respChatbotFk;
         this.dataHoraVisita = dataHoraVisita;
         this.prodPesquisado = prodPesquisado;
         this.pagVisitada = pagVisitada;
-        this.tempoVisitada = tempoVisitada;
+        this.tempoVisita = tempoVisita;
     }
 
     //getters & setters
@@ -58,11 +58,11 @@ public class ExperienciaUsuario {
         this.respChatbotFk = respChatbotFk;
     }
 
-    public Date getDataHoraVisita() {
+    public Timestamp getDataHoraVisita() {
         return dataHoraVisita;
     }
 
-    public void setDataHoraVisita(Date dataHoraVisita) {
+    public void setDataHoraVisita(Timestamp dataHoraVisita) {
         this.dataHoraVisita = dataHoraVisita;
     }
 
@@ -82,11 +82,11 @@ public class ExperienciaUsuario {
         this.pagVisitada = pagVisitada;
     }
 
-    public int getTempoVisitada() {
-        return tempoVisitada;
+    public int getTempoVisita() {
+        return tempoVisita;
     }
 
-    public void setTempoVisitada(int tempoVisitada) {
-        this.tempoVisitada = tempoVisitada;
+    public void setTempoVisita(int tempoVisita) {
+        this.tempoVisita = tempoVisita;
     }
 }
