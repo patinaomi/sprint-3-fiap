@@ -1,23 +1,34 @@
 package view;
 
+import model.bo.GestaoData;
+import model.dao.VisitanteDao;
 import model.impl.ExperienciaUsuarioDaoImpl;
+import model.impl.VisitanteDaoImpl;
 import model.vo.ExperienciaUsuario;
+import model.vo.Visitante;
 
 import java.sql.SQLException;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        String dataEmTexto = "13/11/2023 23:30:03";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(dataEmTexto, formatter);
-        Timestamp timestamp = Timestamp.valueOf(dateTime);
+        Timestamp dataAtualTimestamp = GestaoData.obterDataHoraAtual();
 
-        ExperienciaUsuarioDaoImpl exUser1 = new ExperienciaUsuarioDaoImpl();
+        VisitanteDao visitanteDao= new VisitanteDaoImpl();
+        Visitante visitante = new Visitante();
 
-        System.out.println(exUser1.inserirExperienciaUsuario(new ExperienciaUsuario(1, 1, 1, timestamp, "Tableau", "Produtos", 30))? "Cliente Adicionado" : "Cliente não Adicionado");
+        visitante.setEmail("segteste@teste.com");
+        visitante.setNome("hora atual");
+        visitante.setTempo(40);
+
+        visitante.setDataHora(new Date(dataAtualTimestamp.getTime()));
+
+        visitanteDao.salvarVisitante(visitante);
+
+
     }
 }

@@ -17,6 +17,11 @@ public class PerguntaChatbotImpl implements PerguntaChatbotDao {
     }
 
     @Override
+    public void salvarPerguntaChatbot(PerguntaChatbot perguntaChatbot) {
+
+    }
+
+    @Override
     public void atualizarPerguntaChatbot(PerguntaChatbot perguntaChatbot) {
 
     }

@@ -1,28 +1,33 @@
 package model.impl;
 
-import model.dao.PerguntaChatbotDao;
-import model.vo.PerguntaChatbot;
+import model.dao.QuestionarioDao;
+import model.vo.Questionario;
 
 import java.util.List;
 
-public class QuestionarioDaoImpl implements PerguntaChatbotDao {
+public class QuestionarioDaoImpl implements QuestionarioDao {
     @Override
-    public List<PerguntaChatbot> listarPerguntaChatbot() {
+    public List<Questionario> listarQuestionario() {
         return null;
     }
 
     @Override
-    public PerguntaChatbot buscarPerguntaChatbot(int id) {
+    public Questionario buscarQuestionario(int id) {
         return null;
     }
 
     @Override
-    public void atualizarPerguntaChatbot(PerguntaChatbot perguntaChatbot) {
+    public void salvarQuestionario(Questionario questionario) {
 
     }
 
     @Override
-    public void deletarPerguntaChatbot(PerguntaChatbot perguntaChatbot) {
+    public void atualizarQuestionario(Questionario questionario) {
+
+    }
+
+    @Override
+    public void deletarQuestionario(Questionario questionario) {
 
     }
 }

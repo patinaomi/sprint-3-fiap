@@ -17,6 +17,11 @@ public class PlataformaLoginDaoImpl implements PlataformaLoginDao {
     }
 
     @Override
+    public void salvarPlataformaLogin(PlataformaLogin plataformaLogin) {
+
+    }
+
+    @Override
     public void atualizarPlataformaLogin(PlataformaLogin plataformaLogin) {
 
     }

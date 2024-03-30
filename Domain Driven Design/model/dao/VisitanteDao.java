@@ -6,6 +6,7 @@ import java.util.List;
 public interface VisitanteDao {
         public List<Visitante> listarVisitante();
         public Visitante buscarVisitante(int id);
+        public void salvarVisitante(Visitante visitante);
         public void atualizarVisitante(Visitante visitante);
         public void deletarVisitante(Visitante visitante);
 }

@@ -20,6 +20,10 @@ public class Visitante {
         this.tempo = tempo;
     }
 
+    public Visitante() {
+
+    }
+
     // getter & setters
     public int getId() {
         return id;

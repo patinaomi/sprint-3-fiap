@@ -55,6 +55,11 @@ public class ExperienciaUsuarioDaoImpl implements ExperienciaUsuarioDao {
     }
 
     @Override
+    public void salvarExperienciaUsuario(ExperienciaUsuario experienciaUsuario) {
+
+    }
+
+    @Override
     public ExperienciaUsuario buscarExperienciaUsuario(int id) {
         // Implementação do método buscar
         return null;

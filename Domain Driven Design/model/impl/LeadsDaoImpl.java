@@ -18,6 +18,11 @@ public class LeadsDaoImpl implements LeadsDao {
     }
 
     @Override
+    public void salvarLeads(Leads leads) {
+
+    }
+
+    @Override
     public void atualizarLeads(Leads leads) {
 
     }
