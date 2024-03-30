@@ -67,6 +67,17 @@ def verifica_input(msg):
     return valor
 
 
+def verifica_senha(msg):
+    senha = input(msg).strip()
+    while not senha or len(senha) < 6:
+        if not senha:
+            print("Este campo não pode ficar vazio. Por favor, insira uma senha.")
+        elif len(senha) < 6:
+            print("A senha deve ter pelo menos 6 dígitos. Por favor, tente novamente.")
+        senha = input(msg).strip()
+    return senha
+
+
 def esqueci_a_senha():
     dados = 'login_admin.json'
     dados_login = carregar_dados(dados)
@@ -78,7 +89,7 @@ def esqueci_a_senha():
 
     for login, info_usuario in dados_login.items():
         if info_usuario['email'].lower() == email.lower():
-            nova_senha = verifica_input('Digite a nova senha: ')
+            nova_senha = verifica_senha('Digite a nova senha: ')
 
             # Vai verificar se a senha é diferente da original
             if nova_senha == info_usuario['senha']:
@@ -167,7 +178,7 @@ def criar_usuario():
     novo_user = verifica_input('Digite o usuário: ')
     dados_user = {}
 
-    senha = verifica_input('Digite a senha: ')
+    senha = verifica_senha('Digite a senha: ')
     dados_user['senha'] = senha
 
     while True:
