@@ -1,0 +1,158 @@
+
+/* Padronização da fonte,a tamanho, cores, background*/
+:root {
+
+    /* Fontes - Cores */
+    --color-font-um: #3c3c3c;
+    --color-font-dois:#515151;
+    --color-font-tres: #666f88;
+    --color-font-quatro:#788199;
+    --color-font-cinco:#8990a2;
+    --color-font-seis:#a3a8b7;
+    --color-font-sete:#b5bac9;
+
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira-opcao: #C9E8FC; 
+    --backcolor-segunda-opcao: #8CCAF3; 
+    --backcolor-terceira-opcao: #4CAAEC; 
+    --backcolor-quarta-opcao: #399BDC; 
+    --backcolor-quinta-opcao: #47A8EC; 
+}
+
+
+.container-footer {
+    /*border: 5px solid salmon;*/
+    height: 10rem;
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Conteúdo do Footer */
+
+footer {
+    background-color: var(--backcolor-quinta-opcao);
+    color: rgb(255, 255, 255);
+}
+  
+.container-footer {
+    display: grid;
+}
+
+/* Sesão com informações de contato */
+
+.conteudo-contato {
+    display: flex;
+    padding: 2em;
+    /*border: 5px solid blue;*/
+    text-wrap: wrap;
+}
+
+/* Blocos com icones e textos */
+.footer-info-endereco, .footer-info-telefone, .footer-info-agendamento {
+    display: flex;
+    align-items: center;
+}
+
+/* Título da página */
+.footer-info-titulo {
+    font-size: var(--font-size-textos-pequenos);
+}
+
+
+/* Icones */
+
+.footer-icone {
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+
+/* Sessão das logos */
+
+.conteudo-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    /*border: 5px solid green;*/
+    padding: 1em;
+}
+
+/* Logo Tokito Techs */
+.nav-wrapper-logo-Tokito {
+    width: 80px;
+    height: 80px;
+}
+
+
+
+/* Criação de uma div para fazer uma linha */
+
+.linha {
+    width: 95%;
+    height: 1px;
+    background-color: #fff;
+    margin: 0 auto; 
+}
+
+/* Frase de direitos do projeto */
+.frase-direitos-footer{
+    font-size: 12px;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+
+/* Responsividade */
+
+/* Celular */
+@media (max-width: 480px) {
+    .container-footer {
+        max-width: 480px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .conteudo-contato {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 30px;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 769px) {
+    .container-footer {
+        max-width: 769px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .conteudo-contato {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 30px;
+    }
+
+}
+
+
+@media (min-width: 770px) and (max-width: 1090px) {
+
+    
+}
+
+@media (min-width: 1091px) and (max-width: 1280px) {
+
+    
+}
+
+
+
