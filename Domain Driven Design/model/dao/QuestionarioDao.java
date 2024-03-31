@@ -8,7 +8,7 @@ public interface QuestionarioDao {
     public List<Questionario> listarQuestionario();
     public Questionario buscarQuestionario(int id);
 
-    public void inserir(Questionario questionario);
+    public void salvarQuestionario(Questionario questionario);
     public void atualizarQuestionario(Questionario questionario);
     public void deletarQuestionario(Questionario questionario);
 }

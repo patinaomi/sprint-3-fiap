@@ -32,7 +32,7 @@ public class ExperienciaUsuarioDaoImpl implements ExperienciaUsuarioDao {
             ps.setInt(1, experienciaUsuario.getVisitFk());
             ps.setInt(2, experienciaUsuario.getPergChatbotFk());
             ps.setInt(3, experienciaUsuario.getRespChatbotFk());
-            ps.setTimestamp(4, new java.sql.Timestamp(experienciaUsuario.getDataHoraVisita().getTime()));
+            ps.setTimestamp(4, experienciaUsuario.getDataHoraVisita());
             ps.setString(5, experienciaUsuario.getProdPesquisado());
             ps.setString(6, experienciaUsuario.getPagVisitada());
             ps.setInt(7, experienciaUsuario.getTempoVisita());

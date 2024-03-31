@@ -1,39 +1,27 @@
 package model.vo;
 
-import model.bo.GestaoData;
-
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Visitante {
-
-    Timestamp dataAtual = GestaoData.obterDataHoraAtual();
 
     // atributos
     private int id;
     private String nome;
     private String email;
-    private Timestamp dataHora;
+    private Date dataHora;
     private int tempo;
 
     // construtores
 
-    public Visitante(String nome, String email, int tempo) {
+    public Visitante(String nome, String email, Date dataHora, int tempo) {
         this.nome = nome;
         this.email = email;
-        this.dataHora = dataAtual;
+        this.dataHora = dataHora;
         this.tempo = tempo;
     }
 
     public Visitante() {
 
-    }
-
-    public Visitante(int id, String nome, String email, Timestamp dataHora, int tempo) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.dataHora = dataHora;
-        this.tempo = tempo;
     }
 
     // getter & setters
@@ -61,11 +49,11 @@ public class Visitante {
         this.email = email;
     }
 
-    public Timestamp getDataHora() {
+    public Date getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(Timestamp dataHora) {
+    public void setDataHora(Date dataHora) {
         this.dataHora = dataHora;
     }
 
@@ -76,14 +64,4 @@ public class Visitante {
     public void setTempo(int tempo) {
         this.tempo = tempo;
     }
-
-    @Override
-    public String toString() {
-        return "\nVisitante ID: #" + getId() +
-                "\nNome: " + getNome() +
-                "\nE-mail: " + getEmail() +
-                "\nData: " + GestaoData.formatarTimestampParaString(getDataHora()) +
-                "\nTempo Permanecido: " + getTempo() + "min\n";
-    }
-
 }

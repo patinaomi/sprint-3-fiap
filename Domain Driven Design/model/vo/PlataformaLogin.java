@@ -1,26 +1,23 @@
 package model.vo;
 
-import model.bo.GestaoData;
-
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class PlataformaLogin {
-    Timestamp dataAtual = GestaoData.obterDataHoraAtual();
 
     //atributos
     private int id;
     private int visitaFk;
     private String nome;
     private String status;
-    private Timestamp dataImplementacao;
+    private Date dataImplementacao;
     private String email;
 
     //construtores
-    public PlataformaLogin(int visitaFk, String nome, String status, String email) {
+    public PlataformaLogin(int visitaFk, String nome, String status, Date dataImplementacao, String email) {
         this.visitaFk = visitaFk;
         this.nome = nome;
         this.status = status;
-        this.dataImplementacao = dataAtual;
+        this.dataImplementacao = dataImplementacao;
         this.email = email;
     }
 
@@ -57,11 +54,11 @@ public class PlataformaLogin {
         this.status = status;
     }
 
-    public Timestamp getDataImplementacao() {
+    public Date getDataImplementacao() {
         return dataImplementacao;
     }
 
-    public void setDataImplementacao(Timestamp dataImplementacao) {
+    public void setDataImplementacao(Date dataImplementacao) {
         this.dataImplementacao = dataImplementacao;
     }
 
@@ -71,14 +68,5 @@ public class PlataformaLogin {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String toString() {
-        return "\nPlataforma Login ID: #" + getId() +
-                "\nVisitante FK: " + getVisitaFk() +
-                "\nNome: " + getNome() +
-                "\nE-mail: " + getEmail() +
-                "\nStatus: " + getStatus() +
-                "\nData Implementação: " + GestaoData.formatarTimestampParaString(getDataImplementacao());
     }
 }

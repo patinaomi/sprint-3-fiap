@@ -13,6 +13,6 @@ public class VisitanteController {
     }
 
     public List<Visitante> listarVisitante() {
-        return visitanteDao.listar();
+        return visitanteDao.listarVisitante();
     }
 }
