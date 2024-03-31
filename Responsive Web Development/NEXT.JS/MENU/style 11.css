@@ -1,0 +1,359 @@
+
+
+/* Padronização da fonte,a tamanho, cores, background*/
+:root {
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 64px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
+
+    /* Fontes - Cores */
+    --color-font-um: #000000;
+    --color-font-dois:#86674A;
+    --color-font-tres: #FFFFFF;
+    --color-font-quatro:#EEECDF;
+
+
+    /* Configuração para as cores das sessões */
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira: #C9E8FC; 
+    --backcolor-segunda: #8CCAF3; 
+    --backcolor-terceira: #4CAAEC; 
+    --backcolor-quarta: #399BDC; 
+    --backcolor-quinta: #47A8EC; 
+}
+
+
+
+.container-menu {
+    /*border: 5px solid black;*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: var(--backcolor-quinta-opcao);
+    width: 1280px;
+    height: 80px;
+    position: fixed;
+    z-index: 2000;
+}
+
+.container-primario-menu {
+    display: flex;
+    /*border: 5px solid pink;*/
+    align-items: center;
+    justify-content: start;
+}
+
+.container-secundario-menu {
+    display: flex;
+    /*border: 5px solid green;*/
+    justify-content: end;
+    align-items: end;
+}
+
+/* Logo Sales Force */
+
+.logo-sales-force .texto-logo-salesforce {
+    /*border: 5px solid orange;*/
+    font-size: 28px;
+    color: #FDFEFF;
+    text-transform: uppercase;
+    padding-left: 40px;
+    letter-spacing: 3px;
+}
+
+.logo-sales-force .texto-logo-salesforce a {
+    color: #FDFEFF;
+
+}
+
+/* Lista de opções do menu */
+
+.opcoes-menu nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    text-decoration: none;
+}
+
+.opcoes-menu a {
+    font-size: 16px;
+    color: #FDFEFF;
+    cursor: pointer;
+}
+
+
+/* Menu hamburguer */
+.div-menu-hamburguer {
+    display: none;
+}
+
+
+/* Lista da opção de Configuração */
+.config-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+}
+
+.config-dropdown li {
+    list-style: none;
+    margin: 5px 0;
+
+}
+
+.config-dropdown a {
+    color: #333;
+    text-decoration: none;
+
+}
+
+.config-dropdown a:hover {
+    color: #007bff;
+}
+
+/* Botão de login */
+
+
+.btn-login-principal-menu {
+    padding: 8px 16px;
+    border: 2px solid var(--backcolor-primeira);
+    border-radius: 10px;
+    background-color: var(--backcolor-basico);
+    color: var(--backcolor-terceira);
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    width: 10rem;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-right: 30px;
+}
+
+.btn-login-principal-menu:hover {
+    background-color: var(--backcolor-segunda);
+    color: #ffffff;
+}
+
+.nome-menu-botao {
+    color: var(--backcolor-terceira);
+}
+
+/* Responsividade */
+
+/* Celular */
+@media (max-width: 480px) {
+
+    .container-menu {
+        max-width: 480px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .opcoes-menu {
+        display: none;
+    }
+
+    .btn-login-principal-menu {
+        display: none;
+    }
+
+    .div-menu-hamburguer {
+        display: block;
+        margin-right: 100px;
+    }
+
+    .titulo-menu-hamburguer {
+        display: block;
+        color: #FDFEFF;
+        font-size: 24px;
+        background-color: var(--backcolor-quinta);
+    }
+
+
+    .titulo-opcoes-menu-form {
+        padding-top: 5px;
+    }
+    
+
+    /* Menu hamburguer */
+
+    /* Lista da opção de Configuração */
+    .menu-hamburguer {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        border: 1px solid #ccc;
+        background-color: var(--backcolor-quarta);
+        border-top: none;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        display: flex;
+        justify-content: space-evenly;
+        cursor: pointer;
+    }
+
+    .menu-hamburguer li {
+        list-style: none;
+        margin: 5px 0;
+
+    }
+
+    .menu-hamburguer a {
+        color: #ffffff;
+        text-decoration: none;
+
+    }
+
+    .menu-hamburguer a:hover {
+        color: #007bff;
+    }
+
+    .menu-hamburguer-button {
+        font-size: 24px;
+        border: none;
+        color: #000000;
+        
+    }
+
+
+
+}
+
+@media (min-width: 481px) and (max-width: 769px) {
+    .container-menu {
+        max-width: 769px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .opcoes-menu {
+        display: none;
+    }
+
+    .btn-login-principal-menu {
+        display: none;
+    }
+
+    .div-menu-hamburguer {
+        display: flex;
+    }
+
+
+    .menu-icon {
+        color: rgba(255, 255, 255, 0.8);
+
+    }
+
+    .titulo-opcoes-menu-form {
+        padding-top: 5px;
+    }
+
+    /* Menu hamburguer */
+
+    /* Lista da opção de Configuração */
+    .menu-hamburguer {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-top: none;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        display: flex;
+        justify-content: space-evenly;
+        cursor: pointer;
+    }
+
+    .menu-hamburguer li {
+        list-style: none;
+        margin: 5px 0;
+
+    }
+
+    .menu-hamburguer a {
+        color: #333;
+        text-decoration: none;
+
+    }
+
+    .menu-hamburguer a:hover {
+        color: #007bff;
+    }
+
+    .menu-hamburguer-button {
+        font-size: 24px;
+        border: none;
+        color: #000000;
+        
+    }
+
+    
+}
+
+@media (min-width: 770px) and (max-width: 1090px) {
+
+    .menu-hamburguer {
+        display: none;
+    }
+
+    .container-menu {
+        max-width: 1090px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .btn-login-principal-menu {
+        margin-right: 30px;
+    }
+
+
+}
+
+@media (min-width: 1091px) and (max-width: 1280px) {
+
+    .menu-hamburguer {
+        display: none;
+    }
+
+    .container-menu {
+        max-width: 1280px;
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+        margin: 0;
+    }
+
+    .container-menu {
+        max-width: 1280px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .btn-login-principal-menu {
+        margin-right: 30px;
+    }
+
+}
+
