@@ -13,7 +13,7 @@ public class ExperienciaUsuarioController {
         this.experienciaUsuarioDao = experienciaUsuarioDao;
     }
 
-    public List<ExperienciaUsuario> listarExperienciaUsuario() {
-        return experienciaUsuarioDao.listarExperienciaUsuario();
+    public List<ExperienciaUsuario> listar() {
+        return experienciaUsuarioDao.listar();
     }
 }

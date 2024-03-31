@@ -12,7 +12,7 @@ public class VisitanteController {
         this.visitanteDao = visitanteDao;
     }
 
-    public List<Visitante> listarVisitante() {
-        return visitanteDao.listarVisitante();
+    public List<Visitante> listar() {
+        return visitanteDao.listar();
     }
 }

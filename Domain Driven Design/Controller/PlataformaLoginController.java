@@ -12,7 +12,7 @@ public class PlataformaLoginController {
         this.plataformaLoginDao = plataformaLoginDao;
     }
 
-    public List<PlataformaLogin> listarPlataformaLogin() {
-        return plataformaLoginDao.listarPlataformaLogin();
+    public List<PlataformaLogin> listar() {
+        return plataformaLoginDao.listar();
     }
 }

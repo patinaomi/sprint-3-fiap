@@ -1,33 +1,53 @@
 package view;
 
-import model.bo.GestaoData;
-import model.dao.VisitanteDao;
-import model.impl.ExperienciaUsuarioDaoImpl;
-import model.impl.VisitanteDaoImpl;
-import model.vo.ExperienciaUsuario;
-import model.vo.Visitante;
+import model.dao.*;
+import model.impl.*;
 
 import java.sql.SQLException;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Timestamp dataAtualTimestamp = GestaoData.obterDataHoraAtual();
 
-        VisitanteDao visitanteDao= new VisitanteDaoImpl();
-        Visitante visitante = new Visitante();
+        VisitanteDao visitanteDao = new VisitanteDaoImpl();
+        QuestionarioDao questionarioDao = new QuestionarioDaoImpl();
+        PlataformaLoginDao plataformaLoginDao = new PlataformaLoginDaoImpl();
+        PerguntaChatbotDao perguntaChatbotDao = new PerguntaChatbotImpl();
+        LeadsDao leadsDao = new LeadsDaoImpl();
+        ExperienciaUsuarioDao experienciaUsuarioDao = new ExperienciaUsuarioDaoImpl();
 
-        visitante.setEmail("segteste@teste.com");
-        visitante.setNome("hora atual");
-        visitante.setTempo(40);
+        Menu menu = new Menu();
 
-        visitante.setDataHora(new Date(dataAtualTimestamp.getTime()));
+        menu.menuVisitante();
 
-        visitanteDao.salvarVisitante(visitante);
+
+
+        //A data e hora do login será a atual (já é passada no construtor)
+
+        //Teste Insert - Visitante
+        //Visitante visitante = new Visitante("Pati", Validacoes.validarEmail("pati@oie.com"), 3);
+        //visitanteDao.inserir(visitante);
+
+        //Teste Insert - Questionario
+        //Questionario questionario = new Questionario(1, "Tableau", "Sim", "Internet", "Sim", "Tokito", "Tecnologia", "CRM", "Melhorar Atendimento", 10000, Validacoes.validarEmail("teste@oie.com"));
+        //questionarioDao.inserir(questionario);
+
+        //Teste Insert - Leads
+        //Leads leads = new Leads(1, 1, "Claudio Bispo", Validacoes.validarEmail("claudio@gmail.com"), "Tokito");
+        //leadsDao.inserir(leads);
+
+        //Teste Insert - Experiência Usuário
+        //ExperienciaUsuario experienciaUsuario = new ExperienciaUsuario(1, 1, 1, "Tableau", "Produtos", 5);
+        //experienciaUsuarioDao.inserir(experienciaUsuario);
+
+        //Teste Insert - Pergunta Chatbot
+        //PerguntaChatbot perguntaChatbot = new PerguntaChatbot(3, 3, 1, "Dúvidas", "Entidade", "Intenção", "Tableau", "Muito Satisfeito");
+        //perguntaChatbotDao.inserir(perguntaChatbot);
+
+        //Teste Insert - PlataformaLogin
+        //PlataformaLogin plataformaLogin = new PlataformaLogin(1, "Sara Ingrid", "Ativo", Validacoes.validarEmail("sara@gmail.com"));
+        //plataformaLoginDao.inserir(plataformaLogin);
+
 
 
     }

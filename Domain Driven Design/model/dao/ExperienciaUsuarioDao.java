@@ -4,10 +4,10 @@ import model.vo.ExperienciaUsuario;
 import java.util.List;
 
 public interface ExperienciaUsuarioDao {
-    public List<ExperienciaUsuario> listarExperienciaUsuario();
+    public List<ExperienciaUsuario> listar();
 
-    public void salvarExperienciaUsuario(ExperienciaUsuario experienciaUsuario);
-    public ExperienciaUsuario buscarExperienciaUsuario(int id);
-    public void atualizarExperienciaUsuario(ExperienciaUsuario experienciaUsuario);
-    public void deletarExperienciaUsuario(ExperienciaUsuario experienciaUsuario);
+    public void inserir(ExperienciaUsuario experienciaUsuario);
+    public ExperienciaUsuario buscar(int id);
+    public void atualizar(ExperienciaUsuario experienciaUsuario);
+    public void deletar(int id);
 }

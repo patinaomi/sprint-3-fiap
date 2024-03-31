@@ -12,7 +12,7 @@ public class PerguntaChatbotController {
         this.perguntaChatbotDao = perguntaChatbotDao;
     }
 
-    public List<PerguntaChatbot> listarPerguntaChatbot() {
-        return perguntaChatbotDao.listarPerguntaChatbot();
+    public List<PerguntaChatbot> listar() {
+        return perguntaChatbotDao.listar();
     }
 }

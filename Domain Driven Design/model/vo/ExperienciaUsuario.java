@@ -1,8 +1,12 @@
 package model.vo;
 
+import model.bo.GestaoData;
+
 import java.sql.Timestamp;
 
 public class ExperienciaUsuario {
+    Timestamp dataAtual = GestaoData.obterDataHoraAtual();
+
     //atributos
     private int id;
     private int visitFk;
@@ -14,11 +18,11 @@ public class ExperienciaUsuario {
     private int tempoVisita;
 
     //construtores
-    public ExperienciaUsuario(int visitFk, int pergChatbotFk, int respChatbotFk, Timestamp dataHoraVisita, String prodPesquisado, String pagVisitada, int tempoVisita) {
+    public ExperienciaUsuario(int visitFk, int pergChatbotFk, int respChatbotFk, String prodPesquisado, String pagVisitada, int tempoVisita) {
         this.visitFk = visitFk;
         this.pergChatbotFk = pergChatbotFk;
         this.respChatbotFk = respChatbotFk;
-        this.dataHoraVisita = dataHoraVisita;
+        this.dataHoraVisita = dataAtual;
         this.prodPesquisado = prodPesquisado;
         this.pagVisitada = pagVisitada;
         this.tempoVisita = tempoVisita;
@@ -88,5 +92,14 @@ public class ExperienciaUsuario {
 
     public void setTempoVisita(int tempoVisita) {
         this.tempoVisita = tempoVisita;
+    }
+
+    public String toString() {
+        return "\nExp. Usuário: " + getId() +
+                "\nVisitante FK: " + getVisitFk() + " | Id Perg: #" + getPergChatbotFk() + " | Id Resp: #" + getRespChatbotFk() +
+                "\nPágina Visitada: " + getPagVisitada() +
+                "\nProduto Pesquisado: " + getProdPesquisado() +
+                "\nData: " + GestaoData.formatarTimestampParaString(getDataHoraVisita()) +
+                "\nTempo de Visita: " + getTempoVisita();
     }
 }

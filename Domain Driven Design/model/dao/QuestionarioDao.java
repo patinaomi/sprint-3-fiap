@@ -5,10 +5,10 @@ import model.vo.Questionario;
 import java.util.List;
 
 public interface QuestionarioDao {
-    public List<Questionario> listarQuestionario();
-    public Questionario buscarQuestionario(int id);
+    public List<Questionario> listar();
+    public Questionario buscar(int id);
 
-    public void salvarQuestionario(Questionario questionario);
-    public void atualizarQuestionario(Questionario questionario);
-    public void deletarQuestionario(Questionario questionario);
+    public void inserir(Questionario questionario);
+    public void atualizar(Questionario questionario);
+    public void deletar(int id);
 }

@@ -12,7 +12,7 @@ public class LeadsController {
         this.leadsDao = leadsDao;
     }
 
-    public List<Leads> listarLeads() {
-        return leadsDao.listarLeads();
+    public List<Leads> listar() {
+        return leadsDao.listar();
     }
 }

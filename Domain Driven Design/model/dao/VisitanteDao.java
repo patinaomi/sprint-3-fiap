@@ -4,9 +4,13 @@ import model.vo.Visitante;
 import java.util.List;
 
 public interface VisitanteDao {
-        public List<Visitante> listarVisitante();
-        public Visitante buscarVisitante(int id);
-        public void salvarVisitante(Visitante visitante);
-        public void atualizarVisitante(Visitante visitante);
-        public void deletarVisitante(Visitante visitante);
+        public List<Visitante> listar();
+        public Visitante buscar(int id);
+        public void inserir(Visitante visitante);
+
+        public void atualizar(Visitante visitante);
+
+        public Visitante buscarPorEmail(String email);
+
+        public void deletar(int id);
 }

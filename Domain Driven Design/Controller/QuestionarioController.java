@@ -12,7 +12,7 @@ public class QuestionarioController {
         this.questionarioDao = questionarioDao;
     }
 
-    public List<Questionario> listarQuestionario() {
-        return questionarioDao.listarQuestionario();
+    public List<Questionario> listar() {
+        return questionarioDao.listar();
     }
 }

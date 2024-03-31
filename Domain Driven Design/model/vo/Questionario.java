@@ -1,13 +1,16 @@
 package model.vo;
 
-import java.util.Date;
+import model.bo.GestaoData;
+
+import java.sql.Timestamp;
 
 public class Questionario {
+    Timestamp dataAtual = GestaoData.obterDataHoraAtual();
 
     //atributos
     private int num;
     private int visitaFk;
-    private Date dataHoraVisita;
+    private Timestamp dataHoraVisita;
     private String prodVisitado;
     private String conheceSales;
     private String ondeConheceuSales;
@@ -20,12 +23,12 @@ public class Questionario {
     private String email;
 
     //construtores
-    public Questionario(int visitaFk, Date dataHoraVisita, String prodVisitado, String conheceSales, String ondeConheceuSales,
+    public Questionario(int visitaFk, String prodVisitado, String conheceSales, String ondeConheceuSales,
                         String conheceProdSales, String empresa, String segmento, String necessidadeEmpresa,
                         String solucaoEmpresa, int orcamentoEmpresa, String email)
     {
         this.visitaFk = visitaFk;
-        this.dataHoraVisita = dataHoraVisita;
+        this.dataHoraVisita = dataAtual;
         this.prodVisitado = prodVisitado;
         this.conheceSales = conheceSales;
         this.ondeConheceuSales = ondeConheceuSales;
@@ -36,6 +39,10 @@ public class Questionario {
         this.solucaoEmpresa = solucaoEmpresa;
         this.orcamentoEmpresa = orcamentoEmpresa;
         this.email = email;
+    }
+
+    public Questionario() {
+        this.dataHoraVisita = dataAtual;
     }
 
     //getters & setters
@@ -56,11 +63,11 @@ public class Questionario {
         this.visitaFk = visitaFk;
     }
 
-    public Date getDataHoraVisita() {
+    public Timestamp getDataHoraVisita() {
         return dataHoraVisita;
     }
 
-    public void setDataHoraVisita(Date dataHoraVisita) {
+    public void setDataHoraVisita(Timestamp dataHoraVisita) {
         this.dataHoraVisita = dataHoraVisita;
     }
 
@@ -143,4 +150,22 @@ public class Questionario {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "\nQuestionário ID: #" + getNum() +
+                "\nVisitante FK: " + getVisitaFk() +
+                "\nData: " + GestaoData.formatarTimestampParaString(getDataHoraVisita()) +
+                "\nProduto Visitado: " + getProdVisitado() +
+                "\nConhece a Salesforce: " + getConheceSales() +
+                "\nOnde conheceu: " + getOndeConheceuSales() +
+                "\nConhece Produto Salesforce: " + getConheceProdSales() +
+                "\nEmpresa: " + getEmpresa() +
+                "\nSegmento: " + getSegmento() +
+                "\nNecessidade Empresa: " + getNecessidadeEmpresa() +
+                "\nSolução Empresa: " + getSolucaoEmpresa() +
+                "\nOrçamento Empresa: " + getOrcamentoEmpresa() +
+                "\nE-mail: " + getEmail();
+    }
+
 }
