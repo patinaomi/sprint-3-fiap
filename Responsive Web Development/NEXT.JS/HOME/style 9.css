@@ -1,0 +1,158 @@
+
+/* Padronização da fonte,a tamanho, cores, background*/
+:root {
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 64px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
+
+    /* Fontes - Cores */
+    --color-font-um: #000000;
+    --color-font-dois:#86674A;
+    --color-font-tres: #FFFFFF;
+    --color-font-quatro:#EEECDF;
+
+
+    /* Configuração para as cores das sessões */
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira: #C9E8FC; 
+    --backcolor-segunda: #8CCAF3; 
+    --backcolor-terceira: #4CAAEC; 
+    --backcolor-quarta: #399BDC; 
+    --backcolor-quinta: #47A8EC; 
+}
+
+
+
+.container-home-page {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    height: 100vh;
+    box-shadow: 1px 0px 5px white;
+    background-color: #c7dfff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    }
+
+
+/* Imagem de fundo */
+
+.banner-imagem-principal {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Bloco com os logos */
+
+.container-logos-tokito {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: black;
+    z-index: 1;
+    width: 100%;
+}
+
+/* Logo Tokito Techs */
+.logo-tokito {
+    height: 10rem;
+}
+
+
+/* Texto Logo Tokito Techs */
+.texto-logo-tokito-techs {
+    color: var(--backcolor-basico);
+    font-size: 44px;
+    z-index: 1;
+    font-weight: 200;
+}
+
+/* Frase de efeito do Slogan */
+
+.frase-efeito {
+    font-size: 3em;
+    color: var(--backcolor-basico);
+    overflow-x: hidden; 
+    white-space: nowrap;
+    animation: typing 5s steps(40, end), forwards, blink-caret .1s step-end infinite alternate;
+    text-align: center;
+    position: relative;
+    padding-top: 30px;
+}
+/* Keyframes para o efeito de digitação */
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Keyframes para o efeito de piscar do cursor */
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: blue; }
+}
+
+
+/* Responsividade */
+
+/* Celular */
+@media (max-width: 480px) {
+
+    .container-home-page {
+        max-width: 480px;
+    }
+
+    .titulo-tokito-techs {
+        font-size: 48px;
+    }
+
+    .frase-efeito {
+        font-size: 22px;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 769px) {
+    .container-home-page {
+        max-width: 769px;
+    }
+
+    .titulo-tokito-techs {
+        font-size: 48px;
+    }
+
+    .frase-efeito {
+        font-size: 28px;
+    }
+
+}
+
+
+@media (min-width: 770px) and (max-width: 1090px) {
+
+    .container-home-page {
+        max-width: 1090px;
+    }
+    
+}
+
+@media (min-width: 1091px) and (max-width: 1280px) {
+
+    
+}
+
