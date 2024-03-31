@@ -2,8 +2,8 @@
 'use client'
 
 /* Importar imagem */
-import imagem from './assets/undraw_shopping_re_3wst.svg'
-import imagem2 from './assets/salesforce-logo.svg'
+import imagem from '../../../public/assets/Cadastro/undraw_shopping_re_3wst.svg'
+import imagem2 from '../../../public/assets/Cadastro/salesforce-logo.svg'
 
 /* Importar o CSS */
 import './style.css'
