@@ -1,0 +1,227 @@
+
+/* Padronização da fonte,a tamanho, cores, background*/
+:root {
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 64px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
+
+    /* Fontes - Cores */
+    --color-font-um: #000000;
+    --color-font-dois:#86674A;
+    --color-font-tres: #FFFFFF;
+    --color-font-quatro:#EEECDF;
+
+
+    /* Configuração para as cores das sessões */
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira: #C9E8FC; 
+    --backcolor-segunda: #8CCAF3; 
+    --backcolor-terceira: #4CAAEC; 
+    --backcolor-quarta: #399BDC; 
+    --backcolor-quinta: #47A8EC; 
+}
+
+
+
+/* Ajuste geral */
+
+.container-clarrosel-produtos {
+    background-color: var(--backcolor-primeira-opcao);
+    height: 100vh;
+    /*border: 3px solid orange;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+
+
+/* Título da página */
+
+.titulo-pagina-carrosel {
+    font-size: 34px;
+    color: var(--color-font-um);
+    text-transform: uppercase;
+    text-align: center;
+    /*border: 3px solid red;*/
+    font-weight: 200;
+}
+
+
+/* CARROSEL */
+
+.carrosel-itens-produto {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+.box-itens-carrosel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+/* Imagens Carrosel */
+.slide-item {
+    /*border: 3px solid purple;*/
+    align-items: center;
+    text-align: center;
+    width: 120px;
+}
+
+/* Carrosel */
+
+.titulo-carrosel {
+    font-size: 28px;
+    color: var(--color-font-um);
+    text-align: center;
+    /*border: 3px solid saddlebrown;*/
+
+}
+
+
+.texto_carrosel {
+    font-size: 18px;
+    color: var(--color-font-um);
+    text-align: center;
+    padding: 30px;
+    /*border: 3px solid blue;*/
+}
+
+
+/* Box Feeback */
+
+.box-textos-captar-pesquisa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    text-align: center;
+}
+
+.box-frase-feedback {
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-descricao-feedback-carrosel {
+    text-transform: uppercase;
+    font-size: 32px;
+}
+
+.descricao-feedback-carrosel {
+    font-size: 22px;
+    padding-bottom: 30px;
+}
+.like {
+    font-size: 32px;
+    text-align: center;
+    align-items: center;
+    /*border: 3px solid aqua;*/
+    text-transform: uppercase;
+
+}
+
+.like i {
+    gap: 50px;
+    justify-content: space-evenly;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    font-size: 48px;
+    
+}
+
+.fa-solid.fa-heart {
+    color: red;
+    font-size: 32px;
+    text-decoration: none;
+    font-style: normal;
+}
+
+.fa-regular.fa-thumbs-up{
+    color: #076DB5;
+    font-size: 32px;
+    text-decoration: none;
+    font-style: normal;
+}
+
+.fa-solid.fa-thumbs-down {
+    color: black;
+    font-size: 32px;
+    text-decoration: none;
+    font-style: normal;
+}
+
+.contagem {
+   padding-left: 30px;
+   font-size: 32px;
+    text-decoration: none;
+    font-style: normal;
+}
+
+/* Responsividade */
+
+/* Celular */
+@media (max-width: 480px) {
+    
+    .container-clarrosel-produtos {
+        max-width: 480px;
+        height: 100%;
+    }
+
+    .titulo-pagina-carrosel {
+        font-size: 24px;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .like {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 30px;
+        padding-bottom: 50px ;
+    }
+
+    .fa-solid.fa-heart, .contagem, .fa-regular.fa-thumbs-up, .fa-solid.fa-thumbs-down {
+        font-size: 18px;
+        margin: 0;
+        padding: 0;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 769px) {
+    
+
+}
+
+
+@media (min-width: 770px) and (max-width: 1090px) {
+
+    
+}
+
+@media (min-width: 1091px) and (max-width: 1280px) {
+
+    .descricao-feedback-carrosel {
+        font-size: 24px;
+        padding-bottom: 30px;
+    }
+}
+
+
+
