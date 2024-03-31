@@ -1,0 +1,73 @@
+
+:root {
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 18px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos:  14px;
+
+    /* Fontes - Cores */
+    --color-font-um: #3c3c3c;
+    --color-font-dois:#515151;
+    --color-font-tres: #666f88;
+    --color-font-quatro:#788199;
+    --color-font-cinco:#8990a2;
+    --color-font-seis:#a3a8b7;
+    --color-font-sete:#b5bac9;
+
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira-opcao: #C9E8FC; 
+    --backcolor-segunda-opcao: #8CCAF3; 
+    --backcolor-terceira-opcao: #4CAAEC; 
+    --backcolor-quarta-opcao: #399BDC; 
+    --backcolor-quinta-opcao: #47A8EC; 
+}
+
+.sobre-form-necessidade {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    padding: 20px;
+}
+
+.info-sobre-form-necessidade {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 30px;
+}
+
+/* título da página */
+
+.titulo-pagina-formulario-necessidade {
+    font-size: 44px;
+    color: var(--color-font-um);
+    padding-bottom: 30px;
+}
+
+/* Paragrafo */
+
+.frase-formulario-necessidade {
+    font-size: 24px;
+    line-height: 170%;
+    padding-bottom: 30px;
+}
+
+/* botão */
+
+.botao-form-necessidade{
+    padding: 8px 16px;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    width: 200px;
+    font-size: 18px;
+}
+
+.botao-form-necessidade:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
