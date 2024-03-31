@@ -1,0 +1,208 @@
+
+/* Padronização da fonte,a tamanho, cores, background*/
+
+:root {
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 18px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
+
+    /* Fontes - Cores */
+    --color-font-um: #3c3c3c;
+    --color-font-dois:#515151;
+    --color-font-tres: #666f88;
+    --color-font-quatro:#788199;
+    --color-font-cinco:#8990a2;
+    --color-font-seis:#a3a8b7;
+    --color-font-sete:#b5bac9;
+
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira-opcao: #C9E8FC; 
+    --backcolor-segunda-opcao: #8CCAF3; 
+    --backcolor-terceira-opcao: #4CAAEC; 
+    --backcolor-quarta-opcao: #399BDC; 
+    --backcolor-quinta-opcao: #47A8EC; 
+}
+
+
+
+/* Conteúdo do Login */
+
+/* Configuração geral */
+.container-login-principal {
+    background-color: var(--backcolor-primeira-opcao);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+/* Container com a parte de Login e de Cadastro*/
+.container-primario-login {
+    display: flex;
+    /*border: 10px solid green;*/
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+
+/* Ajuste do lado esquerdo - Login */
+
+.form-container-login {
+    /*border: 5px solid blue;*/
+    transition: all 0.6s ease-in-out;
+    color: var(--color-font-tres);
+    height: 70vh;
+    width: 50%;
+}
+
+
+.formulario-login {
+    background-color: var(--backcolor-basico);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+/* Login com as Redes sociais */
+
+.social-container-login {
+    margin: 20px 0;
+    
+}
+
+.social-container-login a {
+    border: 1px solid #DDDDDD;
+    border-radius: 50%;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+}
+
+/* Campos de inputs do Login */
+
+.input-login-email, .input-login-senha {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.frase-login {
+    font-size: 12px;
+}
+
+/* Frase esqueceu a senha */
+.frase-esquecer-senha {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+/* Botão para fazer o Login */
+
+.botao-login, .botao-cadastro-pagina-login {
+    border-radius: 20px;
+    border: 1px solid var(--backcolor-basico);
+    background-color: var(--backcolor-quinta-opcao);
+    color: var(--backcolor-basico);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+.botao-login:active, .botao-cadastro-pagina-login:active {
+    transform: scale(0.95);
+}
+
+.botao-login:focus {
+    outline: none;
+}
+
+button.botao-cadastro-pagina-login {
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+
+
+/********************************************************/
+
+/* Ajuste do lado direito - Cadastro */
+
+.container-overlay {
+    background-color: var(--backcolor-quinta-opcao);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+    height: 70vh;
+    width: 50%;
+}
+
+
+.titulo-sessao-cadastro-login{
+    color: var(--backcolor-basico);
+    padding-bottom: 20px;
+
+}
+
+.paragrafo-sessao-cadastro-login {
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+
+/* Responsividade */
+
+/* Celular */
+@media (max-width: 769px) {
+
+    .container-login-principal {
+        height: 100%;
+    }
+
+    .container-primario-login {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 60rem;
+        padding-bottom: 100px;
+    }
+
+    .form-container-login {
+        width: 90%;
+        padding-top: 100px;
+        height: 40rem;
+    }
+
+    .container-overlay {
+        width: 90%;
+        height: 30rem;
+    }
+}
+
+
+
+
+
+
+
