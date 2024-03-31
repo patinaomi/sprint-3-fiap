@@ -1,0 +1,50 @@
+﻿Nome,Sobrenome,Email,Telefone,Segmento,Cargo,TamanhodaEmpresa,Produto,Região,Idioma
+Ana,Silva,ana.silva@email.com,(11)98765-4321,Tecnologia,Analista,Pequena,IA,SãoPaulo,Português
+João,Oliveira,joao.oliveira@email.com,(21)12345-6789,Varejo,Gerente,Média,Marketing,Rio de Janeiro,Inglês
+Maria,Santos,maria.santos@email.com,(31)55555-5555,Saúde,Diretor,Grande,Commerce,Minas Gerais,Espanhol
+Pedro,Almeida,pedro.almeida@email.com,(31)98765-1234,Finanças,CEO,Multinacional,NuvemDados,Minas Gerais,Português
+Camila,Lima,camila.lima@email.com,(51)22222-2222,Educação,Coordenador,Pequena,MuleSoft,Rio Grande do Sul,Espanhol
+Lucas,Santos,lucas.santos@email.com,(61)11111-1111,Tecnologia,Desenvolvedor,Média,Slack,Brasília,Português
+Juliana,Oliveira,juliana.oliveira@email.com,(71)33333-3333,Varejo,Estagiário,Grande,Tableau,Bahia,Espanhol
+André,Silva,andre.silva@email.com,(81)44444-4444,Saúde,Consultor,Multinacional,NetZero,Pernambuco,Português
+Luiza,Almeida,luiza.almeida@email.com,(91)55555-5555,Finanças,Analista,Pequena,Vendas,Amazonas,Português
+Rafael,Lima,rafael.lima@email.com,(92)66666-6666,Educação,Professor,Média,PequenasEmpresas,Amazonas,Português
+Marcos,Oliveira,marcos.oliveira@email.com,(93)77777-7777,Tecnologia,Arquiteto,Grande,IA,MatoGrosso,Português
+Carla,Santos,carla.santos@email.com,(94)88888-8888,Varejo,Atendente,Multinacional,Marketing,Sergipe,Português
+Thiago,Almeida,thiago.almeida@email.com,(95)99999-9999,Saúde,Médico,Pequena,Commerce,Tocantins,Português
+Bianca,Lima,bianca.lima@email.com,(96)10101-0101,Finanças,Analista,Média,NuvemDados,Roraima,Português
+Gustavo,Oliveira,gustavo.oliveira@email.com,(97)20202-0202,Educação,Diretor,Grande,MuleSoft,Rondônia,Português
+Patrícia,Almeida,patricia.almeida@email.com,(98)30303-0303,Tecnologia,Programador,Multinacional,Slack,Acre,Português
+Fabrício,Lima,fabricio.lima@email.com,(99)40404-0404,Varejo,Vendedor,Pequena,Tableau,Amapá,Português
+MarianaSantos,mariana.santos@email.com,(11)50505-0505,Saúde,Enfermeira,Grande,NetZero,SãoPaulo,Português
+Vanessa,Oliveira,vanessa.oliveira@email.com,(11)60606-0606,Finanças,Contador,Grande,Vendas,SãoPaulo,Português
+Carlos,Lima,carlos.lima@email.com,(11)70707-0707,Educação,Estudante,Multinacional,PequenasEmpresas,SãoPaulo,Português
+Aline,Santos,aline.santos@email.com,(11)80808-0808,Tecnologia,QA,Multinacional,IA,SãoPaulo,Português
+Eduardo,Oliveira,eduardo.oliveira@email.com,(11)90909-0909,Varejo,Caixa,Grande,Marketing,SãoPaulo,Português
+Renata,Almeida,renata.almeida@email.com,(11)10101-0101,Saúde,Farmacêutico,Grande,Commerce,SãoPaulo,Português
+Carla,Oliveira,carla.oliveira@email.com,(11)18181-8181,Tecnologia,AnalistadeMarketing,Multinacional,Tableau,SãoPaulo,Português
+Rodrigo,Almeida,rodrigo.almeida@email.com,(11)19191-9191,Financeiro,GerentedeVendas,Grande,IA,SãoPaulo,Espanhol
+Juliana,Lima,juliana.lima@email.com,(11)20202-0202,Saúde,EngenheirodeDados,Multinacional,Vendas,SãoPaulo,Inglês
+Daniel,Santos,daniel.santos@email.com,(11)21212-1212,Educação,EspecialistaemCloud,Grande,Marketing,SãoPaulo,Inglês
+Mariana,Oliveira,mariana.oliveira@email.com,(11)22222-2222,Alimentos,ConsultordeCRM,Multinacional,Commerce,SãoPaulo,Inglês
+Gustavo,Almeida,gustavo.almeida@email.com,(31)23232-3232,Automotivo,DesenvolvedorFront-end,Grande,NuvemDados,Minas Gerais,Inglês
+Amanda,Lima,amanda.lima@email.com,(31)24242-4242,Energia,AnalistadeDados,Multinacional,MuleSoft,Minas Gerais,Inglês
+Lucas,Oliveira,lucas.oliveira@email.com,(31)25252-5252,Agricultura,CientistadeDados,Multinacional,Slack,Minas Gerais,Inglês
+Fernanda,Santos,fernanda.santos@email.com,(31)26262-6262,Varejo,DesenvolvedorFull-stack,Grande,Tableau,Minas Gerais,Inglês
+Rafaela,Almeida,rafaela.almeida@email.com,(31)27272-7272,Moda,AnalistadeBI,Grande,NetZero,Minas Gerais,Inglês
+Ana,Silva,ana.silva@email.com,(31)28282-8282,Tecnologia,AnalistadeDados,Média,IA,Minas Gerais,Português
+Pedro,Santos,pedro.santos@email.com,(31)29292-9292,Financeiro,GerentedeContas,Grande,Marketing,Minas Gerais,Espanhol
+Laura,Oliveira,laura.oliveira@email.com,(31)30303-0303,Saúde,Médico,Multinacional,Vendas,Minas Gerais,Inglês
+Guilherme,Lima,guiiherme.lima@email.com,(21)31313-1313,Educação,Professor,Multinacional,Commerce,Rio de Janeiro,Inglês
+Camila,Almeida,camila.almeida@email.com,(21)32323-2323,Alimentos,Nutricionista,Multinacional,NuvemDados,Rio de Janeiro,Português
+Marcos,Oliveira,marcos.oliveira@email.com,(21)33333-3333,Automotivo,EngenheiroMecânico,Grande,Slack,Rio de Janeiro,Espanhol
+Isabela,Lima,isabela.lima@email.com,(21)34343-4343,Energia,EngenheiroElétrico,Multinacional,MuleSoft,Rio de Janeiro,Espanhol
+Lucas,Santos,lucas.santos@email.com,(21)35353-5353,Agricultura,Agrônomo,Multinacional,Tableau,Rio de Janeiro,Espanhol
+Mariana,Almeida,mariana.almeida@email.com,(21)36363-6363,Varejo,Vendedor,Média,NetZero,Rio de Janeiro,Espanhol
+João,Oliveira,joao.oliveira@email.com,(21)37373-7373,Moda,Designer,Grande,Vendas,Rio de Janeiro,Espanhol
+Beatriz,Lima,beatriz.lima@email.com,(21)38383-8383,Tecnologia,DesenvolvedordeSoftware,Multinacional,IA,Rio de Janeiro,Português
+Bruno,Santos,bruno.santos@email.com,(21)39393-9393,Financeiro,AnalistaFinanceiro,Grande,Marketing,Rio de Janeiro,Espanhol
+Juliana,Oliveira,juliana.oliveira@email.com,(21)40404-0404,Saúde,Enfermeira,Multinacional,Vendas,Rio de Janeiro,Inglês
+Rodrigo,Lima,rodrigo.lima@email.com,(21)41414-1414,Educação,Pedagogo,Multinacional,Commerce,Rio de Janeiro,Espanhol
+Laura,Almeida,laura.almeida@email.com,(21)42424-2424,Alimentos,ChefdeCozinha,Grande,NuvemDados,Rio de Janeiro,Espanhol
+Gabriela,Santos,gabriela.santos@email.com,(21)43434-3434,Automotivo,Mecânico,Multinacional,Slack,Rio de Janeiro,Espanhol
