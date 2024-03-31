@@ -1,0 +1,112 @@
+
+/* Padronização da fonte,a tamanho, cores, background*/
+:root {
+
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 64px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
+
+    /* Fontes - Cores */
+    --color-font-um: #000000;
+    --color-font-dois:#86674A;
+    --color-font-tres: #FFFFFF;
+    --color-font-quatro:#EEECDF;
+
+
+    /* Configuração para as cores das sessões */
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira: #C9E8FC; 
+    --backcolor-segunda: #8CCAF3; 
+    --backcolor-terceira: #4CAAEC; 
+    --backcolor-quarta: #399BDC; 
+    --backcolor-quinta: #47A8EC; 
+}
+
+
+.container-sobre {
+    height: calc(100vh - 80px);
+    display: grid;
+    flex-wrap: wrap;
+    background-color: var(--backcolor-primeira);
+    padding-top: 30px;
+}
+
+
+/* Configuração geral do container */
+.container-texto-sobre, .container-atividade-sobre, .redes-sociais-sobre {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Títulos */
+.titulo-sobre {
+    font-weight: 200;
+    font-size: 44px;
+}
+
+.frase-sobre {
+    font-size: 22px;
+    line-height: 170%;
+}
+
+/* Icones das redes sociais */
+.imagem-redes-sociais-sobre {
+    width: 40px;
+}
+
+.container-icones-sobre {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 30px;
+}
+
+.titulo-sobre-redes-sociais {
+    font-size: 24px;
+}
+
+/* Responsividade */
+
+/* Celular */
+@media (max-width: 480px) {
+
+    .container-sobre {
+        max-width: 480px;
+        height: 60rem;
+    }
+
+    .titulo-sobre {
+        font-size: 32px;
+    }
+
+    .frase-sobre {
+        font-size: 18px;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 769px) {
+    
+
+}
+
+
+@media (min-width: 770px) and (max-width: 1090px) {
+
+    
+}
+
+@media (min-width: 1091px) and (max-width: 1280px) {
+
+    
+}
+
+
+
