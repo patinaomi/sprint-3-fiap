@@ -1,8 +1,12 @@
 package model.vo;
 
-import java.util.Date;
+import model.bo.GestaoData;
+
+import java.sql.Timestamp;
 
 public class Leads {
+    Timestamp dataAtual = GestaoData.obterDataHoraAtual();
+
     //atributos
     private int id;
     private int questFk;
@@ -10,17 +14,19 @@ public class Leads {
     private String nome;
     private String email;
     private String empresa;
-    private Date dataHoraLogin;
+    private Timestamp dataHoraLogin;
 
     //construtor
-    public Leads(int questFk, int platLogFk, String nome, String email, String empresa, Date dataHoraLogin) {
+    public Leads(int questFk, int platLogFk, String nome, String email, String empresa) {
         this.questFk = questFk;
         this.platLogFk = platLogFk;
         this.nome = nome;
         this.email = email;
         this.empresa = empresa;
-        this.dataHoraLogin = dataHoraLogin;
+        this.dataHoraLogin = dataAtual;
     }
+
+
 
     //getters & setters
     public int getId() {
@@ -71,11 +77,21 @@ public class Leads {
         this.empresa = empresa;
     }
 
-    public Date getDataHoraLogin() {
+    public Timestamp getDataHoraLogin() {
         return dataHoraLogin;
     }
 
-    public void setDataHoraLogin(Date dataHoraLogin) {
+    public void setDataHoraLogin(Timestamp dataHoraLogin) {
         this.dataHoraLogin = dataHoraLogin;
+    }
+
+    public String toString() {
+        return "\nLead: #" + getId() +
+                "\nQuestionário FK: " + getQuestFk() +
+                "\nLogin: " + getPlatLogFk() +
+                "\nNome: " + getNome() +
+                "\nE-mail: " + getEmail() +
+                "\nEmpresa: " + getEmpresa() +
+                "\nData: " + GestaoData.formatarTimestampParaString(getDataHoraLogin());
     }
 }

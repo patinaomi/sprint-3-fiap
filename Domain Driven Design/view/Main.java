@@ -2,32 +2,30 @@ package view;
 
 import model.bo.GestaoData;
 import model.dao.VisitanteDao;
-import model.impl.ExperienciaUsuarioDaoImpl;
 import model.impl.VisitanteDaoImpl;
-import model.vo.ExperienciaUsuario;
 import model.vo.Visitante;
 
 import java.sql.SQLException;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Timestamp dataAtualTimestamp = GestaoData.obterDataHoraAtual();
 
-        VisitanteDao visitanteDao= new VisitanteDaoImpl();
-        Visitante visitante = new Visitante();
+        // Teste - Visitante
+        VisitanteDao visitanteDao = new VisitanteDaoImpl();
 
-        visitante.setEmail("segteste@teste.com");
-        visitante.setNome("hora atual");
-        visitante.setTempo(40);
+        //Instanciando um visitante, a data e hora do login será a atual (já é passada no construtor
+        //Visitante visitante = new Visitante("TesteConstrutor", "teste@teste.com", 10);
+        //visitanteDao.inserir(visitante);
 
-        visitante.setDataHora(new Date(dataAtualTimestamp.getTime()));
 
-        visitanteDao.salvarVisitante(visitante);
+        // Listando todos os visitantes cadastrados do site.
+        System.out.println(visitanteDao.listar());
+
+        //Teste - Questionario
+
+        //System.out.println( visitanteDao.buscarVisitante(2));
 
 
     }

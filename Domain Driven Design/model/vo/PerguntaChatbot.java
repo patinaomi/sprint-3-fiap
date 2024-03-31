@@ -1,8 +1,12 @@
 package model.vo;
 
-import java.util.Date;
+import model.bo.GestaoData;
+
+import java.sql.Timestamp;
 
 public class PerguntaChatbot {
+    Timestamp dataAtual = GestaoData.obterDataHoraAtual();
+
     //atributos
     private int idPergunta;
     private int idRespota;
@@ -12,12 +16,12 @@ public class PerguntaChatbot {
     private String intencao;
     private String produto;
     private String satisfacao;
-    private Date dataHora;
+    private Timestamp dataHora;
 
     //construtores
 
     public PerguntaChatbot(int idPergunta, int idRespota, int visitaFk, String conteudo, String entidade,
-                           String intencao, String produto, String satisfacao, Date dataHora)
+                           String intencao, String produto, String satisfacao)
     {
         this.idPergunta = idPergunta;
         this.idRespota = idRespota;
@@ -27,7 +31,7 @@ public class PerguntaChatbot {
         this.intencao = intencao;
         this.produto = produto;
         this.satisfacao = satisfacao;
-        this.dataHora = dataHora;
+        this.dataHora = dataAtual;
     }
 
     //getters & setters
@@ -96,11 +100,22 @@ public class PerguntaChatbot {
         this.satisfacao = satisfacao;
     }
 
-    public Date getDataHora() {
+    public Timestamp getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(Date dataHora) {
+    public void setDataHora(Timestamp dataHora) {
         this.dataHora = dataHora;
+    }
+
+    public String toString() {
+        return "\n--- Interação Chatbot ---"  +
+                "\nVisitante FK:" + getVisitaFk() + " | Id Pergunta: #" + getIdPergunta() + " | Id Resposta: #" + getIdRespota() +
+                "\nIntenção: " + getIntencao() +
+                "\nEntidade: " + getEntidade() +
+                "\nProduto: " + getProduto() +
+                "\nSatisfação: " + getSatisfacao() +
+                "\nData: " + GestaoData.formatarTimestampParaString(getDataHora()) +
+                "\nConteúdo: " + getConteudo();
     }
 }
