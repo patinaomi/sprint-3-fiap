@@ -1,0 +1,176 @@
+/* Padronização da fonte,a tamanho, cores, background*/
+:root {
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 64px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
+
+    /* Fontes - Cores */
+    --color-font-um: #000000;
+    --color-font-dois:#86674A;
+    --color-font-tres: #FFFFFF;
+    --color-font-quatro:#EEECDF;
+
+
+    /* Configuração para as cores das sessões */
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira: #C9E8FC; 
+    --backcolor-segunda: #8CCAF3; 
+    --backcolor-terceira: #4CAAEC; 
+    --backcolor-quarta: #399BDC; 
+    --backcolor-quinta: #47A8EC; 
+}
+
+
+/* Ajuste no container geral da minha página */
+.container-form-pesquisa {
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--backcolor-basico);
+}
+
+/* Lado esquerdo com texto e imagem */
+
+.box-mensagens-sobre-pesquisa {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50% !important;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Título*/
+
+.titulo-pagina-pesquisa-satisfacao {
+    font-size: 64px;
+    color: var(--color-font-um);
+    padding-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: 200;
+}
+
+/* Frase com descrição da pesquisa */
+.descritivo-pagina-pesquisa-satisfacao {
+    font-size: 18px;
+    padding-bottom: 30px;
+    line-height: 180%;
+}
+
+/* Imagem */
+
+.imagem-banner-pesquisa {
+    width: 200px;
+    height: 200px;
+}
+
+
+/* Ajuste do formulário */
+
+.formulario_feedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: var(--backcolor-primeira);
+    padding: 20px;
+    width: 400px;
+    height: 70vh;
+}
+
+/* Ajuste das estrelas */
+.rating-star:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+    
+  }
+  
+.rating-star:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    color: var(--backcolor-quarta);
+    font-size: 52px;
+}
+  
+.rating-star:not(:checked) > label:before {
+    content: '★';
+}
+  
+.rating-star > input:checked + label:hover,
+.rating-star > input:checked + label:hover ~ label,
+.rating-star > input:checked ~ label:hover,
+.rating-star > input:checked ~ label:hover ~ label,
+.rating-star > label:hover ~ input:checked ~ label {
+    color: #e58e09;
+}
+  
+.rating-star:not(:checked) > label:hover,
+.rating-star:not(:checked) > label:hover ~ label {
+    color: #ff9e0b;
+}
+  
+.rating-star > input:checked ~ label {
+    color: #ffa723;
+}
+  
+
+/****************************************************/
+
+/* Lado direito */
+
+.box-form-pesquisa {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.titulo-form-pesquisa {
+    font-size: 32px;
+    color: var(--color-font-um);
+}
+
+.formulario_feedback input[type="text"],
+.formulario_feedback textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--backcolor-primeira);
+    border-radius: 5px;
+}
+
+.formulario_feedback textarea {
+    height: 100px;
+}
+
+
+
+/* Botão */
+
+.btn-pesquisa-satisfacao {
+    background-color: var(--backcolor-quarta);
+    color: #E5E3D7;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    width: 170px;
+    font-size: 18px;
+}
+  
+/* Estilo para o botão de envio ao passar o mouse */
+.btn-pesquisa-satisfacao:hover {
+    background-color: var(--backcolor-segunda);
+    color: #f9f9f9;
+}
