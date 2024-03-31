@@ -1,0 +1,45 @@
+
+
+[
+    {
+      "imagem": "/assets/ObjetivosProjeto/layout.svg",
+      "titulo": "Layout estilizado",
+      "descricao": "Layout diáfano, com enfâse na estética, funcionalidade e acessibilidade. Facilitando a visualização das informações mais relevantes."
+    },
+    {
+      "imagem": "/assets/ObjetivosProjeto/tour-guiado.svg",
+      "titulo": "Tour guiado interativo",
+      "descricao": "Tour pelos produtos oferecidos, para uma melhor experiência e precisão no serviço desejado. Visitante escolhe entre aprender com textos, vídeos ou conversando com agente virtual."
+    },
+    {
+      "imagem": "/assets/ObjetivosProjeto/bots.svg",
+      "titulo": "ChatBot",
+      "descricao": "Suporte com maior refinamento, tendo mais precisão com menor burocracia. Sanando dúvidas pontuais, com maior acertividade e sem necessidade de uma pessoa/consultor. Sem necessidade de ler inúmeras FAQs."
+    },
+    {
+      "imagem": "/assets/ObjetivosProjeto/contato.svg",
+      "titulo": "Contato 24 horas",
+      "descricao": "O cliente vai poder se comunicar e tirar suas dúvidas sobre os produtos a qualquer momento do dia e em qualquer idioma com a configuração da página."
+    },
+    {
+      "imagem": "/assets/ObjetivosProjeto/experiencia.svg",
+      "titulo": "Experiência do cliente",
+      "descricao": "Queremos computar toda a experiência do visitante durante o acesso ao site, para sabermos quais os produtos ele pesquisou, quanto tempo ficou pesquisando e que tipos de pergunta fez ao CHATBOT."
+    },
+    {
+      "imagem": "/assets/ObjetivosProjeto/rank.svg",
+      "titulo": "Rankeamento",
+      "descricao": "De acordo com as análises feitas utilizando IA, vamos inserir pontos ao visitante e assim saber se ele é um possível cliente ou não. Cada interação conta aqui, cada cliente, cada pergunta realizada."
+    },
+    {
+      "imagem": "/assets/ObjetivosProjeto/data.svg",
+      "titulo": "Dados acessíveis",
+      "descricao": "Consulta no banco de dados sem precisar entender de código, com os leads mais simples e consultas mais rápidas."
+    },
+    {
+      "imagem": "/assets/ObjetivosProjeto/formulario.svg",
+      "titulo": "Formulário de Necessidade - IA",
+      "descricao": "Quando o visitante não souber qual o melhor produto para sua empresa, será direcionado um formulário que ajudará na definição dos produtos conforme sua resposta."
+    }
+  ]
+  
