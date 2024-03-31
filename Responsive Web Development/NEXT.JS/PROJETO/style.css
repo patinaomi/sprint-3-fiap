@@ -1,0 +1,141 @@
+
+/* Padronização da fonte,a tamanho, cores, background*/
+:root {
+    /* Fontes - Tamanhos*/
+    --font-size-titulo-pagina: 64px;
+    --font-size-titulos-boxs:16px;
+    --font-size-textos: 14px;
+    --font-size-textos-pequenos: 12px;
+    --font-size-textos-sem-foco: 10px;
+
+    /* Fontes - Cores */
+    --color-font-um: #000000;
+    --color-font-dois:#86674A;
+    --color-font-tres: #FFFFFF;
+    --color-font-quatro:#EEECDF;
+
+
+    /* Configuração para as cores das sessões */
+    /* Configuração para as cores das sessões */
+    --backcolor-basico: #FDFEFF; 
+    --backcolor-primeira: #C9E8FC; 
+    --backcolor-segunda: #8CCAF3; 
+    --backcolor-terceira: #4CAAEC; 
+    --backcolor-quarta: #399BDC; 
+    --backcolor-quinta: #47A8EC; 
+}
+
+
+
+
+.container-projeto {
+    background-color: var(--backcolor-segunda);
+    height: 100vh;
+    /*border: 3px solid orange;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 50px;
+}
+
+/* TITULO DA PÁGINA */
+.box-titulo-projeto{
+    /*border: 3px solid purple;*/
+    font-size: 44px;
+    color: var(--color-font-um);
+    text-transform: uppercase;
+    font-size: 32px;
+    font-weight: 200;
+    width: 100%;
+}
+  
+/* FRASE DE EFEITO DA PÁGINA */
+.descricao-projeto {
+    font-size: 28px;
+    color: var(--color-font-um);
+    /*border: 3px solid green;*/
+    width: 100%;
+    padding: 30px;
+
+}
+
+/* BLOCO COM A IMAGEM DO VÍDEO/PITCH */
+
+  
+.btn-vsl-projeto .imagem-pagina-projeto {
+    width: 30%;
+    background-color: #000000;
+
+}
+
+
+/* Responsividade */
+
+/* Celular */
+@media (max-width: 480px) {
+    .container-projeto {
+        max-width: 480px;
+        height: 50rem;
+    }
+
+    .box-titulo-projeto {
+        font-size: 24px;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 769px) {
+    
+    .container-projeto {
+        max-width: 769px;
+    }
+
+    .box-titulo-projeto {
+        font-size: 28px;
+    }
+
+    .descricao-projeto {
+        font-size: 24px;
+        width: 90%;
+    }
+
+}
+
+
+@media (min-width: 770px) and (max-width: 1090px) {
+    
+    .container-projeto {
+        max-width: 1090px;
+    }
+
+    .box-titulo-projeto {
+        font-size: 28px;
+    }
+
+    .descricao-projeto {
+        font-size: 24px;
+        width: 90%;
+    }
+    
+}
+
+@media (min-width: 1091px) and (max-width: 1280px) {
+    .container-projeto {
+        max-width: 1280px;
+    }
+
+    .box-titulo-projeto {
+        font-size: 28px;
+    }
+
+    .descricao-projeto {
+        font-size: 24px;
+        width: 90%;
+    }
+    
+}
+
+
+
