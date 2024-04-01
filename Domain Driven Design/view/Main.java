@@ -1,18 +1,23 @@
 package view;
 
+import Controller.QuestionarioController;
+import Controller.VisitanteController;
+import model.impl.QuestionarioDaoImpl;
+import model.impl.VisitanteDaoImpl;
+
 import java.sql.SQLException;
 
 
 public class Main {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws SQLException {
 
-       Menu menu = new Menu();
+        VisitanteController visitanteController = new VisitanteController(new VisitanteDaoImpl());
+        QuestionarioController questionarioController = new QuestionarioController(new QuestionarioDaoImpl());
 
-        try {
-            menu.menuVisitante();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Menu menu = new Menu(visitanteController, questionarioController);
+
+        menu.menuVisitante();
+
 
     }
 }

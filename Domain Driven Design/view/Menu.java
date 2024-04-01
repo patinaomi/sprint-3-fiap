@@ -1,5 +1,7 @@
 package view;
 
+import Controller.QuestionarioController;
+import Controller.VisitanteController;
 import model.bo.Validacoes;
 import model.dao.QuestionarioDao;
 import model.dao.VisitanteDao;
@@ -13,9 +15,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
-    private VisitanteDao visitanteDao = new VisitanteDaoImpl();
-    QuestionarioDao questionarioDao = new QuestionarioDaoImpl();
+    private VisitanteController visitanteController;
+    private QuestionarioController questionarioController;
     private Scanner scanner = new Scanner(System.in);
+
+
+    public Menu(VisitanteController visitanteController, QuestionarioController questionarioController) {
+        this.visitanteController = visitanteController;
+        this.questionarioController = questionarioController;
+    }
 
     public void menuVisitante() throws SQLException {
         boolean sair = false;
@@ -57,7 +65,7 @@ public class Menu {
         }
     }
 
-    private void cadastrarVisitante() {
+    private void cadastrarVisitante() throws SQLException {
         scanner.nextLine();
         String nome;
         String email;
@@ -76,24 +84,24 @@ public class Menu {
         } while (!Validacoes.validarEmail(email));
 
         Visitante novoVisitante = new Visitante(nome, email);
-        visitanteDao.inserir(novoVisitante);
+        visitanteController.inserir(novoVisitante);
     }
 
 
 
 
-    private void listarVisitantes() {
+    private void listarVisitantes() throws SQLException {
         System.out.println("--- Visitantes do Site ---");
-        for (Visitante visitante : visitanteDao.listar()) {
+        for (Visitante visitante : visitanteController.listar()) {
             System.out.println(visitante);
         }
     }
 
-    private void responderQuestionario() {
+    private void responderQuestionario() throws SQLException {
         scanner.nextLine();
         System.out.print("Digite seu e-mail para começar: ");
         String email = scanner.nextLine();
-        Visitante visitante = visitanteDao.buscarPorEmail(email);
+        Visitante visitante = visitanteController.buscarPorEmail(email);
 
         if (visitante == null) {
             System.out.println("Não foi encontrado um visitante com o e-mail fornecido.");
@@ -155,7 +163,7 @@ public class Menu {
                 visitante.getId(),prodVisitado, conheceSales, ondeConheceuSales, conheceProdSales, empresa, segmento,
                 necessidadeEmpresa, solucaoEmpresa, orcamentoEmpresa, visitante.getEmail());
 
-        questionarioDao.inserir(questionario);
+        questionarioController.inserir(questionario);
         }
     }
 
