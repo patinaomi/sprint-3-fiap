@@ -14,7 +14,7 @@ public class Validacoes {
             return false;
         }
 
-        return true; // Se todas as verificações passarem, o nome é válido
+        return true;
     }
 
     public static boolean validarEmail(String email) {
@@ -22,7 +22,7 @@ public class Validacoes {
         String regex = "^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 
         if (email.matches(regex)) {
-            return true; // O e-mail é válido
+            return true;
         } else {
             System.out.printf("O e-mail %s é inválido.\n", email);
             return false;

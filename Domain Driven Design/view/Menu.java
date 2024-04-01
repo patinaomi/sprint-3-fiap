@@ -63,6 +63,7 @@ public class Menu {
         String email;
 
         // Validação do nome
+        System.out.println("--- Novo Cadastro ---");
         do {
             System.out.print("Nome: ");
             nome = scanner.nextLine();
@@ -71,7 +72,7 @@ public class Menu {
         // Validação do email
         do {
             System.out.print("Email: ");
-            email = scanner.nextLine(); // Lê o email diretamente
+            email = scanner.nextLine();
         } while (!Validacoes.validarEmail(email));
 
         Visitante novoVisitante = new Visitante(nome, email);
@@ -96,8 +97,29 @@ public class Menu {
 
         if (visitante == null) {
             System.out.println("Não foi encontrado um visitante com o e-mail fornecido.");
-            return;
-        }
+            while (true) {
+                try {
+                    System.out.println("Deseja fazer o cadastro?");
+                    System.out.println("[1] Sim");
+                    System.out.println("[2] Não");
+                    int op = scanner.nextInt();
+                    scanner.nextLine();
+
+                    if (op == 1) {
+                        cadastrarVisitante();
+                        break;
+                    } else if (op == 2) {
+                        System.out.println("Só é possível responder o questionário com um cadastro!");
+                        return;
+                    } else {
+                        System.out.println("Opção Inválida. Escolha [1] Sim ou [2] Não.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Por favor, digite somente números.");
+                    scanner.nextLine();
+                }
+            }
+        } else {
 
         System.out.println("--- QUESTIONÁRIO ---");
 
@@ -134,6 +156,7 @@ public class Menu {
                 necessidadeEmpresa, solucaoEmpresa, orcamentoEmpresa, visitante.getEmail());
 
         questionarioDao.inserir(questionario);
+        }
     }
 
 
