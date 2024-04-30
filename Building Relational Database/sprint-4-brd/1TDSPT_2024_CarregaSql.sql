@@ -62,6 +62,7 @@ CREATE TABLE Contato (
     tel_con NUMBER(20),
     seg_con VARCHAR2(70),
     cargo_con VARCHAR2(80),
+    msg_con VARCHAR2(600),
     data_con TIMESTAMP NOT NULL,
     produto_id_prod INTEGER NOT NULL,
     visitante_id_visit INTEGER NOT NULL,
