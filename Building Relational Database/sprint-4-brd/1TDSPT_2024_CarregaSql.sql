@@ -8,10 +8,11 @@ DROP TABLE Quest_Feedback CASCADE CONSTRAINTS;
 DROP TABLE Contato CASCADE CONSTRAINTS;
 DROP TABLE Estado CASCADE CONSTRAINTS;
 DROP TABLE Genero CASCADE CONSTRAINTS;
-DROP TABLE Login CASCADE CONSTRAINTS;
+DROP TABLE Cadastro CASCADE CONSTRAINTS;
 DROP TABLE Produto CASCADE CONSTRAINTS;
 DROP TABLE Questionario CASCADE CONSTRAINTS;
 DROP TABLE Tamanho_Empresa CASCADE CONSTRAINTS;
+DROP TABLE Sobre_Empresa CASCADE CONSTRAINTS;
 DROP TABLE Visitante CASCADE CONSTRAINTS;
 
 -- Criação das tabelas
@@ -46,6 +47,14 @@ CREATE TABLE Tamanho_Empresa (
 );
 ALTER TABLE Tamanho_Empresa ADD CONSTRAINT tamanho_empresa_pk PRIMARY KEY(id_tam_emp);
 
+-- Sobre_Empresa
+CREATE TABLE Sobre_Empresa (
+    id_emp INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+    desc_sobre_emp VARCHAR2(40) NOT NULL
+);
+
+ALTER TABLE Sobre_Empresa ADD CONSTRAINT sobre_empresa_pk PRIMARY KEY(id_emp);
+
 -- Visitante
 CREATE TABLE Visitante (
     id_visit INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
@@ -62,7 +71,6 @@ CREATE TABLE Contato (
     tel_con NUMBER(20),
     seg_con VARCHAR2(70),
     cargo_con VARCHAR2(80),
-    msg_con VARCHAR2(600),
     data_con TIMESTAMP NOT NULL,
     produto_id_prod INTEGER NOT NULL,
     visitante_id_visit INTEGER NOT NULL,
@@ -71,42 +79,61 @@ CREATE TABLE Contato (
 );
 ALTER TABLE Contato ADD CONSTRAINT contato_pk PRIMARY KEY(id_con);
 
--- Login (Cadastre-se)
-CREATE TABLE Login (
-    id_login INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
-    nome_login VARCHAR2(60) NOT NULL,
-    sobrenome_login VARCHAR2(60) NOT NULL,
-    email_login VARCHAR2(60) NOT NULL,
-    cel_login VARCHAR2(60) NOT NULL,
-    funcao_login VARCHAR2(60) NOT NULL,
-    senha_login VARCHAR2(60) NOT NULL,
-    data_login TIMESTAMP NOT NULL,
+-- Cadastro (Login)
+CREATE TABLE Cadastro (
+    id_cad INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+    nome_cad VARCHAR2(60) NOT NULL,
+    sobrenome_cad VARCHAR2(60) NOT NULL,
+    email_cad VARCHAR2(60) NOT NULL,
+    cel_cad VARCHAR2(60) NOT NULL,
+    senha_cad VARCHAR2(60) NOT NULL,
+    data_cad TIMESTAMP NOT NULL,
     estado_id_est INTEGER NOT NULL,
     genero_id_gen INTEGER NOT NULL,
+    sobre_emp_id_emp INTEGER NOT NULL,
     visitante_id_visit INTEGER NOT NULL,
     tamanho_empresa_id_tam_emp INTEGER NOT NULL
 );
-ALTER TABLE Login ADD CONSTRAINT login_pk PRIMARY KEY(id_login);
+ALTER TABLE Cadastro ADD CONSTRAINT cadastro_pk PRIMARY KEY(id_cad);
 
 -- Questionario (Formulário de descoberta)
 CREATE TABLE Questionario (
     id_ques INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
     nome_ques VARCHAR2(80),
-    email_ques VARCHAR2(60) NOT NULL,
     tel_ques NUMBER(20),
+    email_ques VARCHAR2(60),
+    nome_emp_ques VARCHAR2(60),
     seg_ques VARCHAR2(80),
-    data_ques TIMESTAMP NOT NULL,
-    nome_emp_ques VARCHAR2(60) NOT NULL,
     conhece_sales_ques CHAR(1),
     nec_emp_ques VARCHAR2(300),
+    data_ques TIMESTAMP NOT NULL,
     produto_id_prod INTEGER NOT NULL,
-    visitante_id_visit INTEGER NOT NULL
+    visitante_id_visit INTEGER NOT NULL,
+    ques_produto_implantado NUMBER(1),
+    ques_empresa_funcionamento NUMBER(1),
+    ques_estrategias_marketing NUMBER(1),
+    ques_ia_automacoes NUMBER(1),
+    ques_desenvolver_estrategia NUMBER(1),
+    ques_melhorar_comunicacao NUMBER(1),
+    ques_ambiente_integrado NUMBER(1),
+    ques_aumento_produtividade NUMBER(1),
+    ques_melhorar_capacitacao NUMBER(1),
+    ques_reducao_custo NUMBER (1),
+    ques_aumentar_conversao NUMBER(1),
+    ques_potencializar_vendas NUMBER(1),
+    ques_acelerar_vendas NUMBER(1),
+    ques_riqueza_dados NUMBER(1),
+    ques_melhorar_experiencia NUMBER(1),
+    ques_mostrar_diferencial NUMBER(1),
+    ques_criar_jornada NUMBER(1),
+    ques_marketing_oportunidade NUMBER(1)
 );
 ALTER TABLE Questionario ADD CONSTRAINT questionario_pk PRIMARY KEY(id_ques);
 
 -- Quest_Feedback
 CREATE TABLE Quest_Feedback (
     id_feedback INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+    nome_feedback VARCHAR2(80),
     email_feedback VARCHAR2(60) NOT NULL,
     avaliacao_feedback INTEGER NOT NULL,
     data_feedback TIMESTAMP NOT NULL,
@@ -126,14 +153,14 @@ ADD CONSTRAINT contato_tamanho_empresa_fk FOREIGN KEY(tamanho_empresa_id_tam_emp
 ALTER TABLE Contato
 ADD CONSTRAINT contato_visitante_fk FOREIGN KEY(visitante_id_visit) REFERENCES Visitante(id_visit);
 
-ALTER TABLE Login
-ADD CONSTRAINT login_estado_fk FOREIGN KEY(estado_id_est) REFERENCES Estado(id_est);
-ALTER TABLE Login
-ADD CONSTRAINT login_genero_fk FOREIGN KEY(genero_id_gen) REFERENCES Genero(id_gen);
-ALTER TABLE Login
-ADD CONSTRAINT login_tamanho_empresa_fk FOREIGN KEY(tamanho_empresa_id_tam_emp) REFERENCES Tamanho_Empresa(id_tam_emp);
-ALTER TABLE Login
-ADD CONSTRAINT login_visitante_fk FOREIGN KEY(visitante_id_visit) REFERENCES Visitante(id_visit);
+ALTER TABLE Cadastro
+ADD CONSTRAINT cad_estado_fk FOREIGN KEY(estado_id_est) REFERENCES Estado(id_est);
+ALTER TABLE Cadastro
+ADD CONSTRAINT cad_genero_fk FOREIGN KEY(genero_id_gen) REFERENCES Genero(id_gen);
+ALTER TABLE Cadastro
+ADD CONSTRAINT cad_tamanho_empresa_fk FOREIGN KEY(tamanho_empresa_id_tam_emp) REFERENCES Tamanho_Empresa(id_tam_emp);
+ALTER TABLE Cadastro
+ADD CONSTRAINT cad_visitante_fk FOREIGN KEY(visitante_id_visit) REFERENCES Visitante(id_visit);
 
 ALTER TABLE Questionario
 ADD CONSTRAINT questionario_produto_fk FOREIGN KEY(produto_id_prod) REFERENCES Produto(id_prod);
@@ -198,19 +225,23 @@ VALUES ('Marketing', 'Ferramenta de campanhas de marketing', 'Software');
 
 -- Inserção de dados na tabela Tamanho_Empresa
 INSERT INTO Tamanho_Empresa (desc_tam_emp) 
-VALUES ('Funcionário');
+VALUES ('Pequena');
 
 INSERT INTO Tamanho_Empresa (desc_tam_emp) 
-VALUES ('Proprietário');
+VALUES ('Média');
 
 INSERT INTO Tamanho_Empresa (desc_tam_emp) 
-VALUES ('Filiado');
+VALUES ('Grande');
 
 INSERT INTO Tamanho_Empresa (desc_tam_emp) 
-VALUES ('Estudante');
+VALUES ('Multinacional');
 
 
--- INSERTS PARA A SPRINT
+-- Inserção de dados na tabela Sobre_Empresa
+INSERT INTO Sobre_Empresa (desc_sobre_emp) VALUES ('Funcionário');
+INSERT INTO Sobre_Empresa (desc_sobre_emp) VALUES ('Proprietário');
+INSERT INTO Sobre_Empresa (desc_sobre_emp) VALUES ('Filiado');
+INSERT INTO Sobre_Empresa (desc_sobre_emp) VALUES ('Estudante');
 
 -- Inserção de dados na tabela Visitante
 INSERT INTO Visitante (tempo_ent_visit, tempo_sai_visit)
@@ -232,15 +263,18 @@ VALUES ('Maria Oliveira', 'maria.oliveira@example.com', 11223344556, 'Saúde', '
 INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, data_con, produto_id_prod, visitante_id_visit, estado_id_est, tamanho_empresa_id_tam_emp)
 VALUES ('Carlos Costa', 'carlos.costa@example.com', 11922334455, 'Educação', 'Professor', TO_TIMESTAMP('17/01/2024 11:00:00', 'DD/MM/YYYY HH24:MI:SS'), 3, 3, 3, 3);
 
--- Inserção de dados na tabela Login
-INSERT INTO Login (nome_login, sobrenome_login, email_login, cel_login, funcao_login, senha_login, data_login, estado_id_est, genero_id_gen, visitante_id_visit, tamanho_empresa_id_tam_emp)
-VALUES ('João', 'Silva', 'joao.silva@example.com', '11987654321', 'Gerente de TI', 'senha123', TO_TIMESTAMP('29/04/2024 09:00:00', 'DD/MM/YYYY HH24:MI:SS'), 1, 1, 1, 1);
+-- Inserção de dados na tabela Cadastro
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, estado_id_est, genero_id_gen, sobre_emp_id_emp, visitante_id_visit, tamanho_empresa_id_tam_emp) 
+VALUES ('Ana', 'Silva', 'ana.silva@email.com', '11987654321', 'senha123', CURRENT_TIMESTAMP, 1, 1, 1, 1, 1);
 
-INSERT INTO Login (nome_login, sobrenome_login, email_login, cel_login, funcao_login, senha_login, data_login, estado_id_est, genero_id_gen, visitante_id_visit, tamanho_empresa_id_tam_emp)
-VALUES ('Maria', 'Oliveira', 'maria.oliveira@example.com', '11223344556', 'Diretora Médica', 'senha456', TO_TIMESTAMP('29/04/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'), 2, 2, 2, 2);
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, estado_id_est, genero_id_gen, sobre_emp_id_emp, visitante_id_visit, tamanho_empresa_id_tam_emp) 
+VALUES ('Bruno', 'Costa', 'bruno.costa@email.com', '21987654321', 'senha321', CURRENT_TIMESTAMP, 2, 2, 2, 2, 2);
 
-INSERT INTO Login (nome_login, sobrenome_login, email_login, cel_login, funcao_login, senha_login, data_login, estado_id_est, genero_id_gen, visitante_id_visit, tamanho_empresa_id_tam_emp)
-VALUES ('Carlos', 'Costa', 'carlos.costa@example.com', '11922334455', 'Professor', 'senha789', TO_TIMESTAMP('29/04/2024 11:00:00', 'DD/MM/YYYY HH24:MI:SS'), 3, 3, 3, 3);
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, estado_id_est, genero_id_gen, sobre_emp_id_emp, visitante_id_visit, tamanho_empresa_id_tam_emp) 
+VALUES ('Carlos', 'Martins', 'carlos.martins@email.com', '31987654321', 'senha456', CURRENT_TIMESTAMP, 3, 3, 3, 3, 3);
+
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, estado_id_est, genero_id_gen, sobre_emp_id_emp, visitante_id_visit, tamanho_empresa_id_tam_emp) 
+VALUES ('Diana', 'Ferreira', 'diana.ferreira@email.com', '41987654321', 'senha789', CURRENT_TIMESTAMP, 2, 2, 2, 2, 2);
 
 -- Inserção de dados na tabela Questionario
 INSERT INTO Questionario (nome_ques, email_ques, tel_ques, seg_ques, data_ques, nome_emp_ques, conhece_sales_ques, nec_emp_ques, produto_id_prod, visitante_id_visit)
@@ -265,9 +299,9 @@ VALUES ('carlos.costa@example.com', 4, TO_TIMESTAMP('29/04/2024 11:00:00', 'DD/M
 COMMIT;
 
 -- Exemplos de Atualização de dados (UPDATE)
-UPDATE Login
-SET email_login = 'maria.oliveira@gmail.com'
-WHERE id_login = 2;
+UPDATE Cadastro
+SET email_cad = 'maria.oliveira@gmail.com'
+WHERE id_cad = 2;
 
 UPDATE Contato
 SET tamanho_empresa_id_tam_emp = 3
@@ -278,11 +312,6 @@ SET seg_ques = 'Engenharia'
 WHERE id_ques = 1;
 
 -- Exemplos de Remoção de dados (DELETE)
--- Para ver o nome das constraints
-SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE, R_CONSTRAINT_NAME, STATUS
-FROM ALL_CONSTRAINTS
-WHERE TABLE_NAME = 'Quest_Feedback';
-
 -- Exemplo 1
 ALTER TABLE Produto
 DROP CONSTRAINT produto_pk CASCADE;
@@ -337,7 +366,7 @@ GROUP BY
 
 
 -- Relatório utilizando alguma função de grupo
--- Tempo médio de permanência no site
+-- Tempo médio de permanência no site dos visitantes
 SELECT 
   COUNT(id_visit) AS "Total de Visitantes",
   ROUND(AVG((EXTRACT(HOUR FROM (tempo_sai_visit - tempo_ent_visit)) * 60 +
@@ -362,16 +391,18 @@ WHERE v.id_visit IN (
 );
 
 -- Relatório utilizando junção de tabelas
---Junção entre as tabelas Visitante Login e Estado
-SELECT 
-  v.id_visit "Id",
-  l.nome_login || ' ' || l.sobrenome_login AS "Nome Completo",
-  l.email_login AS "Email",
-  l.funcao_login AS "Função",
-  e.sigla_est AS "Estado"
-FROM 
-  Visitante v
-JOIN 
-  Login l ON v.id_visit = l.visitante_id_visit
-JOIN 
-  Estado e ON l.estado_id_est = e.id_est;
+--Junção entre as tabelas Visitante Cadastro e Estado
+SELECT
+    v.id_visit as "Id",
+    c.nome_cad as "Nome",
+    c.sobrenome_cad as "Sobrenome",
+    c.email_cad as "Email",
+    e.sigla_est as "Sigla",
+    v.tempo_ent_visit as "Tempo de Entrada",
+    v.tempo_sai_visit as "Tempo de Saída"
+FROM
+    Visitante v
+JOIN
+    Cadastro c ON v.id_visit = c.visitante_id_visit
+JOIN
+    Estado e ON c.estado_id_est = e.id_est;
