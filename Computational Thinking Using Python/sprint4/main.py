@@ -1,7 +1,6 @@
 import json
 import oracledb
 import re
-from datetime import datetime
 
 
 def configurar_credenciais():
@@ -92,11 +91,15 @@ def validar_email(email):
 
 
 def validar_telefone(telefone):
-    # Remove caracteres não numéricos da string telefone usando a função filter e str.isdigit
-    # e depois o join junta os caracteres restantes de volta em uma string única.
+    # Remove caracteres não numéricos da string do telefone.
     telefone_limpo = ''.join(filter(str.isdigit, telefone))
 
-    return telefone_limpo
+    # Verifica se o telefone limpo tem pelo menos 9 dígitos.
+    if len(telefone_limpo) >= 9:
+        return telefone_limpo
+    else:
+        print("Telefone inválido. Por favor, insira um número com pelo menos 9 dígitos numéricos.")
+        return None  # Retorne None para indicar falha na validação
 
 
 def verifica_usuario_repetido(usuario):
@@ -163,11 +166,11 @@ def consulta_db(comando, secret, params=None):
                               password=secret['password'],
                               dsn=secret['dsn']) as connection:
             with connection.cursor() as cursor:
-                cursor.execute(comando, params)  # Passa os parâmetros para o comando SQL
+                cursor.execute(comando, params)
                 return cursor.fetchall()
     except oracledb.DatabaseError as e:
         print(f'Erro no banco de dados: {e}')
-        return None  # Retorna None em caso de erro
+        return None
     except Exception as e:
         print(f'Erro: {e}')
         return None
@@ -188,7 +191,7 @@ def operacao_db_arquivo(arquivo, secret, commit=True):
                         cursor.execute(command)
                 if commit:
                     connection.commit()
-                return True  # Retorna True se todos os comandos forem executados com sucesso
+                return True
     except oracledb.DatabaseError as e:
         print(f'Erro no banco de dados: {e}')
         return False
@@ -206,12 +209,12 @@ def menu_principal():
         print('--------------------------')
 
         op = input('Digite uma opção: ')
-        if op.isdigit() and int(op) in range(2):  # ver com o professor, se é assim que o príncipe Wagner quer
+        if op.isdigit() and int(op) in range(3):  # ver com o professor, se é assim que o príncipe Wagner quer
             if op == '1':
                 realizar_login()
             if op == '2':
                 esqueci_a_senha()
-            elif op == 0:
+            elif op == '0':
                 print('Saindo do programa...')
                 break
         else:
@@ -349,11 +352,11 @@ def menu_admin():
             elif op == '5':
                 print("Logout realizado com sucesso.")
                 break
-            elif op == 0:
+            elif op == '0':
                 print("Saindo do programa...")
                 exit()
         else:
-            print('Opção inválida, digite novamente.\n')
+            print('Opção inválida, digite novamente.')
 
 
 def criar_usuario():
@@ -521,7 +524,7 @@ def menu_consultor():
     while True:
         print('\n====== Menu de Consultor =====')
         print(' [1] Consultar Tickets')
-        print(' [2] Finalizar Ticket')
+        print(' [2] Finalizar Status Ticket')
         print(' [3] Menu Principal')
         print(' [0] Sair do Programa')
         print('===============================')
@@ -534,7 +537,7 @@ def menu_consultor():
                 alterar_ticket()
             elif op == '3':
                 break
-            elif op == 0:
+            elif op == '0':
                 exit()
         else:
             print(' Opção inválida, digite novamente.')
@@ -637,21 +640,22 @@ def cadastrar_leads():
     print('\n>>>>> Cadastrar Lead <<<<<')
 
     nome = verifica_input('Digite o nome: ')
-    telefone = verifica_input('Digite o telefone: ')
+    while True:
+        telefone_input = verifica_input('Digite o telefone: ')
+        telefone = validar_telefone(telefone_input)
+        if telefone:
+            break
     segmento = verifica_input('Digite o segmento: ')
     cargo = verifica_input('Digite o cargo: ')
     tamanho_empresa = verifica_input('Digite o tamanho da empresa: ')
     produto = verifica_input('Digite o produto: ')
     regiao = verifica_input('Digite a região: ')
 
-    tel_limpo = validar_telefone(telefone)
-
     while True:
-        email = verifica_input('Digite o e-mail: ')
+        email = verifica_input('Digite o email: ')
         if validar_email(email):
             break
-        else:
-            print('Email inválido, digite novamente.')
+        print("Email inválido, tente novamente.")
 
     # SQL para inserir dados na tabela de leads
     sql_insert = """
@@ -661,7 +665,7 @@ def cadastrar_leads():
 
     params = {
         'nome': nome,
-        'telefone': tel_limpo,
+        'telefone': telefone,
         'email': email,
         'segmento': segmento,
         'cargo': cargo,
@@ -687,7 +691,7 @@ def listar_leads():
     }
 
     # Mostra opções pro usuário
-    escolha = input('\nEscolha o campo pelo qual deseja filtrar'
+    escolha = input('Digite o campo pelo qual deseja filtrar'
                     '\nou deixe em branco para selecionar todos:'
                     '\n [1] Segmento'
                     '\n [2] Tamanho da Empresa'
@@ -748,57 +752,57 @@ def editar_leads():
     try:
         num_lead = int(input('Digite o ID do lead que deseja alterar: '))
 
-        sql_select = "SELECT * FROM t_leads_py WHERE id_leads = :id"
+        # Selecionar todos os campos relevantes do lead
+        sql_select = ("SELECT nome_leads, tel_leads, email_leads, segmento_leads, cargo_leads, "
+                      "tamanho_empresa_leads, produto_leads, regiao_leads FROM t_leads_py WHERE id_leads = :id")
         lead = consulta_db(sql_select, secret, {'id': num_lead})
         if not lead:
             print('Lead não encontrado.')
             return
-        lead = lead[0]  # pra pegar o lead da lista
+        lead = lead[0]  # Pega o primeiro registro
 
-        # Menu para editar campos específicos
-        op = input('\nDigite o número correspondente ao dado que deseja alterar:'
-                   '\n [1] Nome'
-                   '\n [2] Telefone'
-                   '\n [3] E-mail'
-                   '\n [4] Segmento'
-                   '\n [5] Cargo'
-                   '\n [6] Tamanho da Empresa'
-                   '\n [7] Produto'
-                   '\n [8] Região'
-                   '\n [0] Cancelar'
-                   '\n Opção: ')
         campos = {
-            '1': 'nome',
-            '2': 'telefone',
-            '3': 'email',
-            '4': 'segmento',
-            '5': 'cargo',
-            '6': 'tamanho_empresa',
-            '7': 'produto',
-            '8': 'regiao'
+            '1': 'nome_leads',
+            '2': 'tel_leads',
+            '3': 'email_leads',
+            '4': 'segmento_leads',
+            '5': 'cargo_leads',
+            '6': 'tamanho_empresa_leads',
+            '7': 'produto_leads',
+            '8': 'regiao_leads'
         }
 
-        if op == '0':
+        print("Selecione o campo que deseja editar:")
+        for key, value in campos.items():
+            print(f"[{key}] {value.replace('_leads', '')}")
+        op = input("Opção: ")
+
+        if op == '0' or op not in campos:
+            print("Operação cancelada.")
             return
 
-        if op in campos:
-            valor_atual = lead[campos[op] + 1]  # +1 para ajustar índice devido ao ID no início
-            print(f"Valor atual: {valor_atual}")
-            novo_valor = verifica_input(f'Digite o novo {campos[op]}: ')
+        campo_escolhido = campos[op]
+        lista_de_campos = list(campos.values())  # Transforma os valores do dicionário em lista
+        index = lista_de_campos.index(campo_escolhido)  # Agora você pode usar .index() corretamente
+        valor_atual = lead[index]
+        print(f"Valor atual de {campo_escolhido.replace('_leads', '')}: {valor_atual}")
 
-            if op == '3' and not validar_email(novo_valor):  # Validação de e-mail
-                print('Email inválido, tente novamente.')
-                return
+        novo_valor = verifica_input(f"Digite o novo valor para {campo_escolhido.replace('_leads', '')}: ")
+        if campo_escolhido == 'email_leads' and not validar_email(novo_valor):
+            print('Email inválido, tente novamente.')
+            return
+        if campo_escolhido == 'tel_leads' and not validar_telefone(novo_valor):
+            return
 
-            # Atualizar o campo escolhido
-            sql_update = f"UPDATE t_leads_py SET {campos[op]} = :novo_valor WHERE id = :id"
-            if operacao_db(sql_update, secret, {'novo_valor': novo_valor, 'id': num_lead}, commit=True):
-                print(f'{campos[op].capitalize()} alterado com sucesso.')
-            else:
-                print(f'Falha ao atualizar o {campos[op]}.')
+        # Executar a atualização no banco de dados
+        sql_update = f"UPDATE t_leads_py SET {campo_escolhido} = :novo_valor WHERE id_leads = :id"
+        if operacao_db(sql_update, secret, {'novo_valor': novo_valor, 'id': num_lead}, commit=True):
+            print(f'{campo_escolhido.replace("_leads", "").capitalize()} atualizado com sucesso.')
+        else:
+            print(f'Falha ao atualizar {campo_escolhido.replace("_leads", "")}.')
 
     except ValueError:
-        print('Digite somente números.')
+        print('Por favor, insira um número válido para o ID.')
 
 
 def deletar_leads():
