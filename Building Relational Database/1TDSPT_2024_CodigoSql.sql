@@ -3,8 +3,7 @@
 -- Patricia Naomi RM:552981
 -- Sara Ingrid RM: 554021
 
-
--- Deleta tabelas caso já existam
+-- Deletar tabelas caso já existam
 DROP TABLE Quest_Feedback CASCADE CONSTRAINTS;
 DROP TABLE Contato CASCADE CONSTRAINTS;
 DROP TABLE Estado CASCADE CONSTRAINTS;
@@ -72,11 +71,12 @@ CREATE TABLE Contato (
     tel_con NUMBER(20),
     seg_con VARCHAR2(70),
     cargo_con VARCHAR2(80),
-    data_con TIMESTAMP NOT NULL,
-    produto_id_prod INTEGER NOT NULL,
-    visitante_id_visit INTEGER NOT NULL,
-    estado_id_est INTEGER NOT NULL,
-    tamanho_empresa_id_tam_emp INTEGER NOT NULL
+    msg_con VARCHAR2(600),
+    data_con TIMESTAMP,
+    produto_id_prod INTEGER,
+    visitante_id_visit INTEGER,
+    estado_id_est INTEGER,
+    tamanho_empresa_id_tam_emp INTEGER
 );
 ALTER TABLE Contato ADD CONSTRAINT contato_pk PRIMARY KEY(id_con);
 
@@ -119,7 +119,7 @@ CREATE TABLE Questionario (
     ques_ambiente_integrado NUMBER(1),
     ques_aumento_produtividade NUMBER(1),
     ques_melhorar_capacitacao NUMBER(1),
-    ques_reducao_custo NUMBER (1),
+    ques_reducao_custo NUMBER(1),
     ques_aumentar_conversao NUMBER(1),
     ques_potencializar_vendas NUMBER(1),
     ques_acelerar_vendas NUMBER(1),
@@ -285,7 +285,7 @@ INSERT INTO Questionario (nome_ques, email_ques, tel_ques, seg_ques, data_ques, 
 VALUES ('Maria Oliveira', 'maria.oliveira@example.com', 11223344556, 'Saúde', TO_TIMESTAMP('29/04/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'), 'MediCare', 'N', 'Melhorar qualidade do atendimento', 2, 2);
 
 INSERT INTO Questionario (nome_ques, email_ques, tel_ques, seg_ques, data_ques, nome_emp_ques, conhece_sales_ques, nec_emp_ques, produto_id_prod, visitante_id_visit)
-VALUES ('Carlos Costa', 'carlos.costa@example.com', 11922334455, 'Educação', TO_TIMESTAMP('29/04/2024 11:00:00', 'DD/MM/YYYY HH24:MI:SS'), 'EduPlus', 'S', 'Integrar novas tecnologias educacionais', 3, 3);
+VALUES ('Carlos Costa', 'carlos.costa@gmail.com', 11922334455, 'Educação', TO_TIMESTAMP('29/04/2024 11:00:00', 'DD/MM/YYYY HH24:MI:SS'), 'EduPlus', 'S', 'Integrar novas tecnologias educacionais', 3, 3);
 
 -- inserção de dados na tabela Feedback
 INSERT INTO Quest_Feedback (email_feedback, avaliacao_feedback, data_feedback, msg_feedback, visitante_id_visit)
@@ -300,20 +300,27 @@ VALUES ('carlos.costa@example.com', 4, TO_TIMESTAMP('29/04/2024 11:00:00', 'DD/M
 COMMIT;
 
 -- Exemplos de Atualização de dados (UPDATE)
+
+-- Alteração do e-mail do cadastro de id 2
 UPDATE Cadastro
-SET email_cad = 'maria.oliveira@gmail.com'
+SET email_cad = 'bruninho@gmail.com'
 WHERE id_cad = 2;
 
+
+-- Alteração da coluna do tamanho da empresa do contato do id 1
 UPDATE Contato
 SET tamanho_empresa_id_tam_emp = 3
 WHERE id_con = 1;
 
+
+-- Alteração do segmento do Questionário de id 1
 UPDATE Questionario
 SET seg_ques = 'Engenharia'
 WHERE id_ques = 1;
 
+
 -- Exemplos de Remoção de dados (DELETE)
--- Exemplo 1
+-- Deletar da tabela produto a categoria de Serviço
 ALTER TABLE Produto
 DROP CONSTRAINT produto_pk CASCADE;
 
@@ -323,7 +330,7 @@ WHERE cat_prod = 'Serviço';
 ALTER TABLE Produto ADD CONSTRAINT produto_pk PRIMARY KEY(id_prod);
 
 
--- Exemplo 2
+-- Deletar da tabela Quest_Feedback as avaliações menor ou igual a 3
 ALTER TABLE Quest_Feedback
 DROP CONSTRAINT feedback_pk CASCADE;
 
@@ -332,12 +339,13 @@ WHERE avaliacao_feedback <= 3;
 
 ALTER TABLE Quest_Feedback ADD CONSTRAINT feedback_pk PRIMARY KEY(id_feedback);
 
--- Exemplo 3
+
+-- Deletar da tabela Questionario os e-mails que contém '@gmail.com'
 ALTER TABLE Questionario
 DROP CONSTRAINT questionario_pk CASCADE;
 
 DELETE FROM Questionario
-WHERE email_ques LIKE '%@example.com';
+WHERE email_ques LIKE '%@gmail.com';
 
 ALTER TABLE Questionario ADD CONSTRAINT questionario_pk PRIMARY KEY(id_ques);
 
@@ -346,7 +354,7 @@ COMMIT;
 -- Linguagem de Consulta de Dados (DQL/SQL)
 
 -- Relatório utilizando classificação de dados 
--- Categoria de Produtos
+-- Organizando os produtos por Categoria
 SELECT id_prod AS "Id",
 nome_prod AS "Produto",
 desc_prod AS "Descrição",
@@ -365,6 +373,7 @@ JOIN Estado e ON c.estado_id_est = e.id_est
 GROUP BY
   e.sigla_est;
 
+
 -- Relatório utilizando alguma função de grupo
 -- Tempo médio de permanência no site dos visitantes
 SELECT 
@@ -373,6 +382,9 @@ SELECT
              EXTRACT(MINUTE FROM (tempo_sai_visit - tempo_ent_visit)) +
              EXTRACT(SECOND FROM (tempo_sai_visit - tempo_ent_visit)) / 60)), 2) AS "Tempo médio de Permanência em Min"
 FROM Visitante;
+
+########## ARRUMAR ########
+
 
 -- Relatório utilizando sub consulta
 -- Visitantes que estão na área de TI e realizaram contatos
@@ -396,8 +408,8 @@ SELECT
     c.sobrenome_cad as "Sobrenome",
     c.email_cad as "Email",
     e.sigla_est as "Sigla",
-    v.tempo_ent_visit as "Tempo de Entrada",
-    v.tempo_sai_visit as "Tempo de Saída"
+    TO_CHAR(v.tempo_ent_visit, 'DD/MM/YYYY HH24:MI:SS') as "Tempo de Entrada",
+    TO_CHAR(v.tempo_sai_visit, 'DD/MM/YYYY HH24:MI:SS')as "Tempo de Saída"
 FROM
     Visitante v
 JOIN
