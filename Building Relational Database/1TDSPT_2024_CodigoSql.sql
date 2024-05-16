@@ -383,7 +383,7 @@ SELECT
              EXTRACT(SECOND FROM (tempo_sai_visit - tempo_ent_visit)) / 60)), 2) AS "Tempo médio de Permanência em Min"
 FROM Visitante;
 
-########## ARRUMAR ########
+select * from visitante;
 
 
 -- Relatório utilizando sub consulta
