@@ -4,20 +4,24 @@ import re
 
 
 def configurar_credenciais():
-    print("--- Configuração das credenciais do banco de dados Oracle ---")
-    usuario = input("Digite o nome de usuário: ")
-    senha = input("Digite a senha: ")
+    try:
+        print('--- Configuração das credenciais do banco de dados Oracle ---')
+        usuario = input('Digite o nome de usuário: ')
+        senha = input('Digite a senha: ')
 
-    dados_secret = {
-        'user': usuario,
-        'password': senha,
-        'dsn': 'oracle.fiap.com.br:1521/orcl'
-    }
+        dados_secret = {
+            'user': usuario,
+            'password': senha,
+            'dsn': 'oracle.fiap.com.br:1521/orcl'
+        }
 
-    escrever_dados('secret.json', dados_secret)
-    print("Credenciais salvas!")
+        escrever_dados('secret.json', dados_secret)
+        print('Credenciais salvas!')
 
-    return dados_secret
+        return dados_secret
+    except Exception as e:
+        print(f'Erro ao configurar credenciais: {e}')
+        return None
 
 
 # Criação das tabelas
@@ -27,29 +31,30 @@ def setup_inicial():
 
     # Verifica se as credenciais foram configuradas corretamente
     if not secret:
-        print("Falha ao configurar as credenciais.")
+        print('Falha ao configurar as credenciais.')
         return
 
     try:
         # Primeiro dar drop caso elas existam
-        if not operacao_db_arquivo('sql_drop_tabela.sql', secret):
-            print("Falha ao deletar as tabelas já existentes.")
+
+        if not operacao_db_arquivo('sql_drop_tabela.sql', secret, True):
+            print('Falha ao deletar as tabelas já existentes.')
             return
 
         # Agora cria as tabelas
         if not operacao_db_arquivo('sql_criar_tabela.sql', secret):
-            print("Falha ao criar tabelas.")
+            print('Falha ao criar tabelas.')
             return
 
         # E então, colocamos os dados nas tabelas!
         if not operacao_db_arquivo('sql_carregar_dados.sql', secret):
-            print("Falha ao inserir dados iniciais nas tabelas.")
+            print('Falha ao inserir dados iniciais nas tabelas.')
             return
 
-        print("Setup inicial concluído com sucesso.")
+        print('Setup inicial concluído com sucesso.')
 
     except Exception as e:
-        print(f"Erro durante o setup inicial: {e}")
+        print(f'Erro durante o setup inicial: {e}')
 
 
 # Funções para trabalhar com JSON
@@ -176,7 +181,7 @@ def consulta_db(comando, secret, params=None):
         return None
 
 
-def operacao_db_arquivo(arquivo, secret, commit=True):
+def operacao_db_arquivo(arquivo, secret, drop=False, commit=True):
     try:
         with oracledb.connect(user=secret['user'],
                               password=secret['password'],
@@ -184,11 +189,15 @@ def operacao_db_arquivo(arquivo, secret, commit=True):
             with connection.cursor() as cursor:
                 with open(arquivo, 'r') as file:
                     sql_script = file.read()
-                # Separar os comandos SQL por ponto e vírgula pra executar um por um
-                sql_commands = sql_script.split(';')
-                for command in sql_commands:
-                    if command.strip():  # Verifica se o comando não está vazio
-                        cursor.execute(command)
+                if drop:
+                    cursor.execute(sql_script)
+                    sql_comando = []
+                else:
+                    # Separar os comandos SQL por ponto e vírgula pra executar um por um
+                    sql_comando = sql_script.split(';')
+                for comando in sql_comando:
+                    if comando.strip():  # Verifica se o comando não está vazio
+                        cursor.execute(comando)
                 if commit:
                     connection.commit()
                 return True
@@ -209,7 +218,7 @@ def menu_principal():
         print('--------------------------')
 
         op = input('Digite uma opção: ')
-        if op.isdigit() and int(op) in range(3):  # ver com o professor, se é assim que o príncipe Wagner quer
+        if op.isdigit() and int(op) in range(3):
             if op == '1':
                 realizar_login()
             if op == '2':
@@ -222,40 +231,44 @@ def menu_principal():
 
 
 def realizar_login():
-    print('\n>>>>> Realizar o Login <<<<<')
-    usuario = input('Digite o login: ')
-    senha = input('Digite a senha: ')
+    try:
+        print('\n>>>>> Realizar o Login <<<<<')
+        usuario = input('Digite o login: ')
+        senha = input('Digite a senha: ')
 
-    # Comando SQL para verificar o usuário e senha
-    sql = """
-    SELECT usuario_user, senha_user, cargo_user, status_user
-    FROM t_usuario_py
-    WHERE usuario_user = :usr
-    """
+        # Comando SQL para verificar o usuário e senha
+        sql = """
+        SELECT usuario_user, senha_user, cargo_user, status_user
+        FROM t_usuario_py
+        WHERE usuario_user = :usr
+        """
 
-    params = {'usr': usuario}
-    result = consulta_db(sql, secret, params)
+        params = {'usr': usuario}
+        result = consulta_db(sql, secret, params)
 
-    if result:
-        user_data = result[0]
-        if user_data[1] == senha:  # Vê se a senha está correta
-            if user_data[3] == '1':  # Checa se o status é '1' (Ativo)
-                print('Login efetuado com sucesso!')
-                # Verifica o cargo e redireciona para o menu correspondente
-                if user_data[2] == 'Admin':
-                    menu_admin()
-                elif user_data[2] == 'Consultor':
-                    menu_consultor()
+        if result:
+            user_data = result[0]
+            if user_data[1] == senha:  # Vê se a senha está correta
+                if user_data[3] == '1':  # Checa se o status é '1' (Ativo)
+                    print('Login efetuado com sucesso!')
+                    # Verifica o cargo e redireciona para o menu correspondente
+                    if user_data[2] == 'Admin':
+                        menu_admin() #Login: patinaomi Senha:654321
+                    elif user_data[2] == 'Consultor':
+                        menu_consultor() #Login: saraingrid Senha:123456
+                    else:
+                        menu_analista() #Login: claudiobipo Senha:palhacinho
                 else:
-                    menu_analista()
+                    print('Usuário desativado. Não foi possível efetuar o login.')
             else:
-                print('Usuário desativado. Não foi possível efetuar o login.')
+                print('Senha incorreta. Não foi possível efetuar o login.')
         else:
-            print('Senha incorreta. Não foi possível efetuar o login.')
-    else:
-        print('Usuário não encontrado.')
+            print('Usuário não encontrado.')
 
-    return usuario
+        return usuario
+    except Exception as e:
+        print(f"Erro ao realizar login: {e}")
+        return None
 
 
 def verifica_senha(msg):
@@ -301,30 +314,33 @@ def atualizar_senha(email, nova_senha, secret):
 
 
 def esqueci_a_senha():
-    print('\n>>>>> Esqueci a Senha <<<<<')
-    email = input('Digite o e-mail associado ao seu login: ')
+    try:
+        print('\n>>>>> Esqueci a Senha <<<<<')
+        email = input('Digite o e-mail associado ao seu login: ')
 
-    # Comando SQL para buscar o usuário pelo e-mail
-    sql_select = """
-    SELECT usuario_user, senha_user, email_user
-    FROM t_usuario_py
-    WHERE email_user = :eml
-    """
+        # Comando SQL para buscar o usuário pelo e-mail
+        sql_select = """
+        SELECT usuario_user, senha_user, email_user
+        FROM t_usuario_py
+        WHERE email_user = :eml
+        """
 
-    result = consulta_db(sql_select, secret, params={'eml': email})
+        result = consulta_db(sql_select, secret, params={'eml': email})
 
-    if result:
-        for user_data in result:
-            nova_senha = verifica_senha('Digite a nova senha: ')
-            if nova_senha == user_data[1]:
-                print('A nova senha não pode ser igual à senha atual, tente novamente.')
-                return
+        if result:
+            for user_data in result:
+                nova_senha = verifica_senha('Digite a nova senha: ')
+                if nova_senha == user_data[1]:
+                    print('A nova senha não pode ser igual à senha atual, tente novamente.')
+                    return
 
-            if atualizar_senha(email, nova_senha, secret):
-                print('Senha alterada com sucesso!')
-                return
-    else:
-        print('E-mail não encontrado. Não foi possível alterar a senha.')
+                if atualizar_senha(email, nova_senha, secret):
+                    print('Senha alterada com sucesso!')
+                    return
+        else:
+            print('E-mail não encontrado. Não foi possível alterar a senha.')
+    except Exception as e:
+        print(f"Erro ao alterar a senha: {e}")
 
 
 def menu_admin():
@@ -418,105 +434,114 @@ def criar_usuario():
 
 
 def alterar_usuario():
-    print('\n>>>>> Alterar Dados do Usuário <<<<<')
-    usuario = input('Digite o usuário que deseja alterar: ')
+    try:
+        print('\n>>>>> Alterar Dados do Usuário <<<<<')
+        usuario = input('Digite o usuário que deseja alterar: ')
 
-    # Primeiro, ver se o usuário existe
-    sql_verifica = "SELECT usuario_user, email_user, cargo_user FROM t_usuario_py WHERE usuario_user = :usuario"
-    result = consulta_db(sql_verifica, secret, params={'usuario': usuario})
-    if not result:
-        print('Usuário não encontrado.')
-        return
-
-    op = input(' Digite o dado que deseja alterar:'
-               '\n [1] Usuário'
-               '\n [2] E-mail'
-               '\n [3] Cargo'
-               '\n [0] Cancelar'
-               '\n Opção: ')
-
-    if op == '1':
-        novo_nome = verifica_input('\nDigite o novo usuário: ')
-        if verifica_usuario_repetido(novo_nome):
-            print('Nome de usuário já existe. Tente outro nome.')
+        # Primeiro, ver se o usuário existe
+        sql_verifica = "SELECT usuario_user, email_user, cargo_user FROM t_usuario_py WHERE usuario_user = :usuario"
+        result = consulta_db(sql_verifica, secret, params={'usuario': usuario})
+        if not result:
+            print('Usuário não encontrado.')
             return
-        sql_update = "UPDATE t_usuario_py SET usuario_user = :novo WHERE usuario_user = :antigo"
-        operacao_db(sql_update, secret, params={'novo': novo_nome, 'antigo': usuario}, commit=True)
 
-    elif op == '2':
-        while True:
-            novo_email = verifica_input('\nDigite o novo e-mail: ')
-            if validar_email(novo_email):
-                if verifica_email_repetido(novo_email):
-                    print('E-mail já registrado. Tente outro e-mail.')
+        op = input(' Digite o dado que deseja alterar:'
+                   '\n [1] Usuário'
+                   '\n [2] E-mail'
+                   '\n [3] Cargo'
+                   '\n [0] Cancelar'
+                   '\n Opção: ')
+
+        if op == '1':
+            novo_nome = verifica_input('\nDigite o novo usuário: ')
+            if verifica_usuario_repetido(novo_nome):
+                print('Nome de usuário já existe. Tente outro nome.')
+                return
+            sql_update = "UPDATE t_usuario_py SET usuario_user = :novo WHERE usuario_user = :antigo"
+            operacao_db(sql_update, secret, params={'novo': novo_nome, 'antigo': usuario}, commit=True)
+
+        elif op == '2':
+            while True:
+                novo_email = verifica_input('\nDigite o novo e-mail: ')
+                if validar_email(novo_email):
+                    if verifica_email_repetido(novo_email):
+                        print('E-mail já registrado. Tente outro e-mail.')
+                    else:
+                        break
                 else:
-                    break
+                    print('Email inválido, digite novamente.')
+
+            sql_update = "UPDATE t_usuario_py SET email_user = :email WHERE usuario_user = :usuario"
+            operacao_db(sql_update, secret, params={'email': novo_email, 'usuario': usuario}, commit=True)
+
+        elif op == '3':
+            print('\n[1] Consultor\n[2] Analista\n[3] Admin')
+            cargo_dict = {'1': 'Consultor', '2': 'Analista', '3': 'Admin'}
+            op_cargo = verifica_input('Selecione o novo cargo: ')
+            if op_cargo in cargo_dict:
+                sql_update = "UPDATE t_usuario_py SET cargo_user = :cargo WHERE usuario_user = :usuario"
+                operacao_db(sql_update, secret, params={'cargo': cargo_dict[op_cargo], 'usuario': usuario}, commit=True)
             else:
-                print('Email inválido, digite novamente.')
+                print('Opção inválida.')
+                return
 
-        sql_update = "UPDATE t_usuario_py SET email_user = :email WHERE usuario_user = :usuario"
-        operacao_db(sql_update, secret, params={'email': novo_email, 'usuario': usuario}, commit=True)
-
-    elif op == '3':
-        print('\n[1] Consultor\n[2] Analista\n[3] Admin')
-        cargo_dict = {'1': 'Consultor', '2': 'Analista', '3': 'Admin'}
-        op_cargo = verifica_input('Selecione o novo cargo: ')
-        if op_cargo in cargo_dict:
-            sql_update = "UPDATE t_usuario_py SET cargo_user = :cargo WHERE usuario_user = :usuario"
-            operacao_db(sql_update, secret, params={'cargo': cargo_dict[op_cargo], 'usuario': usuario}, commit=True)
+        elif op == '0':
+            print('Cancelando...')
+            return
         else:
             print('Opção inválida.')
             return
 
-    elif op == '0':
-        print('Cancelando...')
-        return
-    else:
-        print('Opção inválida.')
-        return
-
-    print('Dados alterados com sucesso!')
+        print('Dados alterados com sucesso!')
+    except Exception as e:
+        print(f"Erro ao alterar dados do usuário: {e}")
 
 
 def listar_usuario():
-    print('\n>>>>> Listar Usuários <<<<<')
-    sql = "SELECT usuario_user, email_user, cargo_user, status_user FROM t_usuario_py"
-    usuarios = consulta_db(sql, secret)
+    try:
+        print('\n>>>>> Listar Usuários <<<<<')
+        sql = "SELECT usuario_user, email_user, cargo_user, status_user FROM t_usuario_py"
+        usuarios = consulta_db(sql, secret)
 
-    if not usuarios:
-        print('Não há usuários cadastrados.')
-        return
+        if not usuarios:
+            print('Não há usuários cadastrados.')
+            return
 
-    for usuario in usuarios:
-        print(f"Usuário: {usuario[0]}")
-        print(f"E-mail: {usuario[1]}")
-        print(f"Cargo: {usuario[2]}")
-        print(f"Status: {'Ativo' if usuario[3] == '1' else 'Desativado'}")
-        print('----------------------------')
+        for usuario in usuarios:
+            print(f"Usuário: {usuario[0]}")
+            print(f"E-mail: {usuario[1]}")
+            print(f"Cargo: {usuario[2]}")
+            print(f"Status: {'Ativo' if usuario[3] == '1' else 'Desativado'}")
+            print('----------------------------')
+    except Exception as e:
+        print(f"Erro ao listar usuários: {e}")
 
 
 def desativar_usuario():
-    print('\n>>>>> Desativar Usuários <<<<<')
-    user_del = verifica_input('Digite o usuário que deseja desativar: ')
+    try:
+        print('\n>>>>> Desativar Usuários <<<<<')
+        user_del = verifica_input('Digite o usuário que deseja desativar: ')
 
-    # Primeiro, verifica se o usuário existe e o status atual
-    sql_check = "SELECT status_user FROM t_usuario_py WHERE usuario_user = :usuario"
-    result = consulta_db(sql_check, secret, params={'usuario': user_del})
-    if not result:
-        print('Usuário não encontrado.')
-        return
+        # Primeiro, verifica se o usuário existe e o status atual
+        sql_check = "SELECT status_user FROM t_usuario_py WHERE usuario_user = :usuario"
+        result = consulta_db(sql_check, secret, params={'usuario': user_del})
+        if not result:
+            print('Usuário não encontrado.')
+            return
 
-    # Verificar se já está desativado
-    if result[0][0] == '0':
-        print(f'Usuário {user_del} já está desativado.')
-        return
+        # Verificar se já está desativado
+        if result[0][0] == '0':
+            print(f'Usuário {user_del} já está desativado.')
+            return
 
-    # Se não, desativar o usuário
-    sql_update = "UPDATE t_usuario_py SET status_user = '0' WHERE usuario_user = :usuario"
-    if operacao_db(sql_update, secret, params={'usuario': user_del}, commit=True):
-        print(f'Usuário {user_del} desativado com sucesso.')
-    else:
-        print('Falha ao desativar o usuário.')
+        # Se não, desativar o usuário
+        sql_update = "UPDATE t_usuario_py SET status_user = '0' WHERE usuario_user = :usuario"
+        if operacao_db(sql_update, secret, params={'usuario': user_del}, commit=True):
+            print(f'Usuário {user_del} desativado com sucesso.')
+        else:
+            print('Falha ao desativar o usuário.')
+    except Exception as e:
+        print(f"Erro ao desativar usuário: {e}")
 
 
 # Menu do Consultor
@@ -525,7 +550,7 @@ def menu_consultor():
         print('\n====== Menu de Consultor =====')
         print(' [1] Consultar Tickets')
         print(' [2] Finalizar Status Ticket')
-        print(' [3] Menu Principal')
+        print(' [3] Fazer Logout e ir ao Menu Principal')
         print(' [0] Sair do Programa')
         print('===============================')
 
@@ -544,43 +569,46 @@ def menu_consultor():
 
 
 def consultar_ticket():
-    print('\n>>>>> Consulta Ticket <<<<<')
-    status_filtro = input("Deseja filtrar tickets por status?\n"
-                          "\n[A] Aberto"
-                          "\n[F] Fechado"
-                          "\nou qualquer tecla para todos: ")
+    try:
+        print('\n>>>>> Consulta Ticket <<<<<')
+        status_filtro = input("Deseja filtrar tickets por status?\n"
+                              "\n[A] Aberto"
+                              "\n[F] Fechado"
+                              "\nou qualquer tecla para todos: ")
 
-    if status_filtro.upper() == 'A':
-        sql = "SELECT * FROM t_ticket_py WHERE status_ticket = 'A'"
-        print("Selecionando tickets Abertos...")
-    elif status_filtro.lower() == 'F':
-        sql = "SELECT * FROM t_ticket_py WHERE status_ticket = 'F'"
-        print("Selecionando  tickets Fechados...")
-    else:
-        sql = "SELECT * FROM t_ticket_py"
-        print("Exibindo todos os tickets...")
+        if status_filtro.upper() == 'A':
+            sql = "SELECT * FROM t_ticket_py WHERE status_ticket = 'A'"
+            print("Selecionando tickets Abertos...")
+        elif status_filtro.lower() == 'F':
+            sql = "SELECT * FROM t_ticket_py WHERE status_ticket = 'F'"
+            print("Selecionando  tickets Fechados...")
+        else:
+            sql = "SELECT * FROM t_ticket_py"
+            print("Exibindo todos os tickets...")
 
-    tickets = consulta_db(sql, secret)
+        tickets = consulta_db(sql, secret)
 
-    if not tickets:
-        print('Não há tickets cadastrados para este filtro.')
-        return
+        if not tickets:
+            print('Não há tickets cadastrados para este filtro.')
+            return
 
-    for ticket in tickets:
-        print(f"Id #{ticket[0]} - {ticket[1]}")
-        print(f"Nome: {ticket[2]} {ticket[3] if ticket[3] else ''}")
-        print(f"Cargo: {ticket[4]}")
-        print(f"Contato: {ticket[5]} - Tel: {ticket[6]}")
-        print(f"Empresa: {ticket[7]}")
-        print(f"Segmento: {ticket[8]}")
-        print(f"Tamanho: {ticket[9]}")
-        print(f"Pergunta: {ticket[10]}")
-        print(f"Status: {'Em Aberto' if ticket[11] == 'A' else 'Fechada'}")
-        print('----------------------------')
+        for ticket in tickets:
+            print(f"Id #{ticket[0]} - {ticket[1]}")
+            print(f"Nome: {ticket[2]} {ticket[3] if ticket[3] else ''}")
+            print(f"Cargo: {ticket[4]}")
+            print(f"Contato: {ticket[5]} - Tel: {ticket[6]}")
+            print(f"Empresa: {ticket[7]}")
+            print(f"Segmento: {ticket[8]}")
+            print(f"Tamanho: {ticket[9]}")
+            print(f"Pergunta: {ticket[10]}")
+            print(f"Status: {'Em Aberto' if ticket[11] == 'A' else 'Fechada'}")
+            print('----------------------------')
 
-    exportar = input("Deseja exportar esses resultados para JSON? (s/n): ")
-    if exportar.lower() == 's':
-        exportar_tickets(tickets)
+        exportar = input("Deseja exportar esses resultados para JSON? (s/n): ")
+        if exportar.lower() == 's':
+            exportar_tickets(tickets)
+    except Exception as e:
+        print(f"Erro ao consultar tickets: {e}")
 
 
 # Wagner -- n to conseguindo deixar utf8 ai ta ficando tudo zuado
@@ -634,104 +662,112 @@ def alterar_ticket():
 
     except ValueError:
         print('Digite um valor válido.')
+    except Exception as e:
+        print(f"Erro ao alterar status do ticket: {e}")
 
 
 def cadastrar_leads():
-    print('\n>>>>> Cadastrar Lead <<<<<')
+    try:
+        print('\n>>>>> Cadastrar Lead <<<<<')
 
-    nome = verifica_input('Digite o nome: ')
-    while True:
-        telefone_input = verifica_input('Digite o telefone: ')
-        telefone = validar_telefone(telefone_input)
-        if telefone:
-            break
-    segmento = verifica_input('Digite o segmento: ')
-    cargo = verifica_input('Digite o cargo: ')
-    tamanho_empresa = verifica_input('Digite o tamanho da empresa: ')
-    produto = verifica_input('Digite o produto: ')
-    regiao = verifica_input('Digite a região: ')
+        nome = verifica_input('Digite o nome: ')
+        while True:
+            telefone_input = verifica_input('Digite o telefone: ')
+            telefone = validar_telefone(telefone_input)
+            if telefone:
+                break
+        segmento = verifica_input('Digite o segmento: ')
+        cargo = verifica_input('Digite o cargo: ')
+        tamanho_empresa = verifica_input('Digite o tamanho da empresa: ')
+        produto = verifica_input('Digite o produto: ')
+        regiao = verifica_input('Digite a região: ')
 
-    while True:
-        email = verifica_input('Digite o email: ')
-        if validar_email(email):
-            break
-        print("Email inválido, tente novamente.")
+        while True:
+            email = verifica_input('Digite o email: ')
+            if validar_email(email):
+                break
+            print("Email inválido, tente novamente.")
 
-    # SQL para inserir dados na tabela de leads
-    sql_insert = """
-    INSERT INTO t_leads_py (nome_leads, tel_leads, email_leads, segmento_leads, cargo_leads, tamanho_empresa_leads, produto_leads, regiao_leads)
-    VALUES (:nome, :telefone, :email, :segmento, :cargo, :tamanho_empresa, :produto, :regiao)
-    """
+        # SQL para inserir dados na tabela de leads
+        sql_insert = """
+        INSERT INTO t_leads_py (nome_leads, tel_leads, email_leads, segmento_leads, cargo_leads, tamanho_empresa_leads, produto_leads, regiao_leads)
+        VALUES (:nome, :telefone, :email, :segmento, :cargo, :tamanho_empresa, :produto, :regiao)
+        """
 
-    params = {
-        'nome': nome,
-        'telefone': telefone,
-        'email': email,
-        'segmento': segmento,
-        'cargo': cargo,
-        'tamanho_empresa': tamanho_empresa,
-        'produto': produto,
-        'regiao': regiao
-    }
+        params = {
+            'nome': nome,
+            'telefone': telefone,
+            'email': email,
+            'segmento': segmento,
+            'cargo': cargo,
+            'tamanho_empresa': tamanho_empresa,
+            'produto': produto,
+            'regiao': regiao
+        }
 
-    if operacao_db(sql_insert, secret, params, commit=True):
-        print('Novo lead cadastrado com sucesso.')
-    else:
-        print('Falha ao cadastrar novo lead.')
+        if operacao_db(sql_insert, secret, params, commit=True):
+            print('Novo lead cadastrado com sucesso.')
+        else:
+            print('Falha ao cadastrar novo lead.')
+    except Exception as e:
+        print(f"Erro ao cadastrar lead: {e}")
 
 
 def listar_leads():
-    print('\n>>>>> Listar Dados <<<<<')
+    try:
+        print('\n>>>>> Listar Dados <<<<<')
 
-    campos = {
-        '1': 'segmento_leads',  # Moda, Comério etc
-        '2': 'tamanho_empresa_leads',  # Grande, Pequena etc
-        '3': 'produto_leads',  # Produtos Salesforce, IA, Cloud etc
-        '4': 'regiao_leads'  # Norte, Sul, Sudeste etc
-    }
+        campos = {
+            '1': 'segmento_leads',  # Moda, Comério etc
+            '2': 'tamanho_empresa_leads',  # Grande, Pequena etc
+            '3': 'produto_leads',  # Produtos Salesforce, IA, Cloud etc
+            '4': 'regiao_leads'  # Norte, Sul, Sudeste etc
+        }
 
-    # Mostra opções pro usuário
-    escolha = input('Digite o campo pelo qual deseja filtrar'
-                    '\nou deixe em branco para selecionar todos:'
-                    '\n [1] Segmento'
-                    '\n [2] Tamanho da Empresa'
-                    '\n [3] Produto'
-                    '\n [4] Região'
-                    '\n [0] Cancelar'
-                    '\n Opção: ')
+        # Mostra opções pro usuário
+        escolha = input('Digite o campo pelo qual deseja filtrar'
+                        '\nou deixe em branco para selecionar todos:'
+                        '\n [1] Segmento'
+                        '\n [2] Tamanho da Empresa'
+                        '\n [3] Produto'
+                        '\n [4] Região'
+                        '\n [0] Cancelar'
+                        '\n Opção: ')
 
-    # Preparar a consulta SQL com base na escolha do usuário
-    if escolha and escolha in campos:
-        filtro = campos[escolha]
-        valor_filtro = input(f"Digite o valor para {filtro}: ")
-        sql = f"SELECT * FROM t_leads_py WHERE {filtro} = :valor"
-        params = {'valor': valor_filtro}
-    else:
-        sql = "SELECT * FROM t_leads_py"
-        params = {}
+        # Preparar a consulta SQL com base na escolha do usuário
+        if escolha and escolha in campos:
+            filtro = campos[escolha]
+            valor_filtro = input(f"Digite o valor para {filtro}: ")
+            sql = f"SELECT * FROM t_leads_py WHERE {filtro} = :valor"
+            params = {'valor': valor_filtro}
+        else:
+            sql = "SELECT * FROM t_leads_py"
+            params = {}
 
-    leads = consulta_db(sql, secret, params)
+        leads = consulta_db(sql, secret, params)
 
-    if not leads:
-        print('Não há leads cadastrados para este filtro.')
-        return
+        if not leads:
+            print('Não há leads cadastrados para este filtro.')
+            return
 
-    # Listar os leads
-    for lead in leads:
-        print(f"---------- ID #{lead[0]} ----------")
-        print(f"Nome: {lead[1]}")
-        print(f"Telefone: {lead[2]}")
-        print(f"E-mail: {lead[3]}")
-        print(f"Segmento: {lead[4]}")
-        print(f"Cargo: {lead[5]}")
-        print(f"Tamanho da Empresa: {lead[6]}")
-        print(f"Produto: {lead[7]}")
-        print(f"Região: {lead[8]}")
-        print('----------------------------')
+        # Listar os leads
+        for lead in leads:
+            print(f"---------- ID #{lead[0]} ----------")
+            print(f"Nome: {lead[1]}")
+            print(f"Telefone: {lead[2]}")
+            print(f"E-mail: {lead[3]}")
+            print(f"Segmento: {lead[4]}")
+            print(f"Cargo: {lead[5]}")
+            print(f"Tamanho da Empresa: {lead[6]}")
+            print(f"Produto: {lead[7]}")
+            print(f"Região: {lead[8]}")
+            print('----------------------------')
 
-    exportar = input("Deseja exportar esses resultados para JSON? (s/n): ")
-    if exportar.lower() == 's':
-        exportar_leads(leads, 'leads.json')
+        exportar = input("Deseja exportar esses resultados para JSON? (s/n): ")
+        if exportar.lower() == 's':
+            exportar_leads(leads, 'leads.json')
+    except Exception as e:
+        print(f"Erro ao listar leads: {e}")
 
 
 def exportar_leads(dados, arquivo):
@@ -803,14 +839,15 @@ def editar_leads():
 
     except ValueError:
         print('Por favor, insira um número válido para o ID.')
+    except Exception as e:
+        print(f"Erro ao editar leads: {e}")
 
 
 def deletar_leads():
-    print('\n>>>>> Deletar Dados <<<<<')
-
-    op = input('Digite o ID do lead que deseja deletar: ')
-
     try:
+        print('\n>>>>> Deletar Dados <<<<<')
+
+        op = input('Digite o ID do lead que deseja deletar: ')
         lead_id = int(op)
 
         sql_delete = "DELETE FROM t_leads_py WHERE id_leads = :id"
@@ -835,7 +872,7 @@ def menu_analista():
         print(' [2] Listar Dados')
         print(' [3] Editar Dados')
         print(' [4] Deletar Dados')
-        print(' [5] Menu Principal')
+        print(' [5] Fazer logou e ir ao Menu Principal')
         print(' [0] Sair do Programa')
         print('===============================')
 
@@ -862,6 +899,7 @@ def menu_analista():
 
 
 # Iniciando o projeto
-setup_inicial()
 secret = carregar_dados('secret.json')
+
+setup_inicial()
 menu_principal()
