@@ -14,6 +14,6 @@ public class QuestionarioBo {
 
     public void inserirQuestionario(Questionario questionario) throws SQLException {
         // Adicione aqui validações ou regras de negócios, se necessário
-        questionarioDao.insert(questionario);
+        questionarioDao.inserir(questionario);
     }
 }

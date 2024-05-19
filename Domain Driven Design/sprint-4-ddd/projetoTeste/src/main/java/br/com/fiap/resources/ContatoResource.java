@@ -18,13 +18,14 @@ public class ContatoResource {
 	private ContatoController contatoController = new ContatoController();
 
 	@POST
-	@Path("/dados-formulario")
+	@Path("/inserir")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response receberDadosFormulario(Contato contato) {
 		try {
 			contatoController.inserirContato(contato);
 			System.out.println("Dados recebidos: " + contato);
 			return Response.ok("Dados recebidos com sucesso").build();
+
 		} catch (IllegalArgumentException e) {
 			return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
 		} catch (SQLException e) {

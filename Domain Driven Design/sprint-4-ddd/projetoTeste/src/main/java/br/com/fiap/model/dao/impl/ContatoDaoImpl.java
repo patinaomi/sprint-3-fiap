@@ -7,13 +7,12 @@ import br.com.fiap.model.dao.ContatoDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 public class ContatoDaoImpl implements ContatoDao {
 
     @Override
     public void inserir(Contato contato) {
-        String sql = "INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp) VALUES (?, ?, ?, ?, ?, ?, sysdate, ?, ?)";
 
         try (Connection conn = ConexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -24,9 +23,8 @@ public class ContatoDaoImpl implements ContatoDao {
             stmt.setString(4, contato.getSegmento());
             stmt.setString(5, contato.getCargo());
             stmt.setString(6, contato.getMensagem());
-            stmt.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
-            stmt.setInt(8, contato.getProdutoId());
-            stmt.setInt(9, contato.getTamanhoEmpresaId());
+            stmt.setInt(7, contato.getProdutoId());
+            stmt.setInt(8, contato.getTamanhoEmpresaId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

@@ -12,7 +12,7 @@ public class Cadastro {
     private String senha;
     private Timestamp data;
     private int generoId;
-    private int tamanhoEmpresaId;
+    private int sobreEmpresaId;
 
 
     public int getId() {
@@ -87,12 +87,12 @@ public class Cadastro {
         this.generoId = generoId;
     }
 
-    public int getTamanhoEmpresaId() {
-        return tamanhoEmpresaId;
+    public int getSobreEmpresaId() {
+        return sobreEmpresaId;
     }
 
-    public void setTamanhoEmpresaId(int tamanhoEmpresaId) {
-        this.tamanhoEmpresaId = tamanhoEmpresaId;
+    public void setSobreEmpresaId(int sobreEmpresaId) {
+        this.sobreEmpresaId = sobreEmpresaId;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class Cadastro {
                 ", senha='" + senha + '\'' +
                 ", data=" + data +
                 ", generoId=" + generoId +
-                ", tamanhoEmpresaId=" + tamanhoEmpresaId +
+                ", tamanhoEmpresaId=" + sobreEmpresaId +
                 '}';
     }
 }

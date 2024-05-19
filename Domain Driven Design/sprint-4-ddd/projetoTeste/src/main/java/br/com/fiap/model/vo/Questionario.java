@@ -9,11 +9,11 @@ public class Questionario {
     private String emailQues;
     private String nomeEmpQues;
     private String segQues;
-    private char conheceSalesQues;
+    private String conheceSalesQues;
     private String necEmpQues;
     private Timestamp dataQues;
     private int produtoIdProd;
-    private int quesProdutoImplantado;
+    private String quesProdutoImplantado;
     private int quesEmpresaFuncionamento;
     private int quesEstrategiasMarketing;
     private int quesIaAutomacoes;
@@ -81,11 +81,11 @@ public class Questionario {
         this.segQues = segQues;
     }
 
-    public char getConheceSalesQues() {
+    public String getConheceSalesQues() {
         return conheceSalesQues;
     }
 
-    public void setConheceSalesQues(char conheceSalesQues) {
+    public void setConheceSalesQues(String conheceSalesQues) {
         this.conheceSalesQues = conheceSalesQues;
     }
 
@@ -113,11 +113,11 @@ public class Questionario {
         this.produtoIdProd = produtoIdProd;
     }
 
-    public int getQuesProdutoImplantado() {
+    public String getQuesProdutoImplantado() {
         return quesProdutoImplantado;
     }
 
-    public void setQuesProdutoImplantado(int quesProdutoImplantado) {
+    public void setQuesProdutoImplantado(String quesProdutoImplantado) {
         this.quesProdutoImplantado = quesProdutoImplantado;
     }
 

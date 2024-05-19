@@ -13,7 +13,7 @@ public class QuestFeedbackBo {
     }
 
     public void inserirBO(QuestFeedback questFeedback) throws SQLException {
-        questFeedbackDao.insert(questFeedback);
+        questFeedbackDao.inserir(questFeedback);
     }
 }
 

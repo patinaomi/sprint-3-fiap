@@ -3,5 +3,5 @@ package br.com.fiap.model.dao;
 import br.com.fiap.model.vo.QuestFeedback;
 
 public interface QuestFeedbackDao {
-    void insert(QuestFeedback questFeedback);
+    void inserir(QuestFeedback questFeedback);
 }

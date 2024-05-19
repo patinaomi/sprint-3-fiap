@@ -10,15 +10,15 @@ import java.sql.SQLException;
 
 public class QuestFeedbackDaoImpl implements QuestFeedbackDao {
     @Override
-    public void insert(QuestFeedback questFeedback) {
-        String sql = "INSERT INTO QUEST_FEEDBACK(email_feedback, avaliacao_feedback, data_feedback, msg_feedback) VALUES (?, ?, ?, ?)";
+    public void inserir(QuestFeedback questFeedback) {
+        String sql = "INSERT INTO QUEST_FEEDBACK(nome_feedback, email_feedback, avaliacao_feedback, msg_feedback, data_feedback) VALUES (?, ?, ?, ?, sysdate)";
 
         try (Connection conn = ConexaoFactory.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, questFeedback.getEmail());
-            ps.setInt(2, questFeedback.getAvaliacao());
-            ps.setTimestamp(3, new java.sql.Timestamp(questFeedback.getData().getTime()));
+            ps.setString(1, questFeedback.getNome());
+            ps.setString(2, questFeedback.getEmail());
+            ps.setInt(3, questFeedback.getAvaliacao());
             ps.setString(4, questFeedback.getMensagem());
 
             int dadosAlterados = ps.executeUpdate();
