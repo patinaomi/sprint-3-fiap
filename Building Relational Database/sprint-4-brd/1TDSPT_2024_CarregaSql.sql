@@ -73,8 +73,7 @@ CREATE TABLE Cadastro (
     senha_cad VARCHAR2(60) NOT NULL,
     data_cad TIMESTAMP NOT NULL,
     genero_id_gen INTEGER NOT NULL,
-    sobre_emp_id_emp INTEGER NOT NULL,
-    tamanho_empresa_id_tam_emp INTEGER NOT NULL
+    sobre_emp_id_emp INTEGER NOT NULL
 );
 ALTER TABLE Cadastro ADD CONSTRAINT cadastro_pk PRIMARY KEY(id_cad);
 
@@ -86,7 +85,7 @@ CREATE TABLE Questionario (
     email_ques VARCHAR2(60),
     nome_emp_ques VARCHAR2(60),
     seg_ques VARCHAR2(80),
-    conhece_sales_ques CHAR(3),
+    conhece_sales_ques CHAR(5),
     nec_emp_ques VARCHAR2(300),
     data_ques TIMESTAMP NOT NULL,
     produto_id_prod INTEGER NOT NULL,
@@ -135,8 +134,6 @@ ALTER TABLE Cadastro
 ADD CONSTRAINT cad_genero_fk FOREIGN KEY(genero_id_gen) REFERENCES Genero(id_gen);
 ALTER TABLE Cadastro
 ADD CONSTRAINT cad_sobre_emp_fk FOREIGN KEY(sobre_emp_id_emp) REFERENCES Sobre_Empresa(id_emp);
-ALTER TABLE Cadastro
-ADD CONSTRAINT cad_tamanho_empresa_fk FOREIGN KEY(tamanho_empresa_id_tam_emp) REFERENCES Tamanho_Empresa(id_tam_emp);
 
 -- FKs na tabela Questionario
 ALTER TABLE Questionario
