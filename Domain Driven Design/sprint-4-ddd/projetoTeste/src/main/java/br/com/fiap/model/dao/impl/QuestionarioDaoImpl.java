@@ -13,42 +13,69 @@ public class QuestionarioDaoImpl implements QuestionarioDao {
     @Override
     public void inserir(Questionario questionario) {
         String sql = "INSERT INTO Questionario (" +
-                "nome_ques, tel_ques, email_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, data_ques, " +
-                "produto_id_prod, ques_produto_implantado, ques_empresa_funcionamento, ques_estrategias_marketing, " +
-                "ques_ia_automacoes, ques_desenvolver_estrategia, ques_melhorar_comunicacao, ques_ambiente_integrado, ques_aumento_produtividade, " +
-                "ques_melhorar_capacitacao, ques_reducao_custo, ques_aumentar_conversao, ques_potencializar_vendas, ques_acelerar_vendas, " +
-                "ques_riqueza_dados, ques_melhorar_experiencia, ques_mostrar_diferencial, ques_criar_jornada, ques_marketing_oportunidade" +
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "nome_ques, tel_ques, email_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques," +
+                "prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, " +
+                "ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, " +
+                "melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, " +
+                "riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques" +
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
 
         try (Connection conn = ConexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, questionario.getNomeQues());
-            stmt.setLong(2, questionario.getTelQues());
-            stmt.setString(3, questionario.getEmailQues());
-            stmt.setString(4, questionario.getNomeEmpQues());
-            stmt.setString(5, questionario.getSegQues());
-            stmt.setString(6, questionario.getConheceSalesQues());
-            stmt.setString(7, questionario.getNecEmpQues());
-            stmt.setInt(8, questionario.getProdutoIdProd());
-            stmt.setString(9, questionario.getQuesProdutoImplantado());
-            stmt.setInt(10, questionario.getQuesEmpresaFuncionamento());
-            stmt.setInt(11, questionario.getQuesEstrategiasMarketing());
-            stmt.setInt(12, questionario.getQuesIaAutomacoes());
-            stmt.setInt(13, questionario.getQuesDesenvolverEstrategia());
-            stmt.setInt(14, questionario.getQuesMelhorarComunicacao());
-            stmt.setInt(15, questionario.getQuesAmbienteIntegrado());
-            stmt.setInt(16, questionario.getQuesAumentoProdutividade());
-            stmt.setInt(17, questionario.getQuesMelhorarCapacitacao());
-            stmt.setInt(18, questionario.getQuesReducaoCusto());
-            stmt.setInt(19, questionario.getQuesAumentarConversao());
-            stmt.setInt(20, questionario.getQuesPotencializarVendas());
-            stmt.setInt(21, questionario.getQuesAcelerarVendas());
-            stmt.setInt(22, questionario.getQuesRiquezaDados());
-            stmt.setInt(23, questionario.getQuesMelhorarExperiencia());
-            stmt.setInt(24, questionario.getQuesMostrarDiferencial());
-            stmt.setInt(25, questionario.getQuesCriarJornada());
-            stmt.setInt(26, questionario.getQuesMarketingOportunidade());
+            stmt.setString(1, questionario.getNome());
+            stmt.setLong(2, questionario.getTelefone());
+            stmt.setString(3, questionario.getEmail());
+            stmt.setString(4, questionario.getNomeEmpresa());
+            stmt.setString(5, questionario.getSegmento());
+            stmt.setString(6, questionario.getConheceSalesforce());
+            stmt.setString(7, questionario.getNecessidadeEmpresa());
+            stmt.setString(8, questionario.getProdutoImplantado());
+            stmt.setInt(9, questionario.getEmpresaFuncionamento());
+            stmt.setInt(10, questionario.getEstrategiasMarketing());
+            stmt.setInt(11, questionario.getIaAutomacoes());
+            stmt.setInt(12, questionario.getDesenvolverEstrategia());
+            stmt.setInt(13, questionario.getMelhorarComunicacao());
+            stmt.setInt(14, questionario.getAmbienteIntegrado());
+            stmt.setInt(15, questionario.getAumentoProdutividade());
+            stmt.setInt(16, questionario.getMelhorarCapacitacao());
+            stmt.setInt(17, questionario.getReducaoCusto());
+            stmt.setInt(18, questionario.getAumentarConversao());
+            stmt.setInt(19, questionario.getPotencializarVendas());
+            stmt.setInt(20, questionario.getAcelerarVendas());
+            stmt.setInt(21, questionario.getRiquezaDados());
+            stmt.setInt(22, questionario.getMelhorarExperiencia());
+            stmt.setInt(23, questionario.getMostrarDiferencial());
+            stmt.setInt(24, questionario.getCriarJornada());
+            stmt.setInt(25, questionario.getMktOportunidade());
+
+            // Logging the values for debugging purposes
+            System.out.println("PreparedStatement Values:");
+            System.out.println("nome_ques: " + questionario.getNome());
+            System.out.println("tel_ques: " + questionario.getTelefone());
+            System.out.println("email_ques: " + questionario.getEmail());
+            System.out.println("nome_emp_ques: " + questionario.getNomeEmpresa());
+            System.out.println("seg_ques: " + questionario.getSegmento());
+            System.out.println("conhece_sales_ques: " + questionario.getConheceSalesforce());
+            System.out.println("nec_emp_ques: " + questionario.getNecessidadeEmpresa());
+            System.out.println("prod_implantado_ques: " + questionario.getProdutoImplantado());
+            System.out.println("prod_funcionamento_ques: " + questionario.getEmpresaFuncionamento());
+            System.out.println("estrategias_mkt_ques: " + questionario.getEstrategiasMarketing());
+            System.out.println("ia_automacoes_ques: " + questionario.getIaAutomacoes());
+            System.out.println("des_estrategia_ques: " + questionario.getDesenvolverEstrategia());
+            System.out.println("melhorar_comunicacao_ques: " + questionario.getMelhorarComunicacao());
+            System.out.println("ambiente_integrado_ques: " + questionario.getAmbienteIntegrado());
+            System.out.println("aumento_produtividade_ques: " + questionario.getAumentoProdutividade());
+            System.out.println("melhorar_capacitacao_ques: " + questionario.getMelhorarCapacitacao());
+            System.out.println("reducao_custo_ques: " + questionario.getReducaoCusto());
+            System.out.println("aumentar_conversao_ques: " + questionario.getAumentarConversao());
+            System.out.println("potencializar_vendas_ques: " + questionario.getPotencializarVendas());
+            System.out.println("acelerar_vendas_ques: " + questionario.getAcelerarVendas());
+            System.out.println("riqueza_dados_ques: " + questionario.getRiquezaDados());
+            System.out.println("melhorar_exp_ques: " + questionario.getMelhorarExperiencia());
+            System.out.println("mostrar_diferencial_ques: " + questionario.getMostrarDiferencial());
+            System.out.println("criar_jornada_ques: " + questionario.getCriarJornada());
+            System.out.println("mkt_oportunidade_ques: " + questionario.getMktOportunidade());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

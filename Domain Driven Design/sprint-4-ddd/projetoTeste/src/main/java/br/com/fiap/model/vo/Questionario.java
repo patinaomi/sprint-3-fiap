@@ -3,257 +3,248 @@ package br.com.fiap.model.vo;
 import java.sql.Timestamp;
 
 public class Questionario {
-    private int idQues;
-    private String nomeQues;
-    private long telQues;
-    private String emailQues;
-    private String nomeEmpQues;
-    private String segQues;
-    private String conheceSalesQues;
-    private String necEmpQues;
-    private Timestamp dataQues;
-    private int produtoIdProd;
-    private String quesProdutoImplantado;
-    private int quesEmpresaFuncionamento;
-    private int quesEstrategiasMarketing;
-    private int quesIaAutomacoes;
-    private int quesDesenvolverEstrategia;
-    private int quesMelhorarComunicacao;
-    private int quesAmbienteIntegrado;
-    private int quesAumentoProdutividade;
-    private int quesMelhorarCapacitacao;
-    private int quesReducaoCusto;
-    private int quesAumentarConversao;
-    private int quesPotencializarVendas;
-    private int quesAcelerarVendas;
-    private int quesRiquezaDados;
-    private int quesMelhorarExperiencia;
-    private int quesMostrarDiferencial;
-    private int quesCriarJornada;
-    private int quesMarketingOportunidade;
+    private int id;
+    private String nome;
+    private long telefone;
+    private String email;
+    private String nomeEmpresa;
+    private String segmento;
+    private String conheceSalesforce;
+    private String necessidadeEmpresa;
+    private String produtoImplantado;
+    private int empresaFuncionamento;
+    private int estrategiasMarketing;
+    private int iaAutomacoes;
+    private int desenvolverEstrategia;
+    private int melhorarComunicacao;
+    private int ambienteIntegrado;
+    private int aumentoProdutividade;
+    private int melhorarCapacitacao;
+    private int reducaoCusto;
+    private int aumentarConversao;
+    private int potencializarVendas;
+    private int acelerarVendas;
+    private int riquezaDados;
+    private int melhorarExperiencia;
+    private int mostrarDiferencial;
+    private int criarJornada;
+    private int mktOportunidade;
+    private Timestamp data;
 
     // Getters and Setters
-    public int getIdQues() {
-        return idQues;
+    public int getId() {
+        return id;
     }
 
-    public void setIdQues(int idQues) {
-        this.idQues = idQues;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getNomeQues() {
-        return nomeQues;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeQues(String nomeQues) {
-        this.nomeQues = nomeQues;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public long getTelQues() {
-        return telQues;
+    public long getTelefone() {
+        return telefone;
     }
 
-    public void setTelQues(long telQues) {
-        this.telQues = telQues;
+    public void setTelefone(long telefone) {
+        this.telefone = telefone;
     }
 
-    public String getEmailQues() {
-        return emailQues;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailQues(String emailQues) {
-        this.emailQues = emailQues;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getNomeEmpQues() {
-        return nomeEmpQues;
+    public String getNomeEmpresa() {
+        return nomeEmpresa;
     }
 
-    public void setNomeEmpQues(String nomeEmpQues) {
-        this.nomeEmpQues = nomeEmpQues;
+    public void setNomeEmpresa(String nomeEmpresa) {
+        this.nomeEmpresa = nomeEmpresa;
     }
 
-    public String getSegQues() {
-        return segQues;
+    public String getSegmento() {
+        return segmento;
     }
 
-    public void setSegQues(String segQues) {
-        this.segQues = segQues;
+    public void setSegmento(String segmento) {
+        this.segmento = segmento;
     }
 
-    public String getConheceSalesQues() {
-        return conheceSalesQues;
+    public String getConheceSalesforce() {
+        return conheceSalesforce;
     }
 
-    public void setConheceSalesQues(String conheceSalesQues) {
-        this.conheceSalesQues = conheceSalesQues;
+    public void setConheceSalesforce(String conheceSalesforce) {
+        this.conheceSalesforce = conheceSalesforce;
     }
 
-    public String getNecEmpQues() {
-        return necEmpQues;
+    public String getNecessidadeEmpresa() {
+        return necessidadeEmpresa;
     }
 
-    public void setNecEmpQues(String necEmpQues) {
-        this.necEmpQues = necEmpQues;
+    public void setNecessidadeEmpresa(String necessidadeEmpresa) {
+        this.necessidadeEmpresa = necessidadeEmpresa;
     }
 
-    public Timestamp getDataQues() {
-        return dataQues;
+    public String getProdutoImplantado() {
+        return produtoImplantado;
     }
 
-    public void setDataQues(Timestamp dataQues) {
-        this.dataQues = dataQues;
+    public void setProdutoImplantado(String produtoImplantado) {
+        this.produtoImplantado = produtoImplantado;
     }
 
-    public int getProdutoIdProd() {
-        return produtoIdProd;
+    public int getEmpresaFuncionamento() {
+        return empresaFuncionamento;
     }
 
-    public void setProdutoIdProd(int produtoIdProd) {
-        this.produtoIdProd = produtoIdProd;
+    public void setEmpresaFuncionamento(int empresaFuncionamento) {
+        this.empresaFuncionamento = empresaFuncionamento;
     }
 
-    public String getQuesProdutoImplantado() {
-        return quesProdutoImplantado;
+    public int getEstrategiasMarketing() {
+        return estrategiasMarketing;
     }
 
-    public void setQuesProdutoImplantado(String quesProdutoImplantado) {
-        this.quesProdutoImplantado = quesProdutoImplantado;
+    public void setEstrategiasMarketing(int estrategiasMarketing) {
+        this.estrategiasMarketing = estrategiasMarketing;
     }
 
-    public int getQuesEmpresaFuncionamento() {
-        return quesEmpresaFuncionamento;
+    public int getIaAutomacoes() {
+        return iaAutomacoes;
     }
 
-    public void setQuesEmpresaFuncionamento(int quesEmpresaFuncionamento) {
-        this.quesEmpresaFuncionamento = quesEmpresaFuncionamento;
+    public void setIaAutomacoes(int iaAutomacoes) {
+        this.iaAutomacoes = iaAutomacoes;
     }
 
-    public int getQuesEstrategiasMarketing() {
-        return quesEstrategiasMarketing;
+    public int getDesenvolverEstrategia() {
+        return desenvolverEstrategia;
     }
 
-    public void setQuesEstrategiasMarketing(int quesEstrategiasMarketing) {
-        this.quesEstrategiasMarketing = quesEstrategiasMarketing;
+    public void setDesenvolverEstrategia(int desenvolverEstrategia) {
+        this.desenvolverEstrategia = desenvolverEstrategia;
     }
 
-    public int getQuesIaAutomacoes() {
-        return quesIaAutomacoes;
+    public int getMelhorarComunicacao() {
+        return melhorarComunicacao;
     }
 
-    public void setQuesIaAutomacoes(int quesIaAutomacoes) {
-        this.quesIaAutomacoes = quesIaAutomacoes;
+    public void setMelhorarComunicacao(int melhorarComunicacao) {
+        this.melhorarComunicacao = melhorarComunicacao;
     }
 
-    public int getQuesDesenvolverEstrategia() {
-        return quesDesenvolverEstrategia;
+    public int getAmbienteIntegrado() {
+        return ambienteIntegrado;
     }
 
-    public void setQuesDesenvolverEstrategia(int quesDesenvolverEstrategia) {
-        this.quesDesenvolverEstrategia = quesDesenvolverEstrategia;
+    public void setAmbienteIntegrado(int ambienteIntegrado) {
+        this.ambienteIntegrado = ambienteIntegrado;
     }
 
-    public int getQuesMelhorarComunicacao() {
-        return quesMelhorarComunicacao;
+    public int getAumentoProdutividade() {
+        return aumentoProdutividade;
     }
 
-    public void setQuesMelhorarComunicacao(int quesMelhorarComunicacao) {
-        this.quesMelhorarComunicacao = quesMelhorarComunicacao;
+    public void setAumentoProdutividade(int aumentoProdutividade) {
+        this.aumentoProdutividade = aumentoProdutividade;
     }
 
-    public int getQuesAmbienteIntegrado() {
-        return quesAmbienteIntegrado;
+    public int getMelhorarCapacitacao() {
+        return melhorarCapacitacao;
     }
 
-    public void setQuesAmbienteIntegrado(int quesAmbienteIntegrado) {
-        this.quesAmbienteIntegrado = quesAmbienteIntegrado;
+    public void setMelhorarCapacitacao(int melhorarCapacitacao) {
+        this.melhorarCapacitacao = melhorarCapacitacao;
     }
 
-    public int getQuesAumentoProdutividade() {
-        return quesAumentoProdutividade;
+    public int getReducaoCusto() {
+        return reducaoCusto;
     }
 
-    public void setQuesAumentoProdutividade(int quesAumentoProdutividade) {
-        this.quesAumentoProdutividade = quesAumentoProdutividade;
+    public void setReducaoCusto(int reducaoCusto) {
+        this.reducaoCusto = reducaoCusto;
     }
 
-    public int getQuesMelhorarCapacitacao() {
-        return quesMelhorarCapacitacao;
+    public int getAumentarConversao() {
+        return aumentarConversao;
     }
 
-    public void setQuesMelhorarCapacitacao(int quesMelhorarCapacitacao) {
-        this.quesMelhorarCapacitacao = quesMelhorarCapacitacao;
+    public void setAumentarConversao(int aumentarConversao) {
+        this.aumentarConversao = aumentarConversao;
     }
 
-    public int getQuesReducaoCusto() {
-        return quesReducaoCusto;
+    public int getPotencializarVendas() {
+        return potencializarVendas;
     }
 
-    public void setQuesReducaoCusto(int quesReducaoCusto) {
-        this.quesReducaoCusto = quesReducaoCusto;
+    public void setPotencializarVendas(int potencializarVendas) {
+        this.potencializarVendas = potencializarVendas;
     }
 
-    public int getQuesAumentarConversao() {
-        return quesAumentarConversao;
+    public int getAcelerarVendas() {
+        return acelerarVendas;
     }
 
-    public void setQuesAumentarConversao(int quesAumentarConversao) {
-        this.quesAumentarConversao = quesAumentarConversao;
+    public void setAcelerarVendas(int acelerarVendas) {
+        this.acelerarVendas = acelerarVendas;
     }
 
-    public int getQuesPotencializarVendas() {
-        return quesPotencializarVendas;
+    public int getRiquezaDados() {
+        return riquezaDados;
     }
 
-    public void setQuesPotencializarVendas(int quesPotencializarVendas) {
-        this.quesPotencializarVendas = quesPotencializarVendas;
+    public void setRiquezaDados(int riquezaDados) {
+        this.riquezaDados = riquezaDados;
     }
 
-    public int getQuesAcelerarVendas() {
-        return quesAcelerarVendas;
+    public int getMelhorarExperiencia() {
+        return melhorarExperiencia;
     }
 
-    public void setQuesAcelerarVendas(int quesAcelerarVendas) {
-        this.quesAcelerarVendas = quesAcelerarVendas;
+    public void setMelhorarExperiencia(int melhorarExperiencia) {
+        this.melhorarExperiencia = melhorarExperiencia;
     }
 
-    public int getQuesRiquezaDados() {
-        return quesRiquezaDados;
+    public int getMostrarDiferencial() {
+        return mostrarDiferencial;
     }
 
-    public void setQuesRiquezaDados(int quesRiquezaDados) {
-        this.quesRiquezaDados = quesRiquezaDados;
+    public void setMostrarDiferencial(int mostrarDiferencial) {
+        this.mostrarDiferencial = mostrarDiferencial;
     }
 
-    public int getQuesMelhorarExperiencia() {
-        return quesMelhorarExperiencia;
+    public int getCriarJornada() {
+        return criarJornada;
     }
 
-    public void setQuesMelhorarExperiencia(int quesMelhorarExperiencia) {
-        this.quesMelhorarExperiencia = quesMelhorarExperiencia;
+    public void setCriarJornada(int criarJornada) {
+        this.criarJornada = criarJornada;
     }
 
-    public int getQuesMostrarDiferencial() {
-        return quesMostrarDiferencial;
+    public int getMktOportunidade() {
+        return mktOportunidade;
     }
 
-    public void setQuesMostrarDiferencial(int quesMostrarDiferencial) {
-        this.quesMostrarDiferencial = quesMostrarDiferencial;
+    public void setMktOportunidade(int mktOportunidade) {
+        this.mktOportunidade = mktOportunidade;
     }
 
-    public int getQuesCriarJornada() {
-        return quesCriarJornada;
+    public Timestamp getData() {
+        return data;
     }
 
-    public void setQuesCriarJornada(int quesCriarJornada) {
-        this.quesCriarJornada = quesCriarJornada;
-    }
-
-    public int getQuesMarketingOportunidade() {
-        return quesMarketingOportunidade;
-    }
-
-    public void setQuesMarketingOportunidade(int quesMarketingOportunidade) {
-        this.quesMarketingOportunidade = quesMarketingOportunidade;
+    public void setData(Timestamp data) {
+        this.data = data;
     }
 }
