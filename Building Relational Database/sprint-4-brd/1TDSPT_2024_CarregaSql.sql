@@ -12,6 +12,7 @@ DROP TABLE Produto CASCADE CONSTRAINTS;
 DROP TABLE Questionario CASCADE CONSTRAINTS;
 DROP TABLE Tamanho_Empresa CASCADE CONSTRAINTS;
 DROP TABLE Sobre_Empresa CASCADE CONSTRAINTS;
+DROP TABLE Visitante CASCADE CONSTRAINTS;
 
 -- Criação das tabelas
 
@@ -43,8 +44,15 @@ CREATE TABLE Sobre_Empresa (
     id_emp INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
     desc_sobre_emp VARCHAR2(40) NOT NULL
 );
-
 ALTER TABLE Sobre_Empresa ADD CONSTRAINT sobre_empresa_pk PRIMARY KEY(id_emp);
+
+-- Visitante
+CREATE TABLE Visitante (
+    id_vis INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
+    hora_entrada_vis TIMESTAMP NOT NULL,
+    hora_saida_vis TIMESTAMP
+);
+ALTER TABLE Visitante ADD CONSTRAINT visitante_pk PRIMARY KEY(id_vis);
 
 -- Contato (Formulário de Contato)
 CREATE TABLE Contato (
@@ -57,7 +65,8 @@ CREATE TABLE Contato (
     msg_con VARCHAR2(600),
     data_con TIMESTAMP,
     produto_id_prod INTEGER,
-    tamanho_empresa_id_tam_emp INTEGER
+    tamanho_empresa_id_tam_emp INTEGER,
+    visitante_id_vis INTEGER NOT NULL
 );
 ALTER TABLE Contato ADD CONSTRAINT contato_pk PRIMARY KEY(id_con);
 
@@ -71,7 +80,8 @@ CREATE TABLE Cadastro (
     senha_cad VARCHAR2(60) NOT NULL,
     data_cad TIMESTAMP NOT NULL,
     genero_id_gen INTEGER NOT NULL,
-    sobre_emp_id_emp INTEGER NOT NULL
+    sobre_emp_id_emp INTEGER NOT NULL,
+    visitante_id_vis INTEGER NOT NULL
 );
 ALTER TABLE Cadastro ADD CONSTRAINT cadastro_pk PRIMARY KEY(id_cad);
 
@@ -103,7 +113,8 @@ CREATE TABLE Questionario (
     mostrar_diferencial_ques NUMBER(1),
     criar_jornada_ques NUMBER(1),
     mkt_oportunidade_ques NUMBER(1),
-    data_ques TIMESTAMP NOT NULL
+    data_ques TIMESTAMP NOT NULL,
+    visitante_id_vis INTEGER NOT NULL
 );
 ALTER TABLE Questionario ADD CONSTRAINT questionario_pk PRIMARY KEY(id_ques);
 
@@ -114,7 +125,8 @@ CREATE TABLE Quest_Feedback (
     email_feedback VARCHAR2(60) NOT NULL,
     avaliacao_feedback INTEGER NOT NULL,
     data_feedback TIMESTAMP NOT NULL,
-    msg_feedback VARCHAR2(600)
+    msg_feedback VARCHAR2(600),
+    visitante_id_vis INTEGER NOT NULL
 );
 ALTER TABLE Quest_Feedback ADD CONSTRAINT feedback_pk PRIMARY KEY(id_feedback);
 
@@ -124,16 +136,27 @@ ALTER TABLE Contato
 ADD CONSTRAINT contato_produto_fk FOREIGN KEY(produto_id_prod) REFERENCES Produto(id_prod);
 ALTER TABLE Contato
 ADD CONSTRAINT contato_tamanho_empresa_fk FOREIGN KEY(tamanho_empresa_id_tam_emp) REFERENCES Tamanho_Empresa(id_tam_emp);
+ALTER TABLE Contato
+ADD CONSTRAINT contato_visitante_fk FOREIGN KEY(visitante_id_vis) REFERENCES Visitante(id_vis);
 
 -- FKs na tabela Cadastro
 ALTER TABLE Cadastro
 ADD CONSTRAINT cad_genero_fk FOREIGN KEY(genero_id_gen) REFERENCES Genero(id_gen);
 ALTER TABLE Cadastro
 ADD CONSTRAINT cad_sobre_emp_fk FOREIGN KEY(sobre_emp_id_emp) REFERENCES Sobre_Empresa(id_emp);
+ALTER TABLE Cadastro
+ADD CONSTRAINT cadastro_visitante_fk FOREIGN KEY(visitante_id_vis) REFERENCES Visitante(id_vis);
 
+-- FKs na tabela Questionario
+ALTER TABLE Questionario
+ADD CONSTRAINT questionario_visitante_fk FOREIGN KEY(visitante_id_vis) REFERENCES Visitante(id_vis);
+
+-- FKs na tabela Quest_Feedback
+ALTER TABLE Quest_Feedback
+ADD CONSTRAINT feedback_visitante_fk FOREIGN KEY(visitante_id_vis) REFERENCES Visitante(id_vis);
 
 -- Inserção de linhas de dados (INSERT)
--- Inserção de dados na tabela genero
+-- Inserção de dados na tabela Genero
 INSERT INTO Genero (desc_gen)
 VALUES ('Feminino');
 
@@ -162,6 +185,9 @@ VALUES ('Vendas', 'Soluções para gestão de vendas', 'Serviço');
 INSERT INTO Produto (nome_prod, desc_prod, cat_prod) 
 VALUES ('Marketing', 'Ferramenta de campanhas de marketing', 'Software');
 
+INSERT INTO Produto (nome_prod, desc_prod, cat_prod) 
+VALUES ('Heroku', 'Ferramenta de administração da empresa', 'Administração');
+
 -- Inserção de dados na tabela Tamanho_Empresa
 INSERT INTO Tamanho_Empresa (desc_tam_emp) 
 VALUES ('Pequena');
@@ -188,72 +214,69 @@ VALUES ('Filiado');
 INSERT INTO Sobre_Empresa (desc_sobre_emp)
 VALUES ('Estudante');
 
-COMMIT;
+-- Inserção de dados na tabela Visitante
+INSERT INTO Visitante (hora_entrada_vis, hora_saida_vis) VALUES (SYSDATE, SYSDATE + INTERVAL '2' HOUR);
 
--- Inserções para trabalharmos com o relatório para a Sprint
 -- Inserção de dados na tabela Contato
-INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp)
-VALUES ('Maria Silva', 'maria.silva@example.com', '123456789', 'Tecnologia', 'Gerente de TI', 'Gostaria de mais informações sobre os produtos.', SYSDATE, 1, 2);
+INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp, visitante_id_vis)
+VALUES ('Maria Silva', 'maria.silva@example.com', '123456789', 'Tecnologia', 'Gerente de TI', 'Gostaria de mais informações sobre os produtos.', SYSDATE, 1, 2, 1);
 
-INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp)
-VALUES ('José Souza', 'jose.souza@example.com', '987654321', 'Vendas', 'Diretor de Vendas', 'Interessado em uma demonstração do produto.', SYSDATE, 2, 3);
+INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp, visitante_id_vis)
+VALUES ('José Souza', 'jose.souza@example.com', '987654321', 'Vendas', 'Diretor de Vendas', 'Interessado em uma demonstração do produto.', SYSDATE, 2, 3, 1);
 
-INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp)
-VALUES ('Ana Costa', 'ana.costa@example.com', '456789123', 'Marketing', 'Especialista em Marketing', 'Preciso de mais detalhes sobre as funcionalidades.', SYSDATE, 3, 1);
+INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp, visitante_id_vis)
+VALUES ('Ana Costa', 'ana.costa@example.com', '456789123', 'Marketing', 'Especialista em Marketing', 'Preciso de mais detalhes sobre as funcionalidades.', SYSDATE, 3, 1, 1);
 
-INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp)
-VALUES ('Carlos Pereira', 'carlos.pereira@example.com', '321654987', 'RH', 'Analista de Recursos Humanos', 'Qual é o preço do produto?', SYSDATE, 4, 4);
+INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp, visitante_id_vis)
+VALUES ('Carlos Pereira', 'carlos.pereira@example.com', '321654987', 'RH', 'Analista de Recursos Humanos', 'Qual é o preço do produto?', SYSDATE, 4, 4, 1);
 
-INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp)
-VALUES ('Fernanda Lima', 'fernanda.lima@example.com', '789123456', 'Finanças', 'Gerente Financeiro', 'Gostaria de saber sobre as opções de pagamento.', SYSDATE, 5, 2);
-
+INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp, visitante_id_vis)
+VALUES ('Fernanda Lima', 'fernanda.lima@example.com', '789123456', 'Finanças', 'Gerente Financeiro', 'Gostaria de saber sobre as opções de pagamento.', SYSDATE, 5, 2, 1);
 
 -- Inserção de dados na tabela Cadastro
-INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp)
-VALUES ('João', 'Santos', 'joao.santos@example.com', '999888777', 'senha123', SYSDATE, 2, 1);
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp, visitante_id_vis)
+VALUES ('João', 'Santos', 'joao.santos@example.com', '999888777', 'senha123', SYSDATE, 2, 1, 1);
 
-INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp)
-VALUES ('Mariana', 'Oliveira', 'mariana.oliveira@example.com', '888777666', 'senha456', SYSDATE, 1, 2);
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp, visitante_id_vis)
+VALUES ('Mariana', 'Oliveira', 'mariana.oliveira@example.com', '888777666', 'senha456', SYSDATE, 1, 2, 1);
 
-INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp)
-VALUES ('Carlos', 'Lima', 'carlos.lima@example.com', '777666555', 'senha789', SYSDATE, 2, 3);
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp, visitante_id_vis)
+VALUES ('Carlos', 'Lima', 'carlos.lima@example.com', '777666555', 'senha789', SYSDATE, 2, 3, 1);
 
-INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp)
-VALUES ('Fernanda', 'Costa', 'fernanda.costa@example.com', '666555444', 'senha101', SYSDATE, 1, 4);
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp, visitante_id_vis)
+VALUES ('Fernanda', 'Costa', 'fernanda.costa@example.com', '666555444', 'senha101', SYSDATE, 1, 4, 1);
 
-INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp)
-VALUES ('Ricardo', 'Pereira', 'ricardo.pereira@example.com', '555444333', 'senha202', SYSDATE, 3, 1);
-
+INSERT INTO Cadastro (nome_cad, sobrenome_cad, email_cad, cel_cad, senha_cad, data_cad, genero_id_gen, sobre_emp_id_emp, visitante_id_vis)
+VALUES ('Ricardo', 'Pereira', 'ricardo.pereira@example.com', '555444333', 'senha202', SYSDATE, 3, 1, 1);
 
 -- Inserção de dados na tabela Questionario
-INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques)
-VALUES ('Pedro Almeida', 'pedro.almeida@gmail.com', '111222333', 'Tech Solutions', 'Tecnologia', 'Sim', 'Necessitamos de uma solução robusta para gestão de clientes.', 'Sim', 1, 1, 4, 1, 3, 2, 5, 4, 3, 2, 4, 3, 2, 4, 5, 2, 1, TO_TIMESTAMP('18/01/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'));
+INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques, visitante_id_vis)
+VALUES ('Pedro Almeida', 'pedro.almeida@gmail.com', '111222333', 'Tech Solutions', 'Tecnologia', 'Sim', 'Necessitamos de uma solução robusta para gestão de clientes.', 'Sim', 1, 1, 4, 1, 3, 2, 5, 4, 3, 2, 4, 3, 2, 4, 5, 2, 1, TO_TIMESTAMP('18/01/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'), 1);
 
-INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques)
-VALUES ('Ana Ribeiro', 'ana.ribeiro@gmail.com', '222333444', 'Marketing Experts', 'Marketing', 'Não', 'Precisamos melhorar nossas campanhas de marketing.', 'Não', 1, 2, 4, 3, 1, 3, 3, 3, 2, 4, 2, 4, 3, 4, 3, 2, 5, TO_TIMESTAMP('08/02/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'));
+INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques, visitante_id_vis)
+VALUES ('Ana Ribeiro', 'ana.ribeiro@gmail.com', '222333444', 'Marketing Experts', 'Marketing', 'Não', 'Precisamos melhorar nossas campanhas de marketing.', 'Não', 1, 2, 4, 3, 1, 3, 3, 3, 2, 4, 2, 4, 3, 4, 3, 2, 5, TO_TIMESTAMP('08/02/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'), 1);
 
-INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques)
-VALUES ('Lucas Santos', 'lucas.santos@example.com', '333444555', 'Financial Advisors', 'Finanças', 'Sim', 'Estamos procurando uma solução para otimizar nossas operações financeiras.', 'Sim', 3, 4, 2, 4, 4, 4, 3, 2, 1, 3, 4, 3, 2, 4, 3, 4, 3, TO_TIMESTAMP('14/03/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'));
+INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques, visitante_id_vis)
+VALUES ('Lucas Santos', 'lucas.santos@example.com', '333444555', 'Financial Advisors', 'Finanças', 'Sim', 'Estamos procurando uma solução para otimizar nossas operações financeiras.', 'Sim', 3, 4, 2, 4, 4, 4, 3, 2, 1, 3, 4, 3, 2, 4, 3, 4, 3, TO_TIMESTAMP('14/03/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'), 1);
 
-INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques)
-VALUES ('Mariana Souza', 'mariana.souza@example.com', '444555666', 'EduTech', 'Educação', 'Não', 'Queremos melhorar a experiência de nossos alunos com novas tecnologias.', 'Não', 0, 3, 4, 2, 4, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 1, 1, TO_TIMESTAMP('22/04/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'));
+INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques, visitante_id_vis)
+VALUES ('Mariana Souza', 'mariana.souza@example.com', '444555666', 'EduTech', 'Educação', 'Não', 'Queremos melhorar a experiência de nossos alunos com novas tecnologias.', 'Não', 0, 3, 4, 2, 4, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 1, 1, TO_TIMESTAMP('22/04/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'), 1);
 
-INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques)
-VALUES ('Ricardo Fernandes', 'ricardo.fernandes@example.com', '555666777', 'Health Solutions', 'Saúde', 'Sim', 'Estamos interessados em soluções que possam melhorar nossa gestão de pacientes.', 'Sim', 3, 4, 4, 4, 3, 2, 4, 3, 4, 3, 2, 2, 1, 3, 4, 4, 3, TO_TIMESTAMP('29/05/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'));
+INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques, visitante_id_vis)
+VALUES ('Ricardo Fernandes', 'ricardo.fernandes@example.com', '555666777', 'Health Solutions', 'Saúde', 'Sim', 'Estamos interessados em soluções que possam melhorar nossa gestão de pacientes.', 'Sim', 3, 4, 4, 4, 3, 2, 4, 3, 4, 3, 2, 2, 1, 3, 4, 4, 3, TO_TIMESTAMP('29/05/2024 10:30:00', 'DD/MM/YYYY HH24:MI:SS'), 1);
 
+-- Inserção de dados na tabela Quest_Feedback
+INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback, visitante_id_vis)
+VALUES ('João Pimenta', 'joao.pimenta@example.com', 5, TO_TIMESTAMP('21/01/2024 11:01:00', 'DD/MM/YYYY HH24:MI:SS'), 'Ótimo serviço, experiência muito satisfatória.', 1);
 
--- inserção de dados na tabela Feedback
-INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback)
-VALUES ('João Pimenta', 'joao.pimenta@example.com', 5, TO_TIMESTAMP('21/01/2024 11:01:00', 'Ótimo serviço, experiência muito satisfatória.');
+INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback, visitante_id_vis)
+VALUES ('Maria Oliveira', 'maria.oliveira@example.com', 3, TO_TIMESTAMP('11/02/2024 18:45:00', 'DD/MM/YYYY HH24:MI:SS'), 'Atendimento mediano, poderia melhorar.', 1);
 
-INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback)
-VALUES ('Maria Oliveira', 'maria.oliveira@example.com', 3, TO_TIMESTAMP('11/02/2024 18:45:00', 'DD/MM/YYYY HH24:MI:SS'), 'Atendimento mediano, poderia melhorar.');
+INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback, visitante_id_vis)
+VALUES ('Carlos Costa', 'carlos.costa@example.com', 4, TO_TIMESTAMP('08/04/2024 09:55:00', 'DD/MM/YYYY HH24:MI:SS'), 'Serviço bom, mas há espaço para aprimoramento.', 1);
 
-INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback)
-VALUES ('Carlos Costa', 'carlos.costa@example.com', 4, TO_TIMESTAMP('08/04/2024 09:55:00', 'DD/MM/YYYY HH24:MI:SS'), 'Serviço bom, mas há espaço para aprimoramento.');
-
-INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback)
-VALUES ('Ana Júlia', 'aninhatdb@gmail.com', 2, TO_TIMESTAMP('03/01/2024 21:53:00', 'DD/MM/YYYY HH24:MI:SS'), 'Nossa detestei esse site!');
+INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback, visitante_id_vis)
+VALUES ('Ana Júlia', 'aninhatdb@gmail.com', 2, TO_TIMESTAMP('03/01/2024 21:53:00', 'DD/MM/YYYY HH24:MI:SS'), 'Nossa detestei esse site!', 1);
 
 COMMIT;
 
@@ -266,7 +289,7 @@ SELECT * FROM Produto;
 SELECT * FROM Questionario;
 SELECT * FROM Tamanho_Empresa;
 SELECT * FROM Sobre_Empresa;
-
+SELECT * FROM Visitante;
 
 -- Exemplos de Atualização de dados (UPDATE)
 
@@ -275,38 +298,44 @@ UPDATE Cadastro
 SET email_cad = 'mariana@gmail.com'
 WHERE id_cad = 2;
 
-
 -- Alteração da coluna do tamanho da empresa do contato do id 1
 UPDATE Contato
 SET tamanho_empresa_id_tam_emp = 3
 WHERE id_con = 1;
-
 
 -- Alteração do segmento do Questionário de id 1
 UPDATE Questionario
 SET seg_ques = 'Engenharia'
 WHERE id_ques = 1;
 
-
 -- Exemplos de Remoção de dados (DELETE)
 -- Primeiro precisamos remover as constraints de FK para poder deletar
 -- Remover as FK na tabela Contato
 ALTER TABLE Contato DROP CONSTRAINT contato_produto_fk CASCADE;
 ALTER TABLE Contato DROP CONSTRAINT contato_tamanho_empresa_fk CASCADE;
+ALTER TABLE Contato DROP CONSTRAINT contato_visitante_fk CASCADE;
 
 -- Remover as FK na tabela Cadastro
 ALTER TABLE Cadastro DROP CONSTRAINT cad_genero_fk CASCADE;
 ALTER TABLE Cadastro DROP CONSTRAINT cad_sobre_emp_fk CASCADE;
+ALTER TABLE Cadastro DROP CONSTRAINT cadastro_visitante_fk CASCADE;
+
+-- Remover as FK na tabela Questionario
+ALTER TABLE Questionario DROP CONSTRAINT questionario_visitante_fk CASCADE;
+
+-- Remover as FK na tabela Quest_Feedback
+ALTER TABLE Quest_Feedback DROP CONSTRAINT feedback_visitante_fk CASCADE;
 
 -- Agora vamos deletar os dados que queremos das tabelas
--- Deletar registros da tabela Produto onde cat_prod é 'Serviço'
-DELETE FROM Produto WHERE cat_prod = 'Serviço';
+-- Deletar registros da tabela Produto onde cat_prod é 'Administração'
+DELETE FROM Produto WHERE cat_prod = 'Administração';
 
 -- Deletar registros da tabela Quest_Feedback onde avaliacao_feedback <= 3
 DELETE FROM Quest_Feedback WHERE avaliacao_feedback <= 3;
 
 -- Deletar registros da tabela Questionario onde email_ques contém '@gmail.com'
 DELETE FROM Questionario WHERE email_ques LIKE '%@gmail.com';
+
 
 -- Adicionar novamente as constraints de chave estrangeira na tabela Contato
 ALTER TABLE Contato ADD CONSTRAINT contato_produto_fk
@@ -315,6 +344,9 @@ FOREIGN KEY (produto_id_prod) REFERENCES Produto(id_prod);
 ALTER TABLE Contato ADD CONSTRAINT contato_tamanho_empresa_fk
 FOREIGN KEY (tamanho_empresa_id_tam_emp) REFERENCES Tamanho_Empresa(id_tam_emp);
 
+ALTER TABLE Contato ADD CONSTRAINT contato_visitante_fk
+FOREIGN KEY (visitante_id_vis) REFERENCES Visitante(id_vis);
+
 -- Adicionar novamente as constraints de chave estrangeira na tabela Cadastro
 ALTER TABLE Cadastro ADD CONSTRAINT cad_genero_fk
 FOREIGN KEY (genero_id_gen) REFERENCES Genero(id_gen);
@@ -322,27 +354,38 @@ FOREIGN KEY (genero_id_gen) REFERENCES Genero(id_gen);
 ALTER TABLE Cadastro ADD CONSTRAINT cad_sobre_emp_fk
 FOREIGN KEY (sobre_emp_id_emp) REFERENCES Sobre_Empresa(id_emp);
 
+ALTER TABLE Cadastro ADD CONSTRAINT cadastro_visitante_fk
+FOREIGN KEY (visitante_id_vis) REFERENCES Visitante(id_vis);
+
+-- Adicionar novamente as constraints de chave estrangeira na tabela Questionario
+ALTER TABLE Questionario ADD CONSTRAINT questionario_visitante_fk
+FOREIGN KEY (visitante_id_vis) REFERENCES Visitante(id_vis);
+
+-- Adicionar novamente as constraints de chave estrangeira na tabela Quest_Feedback
+ALTER TABLE Quest_Feedback ADD CONSTRAINT feedback_visitante_fk
+FOREIGN KEY (visitante_id_vis) REFERENCES Visitante(id_vis);
 
 COMMIT;
+
 -- Linguagem de Consulta de Dados (DQL/SQL)
 -- Antes de trabalhar com os relatórios, inserimos mais dados para mais resultados
-INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques)
-VALUES ('Igor Marcondes', 'iguinho@hotmail.com', '444555666', 'IgTech', 'Automobilismo', 'Não', 'Queremos vender mais e economizar dinheiro.', 'Não', 0, 3, 4, 2, 4, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 1, 1, TO_TIMESTAMP('05/05/2024 00:30:00', 'DD/MM/YYYY HH24:MI:SS'));
+INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques, visitante_id_vis)
+VALUES ('Igor Marcondes', 'iguinho@hotmail.com', '444555666', 'IgTech', 'Automobilismo', 'Não', 'Queremos vender mais e economizar dinheiro.', 'Não', 0, 3, 4, 2, 4, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 1, 1, TO_TIMESTAMP('05/05/2024 00:30:00', 'DD/MM/YYYY HH24:MI:SS'), 1);
 
-INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques)
-VALUES ('Nath Comeron', 'nathzinha@email.com', '555666777', 'Nath Ideias', 'Design', 'Sim', 'Estamos interessados em ideias para atrair mais alunos.', 'Sim', 3, 4, 4, 4, 3, 2, 4, 3, 4, 3, 2, 2, 1, 3, 4, 4, 3, TO_TIMESTAMP('02/03/2024 11:34:00', 'DD/MM/YYYY HH24:MI:SS'));
+INSERT INTO Questionario (nome_ques, email_ques, tel_ques, nome_emp_ques, seg_ques, conhece_sales_ques, nec_emp_ques, prod_implantado_ques, prod_funcionamento_ques, estrategias_mkt_ques, ia_automacoes_ques, des_estrategia_ques, melhorar_comunicacao_ques, ambiente_integrado_ques, aumento_produtividade_ques, melhorar_capacitacao_ques, reducao_custo_ques, aumentar_conversao_ques, potencializar_vendas_ques, acelerar_vendas_ques, riqueza_dados_ques, melhorar_exp_ques, mostrar_diferencial_ques, criar_jornada_ques, mkt_oportunidade_ques, data_ques, visitante_id_vis)
+VALUES ('Nath Comeron', 'nathzinha@email.com', '555666777', 'Nath Ideias', 'Design', 'Sim', 'Estamos interessados em ideias para atrair mais alunos.', 'Sim', 3, 4, 4, 4, 3, 2, 4, 3, 4, 3, 2, 2, 1, 3, 4, 4, 3, TO_TIMESTAMP('02/03/2024 11:34:00', 'DD/MM/YYYY HH24:MI:SS'), 1);
 
-INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback)
-VALUES ('Rita Maria', 'maria.rita@hotmail.com', 5, TO_TIMESTAMP('11/10/2023 10:59:00'), 'Site incrível amei!');
+INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback, visitante_id_vis)
+VALUES ('Rita Maria', 'maria.rita@hotmail.com', 5, TO_TIMESTAMP('11/10/2023 10:59:00'), 'Site incrível amei!', 1);
 
-INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback)
-VALUES ('Bruno Cassio', 'cassio.bruno@exemplo.com', 2, TO_TIMESTAMP('18/01/2023 10:53:00'), 'Mandei mensagem e até agora não fui atendido');
+INSERT INTO Quest_Feedback (nome_feedback, email_feedback, avaliacao_feedback, data_feedback, msg_feedback, visitante_id_vis)
+VALUES ('Bruno Cassio', 'cassio.bruno@exemplo.com', 2, TO_TIMESTAMP('18/01/2023 10:53:00'), 'Mandei mensagem e até agora não fui atendido', 1);
 
-INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp)
-VALUES ('Camila Andrade', 'and_camila@gmail.com', '678435678', 'Moda', 'Estilista', 'Gostaria de entender mais como funciona', SYSDATE, 4, 4);
+INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp, visitante_id_vis)
+VALUES ('Camila Andrade', 'and_camila@gmail.com', '678435678', 'Moda', 'Estilista', 'Gostaria de entender mais como funciona', SYSDATE, 4, 4, 1);
 
-INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp)
-VALUES ('Luís Leonardo', 'leo_luis@hotmail.com', '98732136', 'Indústria', 'Desenvolvedor', 'Como faço para adquirir os serviços?', SYSDATE, 5, 2);
+INSERT INTO Contato (nome_con, email_con, tel_con, seg_con, cargo_con, msg_con, data_con, produto_id_prod, tamanho_empresa_id_tam_emp, visitante_id_vis)
+VALUES ('Luís Leonardo', 'leo_luis@hotmail.com', '98732136', 'Indústria', 'Desenvolvedor', 'Como faço para adquirir os serviços?', SYSDATE, 5, 2, 1);
 
 COMMIT;
 
@@ -365,7 +408,6 @@ SELECT
 FROM
     Quest_Feedback;
 
-
 -- Relatório utilizando alguma função de grupo
 -- Contagem de Cadastros Agrupados por Gênero
 SELECT
@@ -379,7 +421,6 @@ GROUP BY
     g.desc_gen
 ORDER BY
     "Número de Cadastros" DESC;
-
 
 -- Relatório utilizando sub consulta
 -- Contatos com Categoria do Produto
@@ -395,7 +436,6 @@ FROM
     Contato c
 ORDER BY
     c.nome_con;
-
 
 -- Relatório utilizando junção de tabelas
 -- Cadastros com Informações de Gênero e Empresa
