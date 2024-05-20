@@ -3,9 +3,14 @@ package br.com.fiap.model.vo;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Timestamp;
 
+/**
+ * Classe que representa um contato.
+ * Contém informações pessoais, de contato e detalhes profissionais do contato, além de dados relacionados ao produto e tamanho da empresa.
+ */
 @XmlRootElement
 public class Contato {
 
+	//Atributos
 	private int id;
 	private String nome;
 	private String email;
@@ -97,19 +102,16 @@ public class Contato {
 		this.tamanhoEmpresaId = tamanhoEmpresaId;
 	}
 
+	// ToString para formatar os dados
 	@Override
 	public String toString() {
-		return "Contato{" +
-				"id=" + id +
-				", nome='" + nome + '\'' +
-				", email='" + email + '\'' +
-				", telefone='" + telefone + '\'' +
-				", segmento='" + segmento + '\'' +
-				", cargo='" + cargo + '\'' +
-				", msg " + mensagem +
-				", data=" + data +
-				", produtoId=" + produtoId +
-				", tamanhoEmpresaId=" + tamanhoEmpresaId +
-				'}';
+		return  "\nNome: " + getNome() +
+				"\nE-mail: " + getEmail() +
+				"\nTelefone: " + getTelefone() +
+				"\nSegmento: " + getSegmento() +
+				"\nCargo: " + getCargo() +
+				"\nMensagem: " + getMensagem() +
+				"\nId Produto: " + getProdutoId() +
+				"\nId Tam. Empresa: " + getTamanhoEmpresaId();
 	}
 }

@@ -26,7 +26,7 @@ public class Config {
     private static void loadProperties() {
         try (InputStream input = Config.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
-                System.out.println("Sorry, unable to find config.properties");
+                System.out.println("Não foi possível encontrar o arqvuivo config.properties");
                 return;
             }
             properties.load(input);

@@ -8,8 +8,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Implementação da interface QuestionarioDao para operações de persistência relacionadas ao objeto Questionario.
+ * Esta classe utiliza JDBC para interagir com o banco de dados.
+ */
 public class QuestionarioDaoImpl implements QuestionarioDao {
 
+    /**
+     * Insere um novo questionário no banco de dados.
+     *
+     * @param questionario O objeto Questionario a ser inserido.
+     */
     @Override
     public void inserir(Questionario questionario) {
         String sql = "INSERT INTO Questionario (" +
@@ -23,6 +32,7 @@ public class QuestionarioDaoImpl implements QuestionarioDao {
         try (Connection conn = ConexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            // Configura os parâmetros da instrução SQL
             stmt.setString(1, questionario.getNome());
             stmt.setLong(2, questionario.getTelefone());
             stmt.setString(3, questionario.getEmail());
@@ -49,36 +59,15 @@ public class QuestionarioDaoImpl implements QuestionarioDao {
             stmt.setInt(24, questionario.getCriarJornada());
             stmt.setInt(25, questionario.getMktOportunidade());
 
-            // Logging the values for debugging purposes
-            System.out.println("PreparedStatement Values:");
-            System.out.println("nome_ques: " + questionario.getNome());
-            System.out.println("tel_ques: " + questionario.getTelefone());
-            System.out.println("email_ques: " + questionario.getEmail());
-            System.out.println("nome_emp_ques: " + questionario.getNomeEmpresa());
-            System.out.println("seg_ques: " + questionario.getSegmento());
-            System.out.println("conhece_sales_ques: " + questionario.getConheceSalesforce());
-            System.out.println("nec_emp_ques: " + questionario.getNecessidadeEmpresa());
-            System.out.println("prod_implantado_ques: " + questionario.getProdutoImplantado());
-            System.out.println("prod_funcionamento_ques: " + questionario.getEmpresaFuncionamento());
-            System.out.println("estrategias_mkt_ques: " + questionario.getEstrategiasMarketing());
-            System.out.println("ia_automacoes_ques: " + questionario.getIaAutomacoes());
-            System.out.println("des_estrategia_ques: " + questionario.getDesenvolverEstrategia());
-            System.out.println("melhorar_comunicacao_ques: " + questionario.getMelhorarComunicacao());
-            System.out.println("ambiente_integrado_ques: " + questionario.getAmbienteIntegrado());
-            System.out.println("aumento_produtividade_ques: " + questionario.getAumentoProdutividade());
-            System.out.println("melhorar_capacitacao_ques: " + questionario.getMelhorarCapacitacao());
-            System.out.println("reducao_custo_ques: " + questionario.getReducaoCusto());
-            System.out.println("aumentar_conversao_ques: " + questionario.getAumentarConversao());
-            System.out.println("potencializar_vendas_ques: " + questionario.getPotencializarVendas());
-            System.out.println("acelerar_vendas_ques: " + questionario.getAcelerarVendas());
-            System.out.println("riqueza_dados_ques: " + questionario.getRiquezaDados());
-            System.out.println("melhorar_exp_ques: " + questionario.getMelhorarExperiencia());
-            System.out.println("mostrar_diferencial_ques: " + questionario.getMostrarDiferencial());
-            System.out.println("criar_jornada_ques: " + questionario.getCriarJornada());
-            System.out.println("mkt_oportunidade_ques: " + questionario.getMktOportunidade());
-
-            stmt.executeUpdate();
+            // Executa a inserção
+            int dadosAlterados = stmt.executeUpdate();
+            if (dadosAlterados > 0) {
+                System.out.println("Questionário inserido com sucesso!");
+            } else {
+                System.err.println("Erro: Nenhum questionário foi inserido.");
+            }
         } catch (SQLException e) {
+            System.err.println("Erro ao inserir questionário.");
             e.printStackTrace();
         }
     }

@@ -2,14 +2,21 @@ package br.com.fiap.model.vo;
 
 import java.sql.Timestamp;
 
+/**
+ * Classe que representa o feedback de um questionário.
+ * Contém informações sobre o feedback fornecido pelo usuário, incluindo nome, email, avaliação, data e mensagem.
+ */
 public class QuestFeedback {
-    private int id;
 
+    // Atributos
+    private int id;
     private String nome;
     private String email;
     private int avaliacao;
     private Timestamp data;
     private String mensagem;
+
+    // Getters & Setters
 
     public int getId() {
         return id;
@@ -59,15 +66,12 @@ public class QuestFeedback {
         this.mensagem = mensagem;
     }
 
-
+    // ToString para formatar os dados
     @Override
     public String toString() {
-        return "QuestFeedback{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", avaliacao=" + avaliacao +
-                ", data=" + data +
-                ", mensagem='" + mensagem + '\'' +
-                '}';
+        return  "\nNome: " + getNome() +
+                "\nE-mail: " + getEmail() +
+                "\nAvaliação: " + getAvaliacao() +
+                "\nMensagem: " + getMensagem();
     }
 }

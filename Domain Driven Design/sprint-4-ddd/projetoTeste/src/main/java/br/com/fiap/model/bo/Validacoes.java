@@ -17,10 +17,6 @@ public class Validacoes {
             System.out.println("O nome deve ter entre 2 e 30 caracteres.");
             return false;
         }
-        if (!nome.matches("^[A-Za-z0-9]+$")) { //Não pode ter espaço o usuário!
-            System.out.println("O nome contém caracteres inválidos.");
-            return false;
-        }
         return true;
     }
 
@@ -51,11 +47,29 @@ public class Validacoes {
      */
     public static boolean validarSenha(String senha) {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!*@#$%^&+=])(?=\\S+$).{6,}$";
-
+        //ESTE METODO FOI RETIRADO DAS VALIDAÇÕES POIS O FRONT FEZ UMA VALIDAÇÃO DIFERENTE AFF
         if (senha.matches(regex)) {
             return true;
         } else {
             System.out.println("A senha deve conter no mínimo 6 caracteres, incluindo pelo menos um número, uma letra maiúscula, uma letra minúscula e um caractere especial.");
+            return false;
+        }
+    }
+
+    /**
+     * Valida um número de telefone garantindo que ele esteja no formato correto.
+     *
+     * @param telefone O número de telefone a ser validado.
+     * @return true se o número de telefone estiver em um formato válido.
+     */
+    public static boolean validarTelefone(String telefone) {
+        // Regex para validar o telefone (exemplo simples, ajuste conforme necessário)
+        String regex = "^[0-9]{8,15}$"; // Exemplo: aceita números de 10 a 15 dígitos
+
+        if (telefone.matches(regex)) {
+            return true;
+        } else {
+            System.out.printf("O telefone %s é inválido.\n", telefone);
             return false;
         }
     }

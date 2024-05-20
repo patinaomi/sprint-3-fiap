@@ -14,19 +14,35 @@ import javax.ws.rs.core.UriInfo;
 import br.com.fiap.controller.QuestFeedbackController;
 import br.com.fiap.model.vo.QuestFeedback;
 
+/**
+ * Recurso RESTful para operações relacionadas ao feedback de questionários.
+ * Fornece endpoints para inserir feedbacks via HTTP.
+ */
 @Path("/feedback")
 public class QuestFeedbackResource {
 
     private QuestFeedbackController questFeedbackController = new QuestFeedbackController();
 
-    // Inserir (POST)
+    /**
+     * Endpoint para inserir um novo feedback de questionário.
+     *
+     * @param feedback O objeto QuestFeedback a ser inserido.
+     * @param uriInfo Informações de URI para construir o URI do recurso criado.
+     * @return A resposta HTTP indicando o resultado da operação.
+     */
     @POST
     @Path("/inserir")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response cadastroFeedback(QuestFeedback feedback, @Context UriInfo uriInfo) throws ClassNotFoundException, SQLException {
-        questFeedbackController.inserir(feedback);
-        UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-        builder.path(Integer.toString(feedback.getId()));
-        return Response.created(builder.build()).build();
+    public Response cadastroFeedback(QuestFeedback feedback, @Context UriInfo uriInfo) {
+        try {
+            questFeedbackController.inserir(feedback);
+            System.out.println("Dados recebidos: " + feedback);
+            UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+            builder.path(Integer.toString(feedback.getId()));
+            return Response.created(builder.build()).build();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao inserir feedback").build();
+        }
     }
 }

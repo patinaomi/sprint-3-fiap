@@ -2,7 +2,14 @@ package br.com.fiap.model.vo;
 
 import java.sql.Timestamp;
 
+/**
+ * Classe que representa um questionário.
+ * Contém informações sobre o questionário preenchido pelo usuário, incluindo dados pessoais,
+ * informações de contato, informações sobre a empresa e respostas a perguntas específicas do questionário do site.
+ */
 public class Questionario {
+
+    // Atributos
     private int id;
     private String nome;
     private long telefone;
@@ -247,4 +254,33 @@ public class Questionario {
     public void setData(Timestamp data) {
         this.data = data;
     }
+
+    // ToString para formatar os dados
+    @Override
+    public String toString() {
+        return  "\nNome: " + getNome() +
+                "\nTelefone: " + getTelefone() +
+                "\nE-mail: " + getEmail() +
+                "\nNome da Empresa: " + getNomeEmpresa() +
+                "\nSegmento: " + getSegmento() +
+                "\nConhece Salesforce: " + getConheceSalesforce() +
+                "\nNecessidade Empresa: " + getNecessidadeEmpresa() +
+                "\nProduto Implantado: " + getProdutoImplantado() +
+                "\nEmpresa Funcionamento: " + getEmpresaFuncionamento() +
+                "\nIA Automações: " + getIaAutomacoes() +
+                "\nDesenvolver Estratégia: " + getDesenvolverEstrategia() +
+                "\nMelhorar Comunicação: " + getMelhorarComunicacao() +
+                "\nAmbiente Integrado: " + getAmbienteIntegrado() +
+                "\nAumento Produtividade: " + getAumentoProdutividade() +
+                "\nRedução Custos: " + getReducaoCusto() +
+                "\nAumentar Conversão: " + getAumentarConversao() +
+                "\nPotencializar Vendas: " + getPotencializarVendas() +
+                "\nAcelerar Vendas: " + getAcelerarVendas() +
+                "\nRiqueza Dados: " + getRiquezaDados() +
+                "\nMelhorar Experiência: " + getMelhorarExperiencia() +
+                "\nMostrar Diferencial: " + getMostrarDiferencial() +
+                "\nCriar Jornada: " + getCriarJornada() +
+                "\nMKT Oportunidade: " + getMktOportunidade();
+    }
+
 }

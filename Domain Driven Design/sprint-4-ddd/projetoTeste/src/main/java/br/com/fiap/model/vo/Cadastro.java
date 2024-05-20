@@ -2,19 +2,25 @@ package br.com.fiap.model.vo;
 
 import java.sql.Timestamp;
 
+/**
+ * Classe que representa um cadastro de usuário.
+ * Contém informações pessoais e de contato do usuário, além de dados relacionados à empresa e gênero.
+ */
 public class Cadastro {
+
+    // Atributos
     private int id;
     private String nome;
     private String sobrenome;
     private String email;
     private String celular;
-    private String funcao;
     private String senha;
     private Timestamp data;
     private int generoId;
     private int sobreEmpresaId;
 
 
+    // Getters & Setters
     public int getId() {
         return id;
     }
@@ -55,14 +61,6 @@ public class Cadastro {
         this.celular = celular;
     }
 
-    public String getFuncao() {
-        return funcao;
-    }
-
-    public void setFuncao(String funcao) {
-        this.funcao = funcao;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -95,19 +93,15 @@ public class Cadastro {
         this.sobreEmpresaId = sobreEmpresaId;
     }
 
+    // ToString para formatar os dados
     @Override
     public String toString() {
-        return "Login{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", sobrenome='" + sobrenome + '\'' +
-                ", email='" + email + '\'' +
-                ", celular='" + celular + '\'' +
-                ", funcao='" + funcao + '\'' +
-                ", senha='" + senha + '\'' +
-                ", data=" + data +
-                ", generoId=" + generoId +
-                ", tamanhoEmpresaId=" + sobreEmpresaId +
-                '}';
+        return  "\nNome: " + getNome() +
+                "\nSobrenome: " + getSobrenome() +
+                "\nE-mail: " + getEmail() +
+                "\nCelular: " + getCelular() +
+                "\nSenha: " + getSenha() +
+                "\nId Gênero: " + getGeneroId() +
+                "\nId Empresa: " + getSobreEmpresaId();
     }
 }
