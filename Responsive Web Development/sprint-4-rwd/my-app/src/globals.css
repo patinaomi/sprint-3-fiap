@@ -1,0 +1,136 @@
+
+/* Definindo as fontes personalizadas */
+@font-face {
+    font-family: 'FonteOrelega';
+    src: url('/assets/fonts/Orelega_One/OrelegaOne-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'FonteSen';
+    src: url('/assets/fonts/Sen/static/Sen-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteSen';
+    src: url('/assets/fonts/Sen/static/Sen-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteSen';
+    src: url('/assets/fonts/Sen/static/Sen-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteSen';
+    src: url('/assets/fonts/Sen/static/Sen-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteSen';
+    src: url('/assets/fonts/Sen/static/Sen-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'FonteManrope';
+    src: url('/assets/fonts/Manrope/static/Manrope-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteManrope';
+    src: url('/assets/fonts/Manrope/static/Manrope-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteManrope';
+    src: url('/assets/fonts/Manrope/static/Manrope-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'FonteManrope';
+    src: url('/assets/fonts/Manrope/static/Manrope-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteManrope';
+    src: url('/assets/fonts/Manrope/static/Manrope-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteManrope';
+    src: url('/assets/fonts/Manrope/static/Manrope-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'FonteManrope';
+    src: url('/assets/fonts/Manrope/static/Manrope-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+body {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* Personalizações para o Menu */
+.mobile-menu {
+  @apply fixed inset-0 z-50 bg-white/85 backdrop-blur-sm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem; 
+  height: 100vh;
+}
+
+.close-button {
+  @apply font-bold text-lg;
+  color: red;
+}
+
+/* Persoalização do chat */
+
+#watson-chat {
+  position: fixed; /* Ou absolute */
+  bottom: 20px; /* Ajuste a posição conforme necessário */
+  right: 20px;
+}

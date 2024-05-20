@@ -92,7 +92,7 @@ export default function FormDescoberta() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    saveDataToCSV(InformacoesFormulario);
+    // saveDataToCSV(InformacoesFormulario);
     const dadosFormularioJson = JSON.stringify(InformacoesFormulario);
     localStorage.setItem("InformacoesFormulario", dadosFormularioJson);
 

@@ -117,7 +117,19 @@ export default function Contact() {
       );
       if (response.ok) {
         alert("Dados enviados com sucesso!");
-      } else {
+
+        setInformacoesFormulario({
+          nome: "",
+          email: "",
+          telefone: "",
+          tamanho: "",
+          segmento: "",
+          produto: "",
+          cargo: "",
+          mensagem: "",
+
+      });
+     } else {
         alert("Falha ao enviar os dados.");
       }
     } catch (error) {
@@ -140,8 +152,9 @@ export default function Contact() {
       <div className="bg-white dark:bg-gray-700 w-full p-6">
         <form
           className="flex flex-col justify-center gap-5"
-          action="#"
+          action="post"
           onSubmit={handleSubmit}
+          name="formulario-contato"
         >
           <div className="flex justify-between items-center">
             <div className=" text-[#667085] w-full font-sen text-4xl h-20 flex justify-start items-center dark:text-white">
