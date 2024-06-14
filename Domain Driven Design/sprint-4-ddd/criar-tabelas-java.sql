@@ -29,8 +29,7 @@ CREATE TABLE Usuario (
   sobrenome_usuario VARCHAR2(80) NOT NULL,
   email_usuario VARCHAR2(80) UNIQUE NOT NULL,
   senha_usuario VARCHAR2(80) NOT NULL,
-  tel_usuario VARCHAR2(30) NOT NULL,
-  id_visitante INTEGER REFERENCES Visitante(id_visitante)
+  tel_usuario VARCHAR2(30) NOT NULL
 );
 
 -- Genero
