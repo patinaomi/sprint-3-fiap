@@ -97,6 +97,16 @@ def consultar_feedback(secret):
     return consulta_db(comando, secret)
 
 
+def atualizar_sentimento(secret, feedback_id, sentimento):
+    comando = """
+    UPDATE FEEDBACK
+    SET sentimento_feedback = :sentimento
+    WHERE id = :id
+    """
+    params = {'sentimento_feedback': sentimento, 'id_feedback': feedback_id}
+    return operacao_db(comando, secret, params)
+
+
 # Análise de Sentimentos
 def analisar_sentimentos(feedbacks):
     openai.api_key = "sk-proj-qYLceiDdSCkAXV0ujfkcT3BlbkFJHknF8zf3yGKeeUPyWKtX"
@@ -133,12 +143,12 @@ def main():
 
     feedbacks = consultar_feedback(secret)
     if feedbacks:
-        feedbacks_analisados = analisar_sentimentos(feedbacks)
+        feedbacks_analisados = analisar_sentimentos(feedbacks, secret)
         insights = obter_insights(feedbacks_analisados)
 
         print("Feedbacks analisados:")
         for feedback in feedbacks_analisados:
-            print(f"Nome: {feedback[0]}, Email: {feedback[1]}, Avaliação: {feedback[2]}, Mensagem: {feedback[3]}, Sentimento: {feedback[4]}")
+            print(f"Nome: {feedback[1]}, Email: {feedback[2]}, Avaliação: {feedback[3]}, Mensagem: {feedback[4]}, Sentimento: {feedback[5]}")
 
         print("\nInsights para melhorias no site:")
         print(insights)
