@@ -9,7 +9,7 @@ DROP TABLE Tamanho_Empresa CASCADE CONSTRAINTS;
 DROP TABLE Sobre_Empresa CASCADE CONSTRAINTS;
 DROP TABLE Usuario CASCADE CONSTRAINTS;
 DROP TABLE Login CASCADE CONSTRAINTS;
-DROP TABLE Consulta_Produto CASCADE CONSTRAINTS;
+DROP TABLE Consulta CASCADE CONSTRAINTS;
 
 -- Criação das tabelas
 
@@ -132,18 +132,19 @@ CREATE TABLE Quest_Feedback (
     email_feedback VARCHAR2(60),
     avaliacao_feedback INTEGER,
     data_feedback TIMESTAMP,
-    msg_feedback VARCHAR2(600)
+    msg_feedback VARCHAR2(600),
+    sentimento_feedback VARCHAR2(50)
 );
 ALTER TABLE Quest_Feedback ADD CONSTRAINT feedback_pk PRIMARY KEY(id_feedback);
 
 
-CREATE TABLE Consulta_Produto (
+CREATE TABLE Consulta (
     id_consulta INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) NOT NULL,
     perg_consulta VARCHAR2(900) NOT NULL,
     resp_consulta VARCHAR2(900) NOT NULL,
     data_consulta TIMESTAMP NOT NULL
 );
-ALTER TABLE Consulta_Produto ADD CONSTRAINT consulta_pk PRIMARY KEY(id_consulta);
+ALTER TABLE Consulta ADD CONSTRAINT consulta_pk PRIMARY KEY(id_consulta);
 
 
 -- Inserindo Foreign Keys
