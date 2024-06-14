@@ -30,22 +30,7 @@ public class QuestFeedbackBo {
      * @throws SQLException Se ocorrer um erro ao inserir o feedback.
      */
     public void inserir(QuestFeedback questFeedback) throws SQLException {
-        validarQuestFeedback(questFeedback);
         questFeedbackDao.inserir(questFeedback);
     }
 
-    /**
-     * Valida o objeto QuestFeedback aplicando regras de negócio.
-     *
-     * @param questFeedback O objeto QuestFeedback a ser validado.
-     * @throws IllegalArgumentException Se alguma validação falhar.
-     */
-    private void validarQuestFeedback(QuestFeedback questFeedback) {
-        if (!Validacoes.validarEmail(questFeedback.getEmail())) {
-            throw new IllegalArgumentException("Email inválido.");
-        }
-        if (questFeedback.getAvaliacao() < 1 || questFeedback.getAvaliacao() > 5) {
-            throw new IllegalArgumentException("Avaliação deve ser entre 1 e 5.");
-        }
-    }
 }

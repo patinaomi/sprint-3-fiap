@@ -1,13 +1,11 @@
 package br.com.fiap.model.vo;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Timestamp;
 
 /**
  * Classe que representa um contato.
  * Contém informações pessoais, de contato e detalhes profissionais do contato, além de dados relacionados ao produto e tamanho da empresa.
  */
-@XmlRootElement
 public class Contato {
 
 	//Atributos
