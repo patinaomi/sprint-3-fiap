@@ -1,18 +1,15 @@
 package br.com.fiap.service;
 
 import br.com.fiap.config.Config;
-import br.com.fiap.model.bo.CadastroBo;
-import br.com.fiap.model.bo.ConsultaProdutoBo;
+import br.com.fiap.model.bo.ContatoBo;
+import br.com.fiap.model.bo.ConsultaBo;
 import br.com.fiap.model.bo.QuestFeedbackBo;
 import br.com.fiap.model.bo.Validacoes;
-import br.com.fiap.model.dao.CadastroDao;
-import br.com.fiap.model.dao.ConsultaProdutoDao;
-import br.com.fiap.model.dao.QuestFeedbackDao;
-import br.com.fiap.model.dao.impl.CadastroDaoImpl;
-import br.com.fiap.model.dao.impl.ConsultaProdutoDaoImpl;
+import br.com.fiap.model.dao.impl.ConsultaDaoImpl;
+import br.com.fiap.model.dao.impl.ContatoDaoImpl;
 import br.com.fiap.model.dao.impl.QuestFeedbackDaoImpl;
-import br.com.fiap.model.vo.Cadastro;
-import br.com.fiap.model.vo.ConsultaProduto;
+import br.com.fiap.model.vo.Consulta;
+import br.com.fiap.model.vo.Contato;
 import br.com.fiap.model.vo.QuestFeedback;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
@@ -37,12 +34,12 @@ public class TelegramService {
     private OpenAiService openAiService;
     private TextToSpeechService textToSpeechService;
 
-    private CadastroBo cadastroBo;
-    private ConsultaProdutoBo consultaProdutoBo;
+    private ContatoBo contatoBo;
+    private ConsultaBo consultaBo;
     private QuestFeedbackBo questFeedbackBo;
 
     private Map<String, String> userStates = new HashMap<>();
-    private Map<String, Cadastro> tempUsers = new HashMap<>();
+    private Map<Object, Contato> tempUsers = new HashMap<Object, Contato>();
     private Map<String, QuestFeedback> tempFeedbacks = new HashMap<>();
 
     /**
@@ -55,8 +52,8 @@ public class TelegramService {
         this.bot = new TelegramBot(token);
         this.openAiService = openAiService;
         this.textToSpeechService = new TextToSpeechService();
-        this.cadastroBo = new CadastroBo(new CadastroDaoImpl());
-        this.consultaProdutoBo = new ConsultaProdutoBo(new ConsultaProdutoDaoImpl());
+        this.contatoBo = new ContatoBo(new ContatoDaoImpl());
+        this.consultaBo = new ConsultaBo(new ConsultaDaoImpl());
         this.questFeedbackBo = new QuestFeedbackBo(new QuestFeedbackDaoImpl());
     }
 
@@ -102,11 +99,11 @@ public class TelegramService {
                 case "/start":
                     opcaoStart(chatId);
                     break;
-                case "/cadastro":
-                    opcaoCadastro(chatId);
+                case "/contato":
+                    opcaoContato(chatId);
                     break;
-                case "/duvida":
-                    opcaoProdutos(chatId);
+                case "/consulta":
+                    opcaoConsulta(chatId);
                     break;
                 case "/feedback":
                     opcaoFeedback(chatId);
@@ -125,14 +122,21 @@ public class TelegramService {
         String chatId = String.valueOf(callbackQuery.message().chat().id());
         String data = callbackQuery.data();
 
-        if (data.equals("texto") || data.equals("audio")) {
-            fluxoProdutos(chatId, data);
+        if (data.startsWith("consulta_")) {
+            boolean isAudio = data.equals("consulta_audio");
+            userStates.put(chatId, isAudio ? "awaiting_consulta_audio_query" : "awaiting_consulta_text_query");
+            bot.execute(new SendMessage(chatId, "Escreva a sua pergunta sobre a Salesforce:"));
         } else if (data.equals("feedback_sim")) {
             opcaoFeedback(chatId);
         } else if (data.equals("feedback_nao")) {
             bot.execute(new SendMessage(chatId, "Obrigado por usar nossos serviços!"));
+        } else if (data.startsWith("produto_")) {
+            fluxoContato(chatId, data);
+        } else if (data.startsWith("tamanho_")) {
+            fluxoContato(chatId, data);
         }
     }
+
 
     private void opcaoStart(String chatId) {
         String welcomeMessage = "Bem-vindo ao SalesBot! Utilize o menu inferior à esquerda para acessar as opções.";
@@ -140,34 +144,24 @@ public class TelegramService {
         userStates.put(chatId, null);
     }
 
-    private void opcaoCadastro(String chatId) {
+    private void opcaoContato(String chatId) {
         bot.execute(new SendMessage(chatId, "Digite seu nome:"));
-        userStates.put(chatId, "awaiting_first_name");
+        userStates.put(chatId, "awaiting_nome");
     }
 
-    private void fluxoCadastro(String chatId, String userText) {
+    private void fluxoContato(String chatId, String userText) {
         String state = userStates.get(chatId);
-        Cadastro cadastro = tempUsers.getOrDefault(chatId, new Cadastro());
+        Contato contato = tempUsers.getOrDefault(chatId, new Contato());
 
         try {
             switch (state) {
-                case "awaiting_first_name":
+                case "awaiting_nome":
                     if (!Validacoes.validarUsuario(userText)) {
                         bot.execute(new SendMessage(chatId, "Erro: Nome inválido. O nome deve ter entre 2 e 30 caracteres."));
                         return;
                     }
-                    cadastro.setNome(userText);
-                    tempUsers.put(chatId, cadastro);
-                    userStates.put(chatId, "awaiting_last_name");
-                    bot.execute(new SendMessage(chatId, "Digite seu sobrenome:"));
-                    break;
-                case "awaiting_last_name":
-                    if (!Validacoes.validarUsuario(userText)) {
-                        bot.execute(new SendMessage(chatId, "Erro: Sobrenome inválido. O sobrenome deve ter entre 2 e 30 caracteres."));
-                        return;
-                    }
-                    cadastro.setSobrenome(userText);
-                    tempUsers.put(chatId, cadastro);
+                    contato.setNome(userText);
+                    tempUsers.put(chatId, contato);
                     userStates.put(chatId, "awaiting_email");
                     bot.execute(new SendMessage(chatId, "Digite seu e-mail:"));
                     break;
@@ -176,64 +170,110 @@ public class TelegramService {
                         bot.execute(new SendMessage(chatId, "Erro: Email inválido. Por favor, insira um email válido."));
                         return;
                     }
-                    cadastro.setEmail(userText);
-                    tempUsers.put(chatId, cadastro);
-                    userStates.put(chatId, "awaiting_password");
-                    bot.execute(new SendMessage(chatId, "Crie uma senha:"));
-                    break;
-                case "awaiting_password":
-                    if (!Validacoes.validarSenha(userText)) {
-                        bot.execute(new SendMessage(chatId, "Erro: A senha deve conter no mínimo 6 caracteres, incluindo pelo menos um número, uma letra maiúscula, uma letra minúscula e um caractere especial."));
-                        return;
-                    }
-                    cadastro.setSenha(userText);
-                    tempUsers.put(chatId, cadastro);
-                    userStates.put(chatId, "awaiting_telephone");
+                    contato.setEmail(userText);
+                    tempUsers.put(chatId, contato);
+                    userStates.put(chatId, "awaiting_telefone");
                     bot.execute(new SendMessage(chatId, "Digite seu telefone:"));
                     break;
-                case "awaiting_telephone":
-                    if (!Validacoes.validarTelefone(userText)) {
+                case "awaiting_telefone":
+                    String telefoneLimpo = userText.replaceAll("[^0-9]", "");
+                    if (!Validacoes.validarTelefone(telefoneLimpo)) {
                         bot.execute(new SendMessage(chatId, "Erro: Telefone inválido. Use apenas números."));
                         return;
                     }
-                    cadastro.setCelular(userText.replaceAll("[^0-9]", ""));
-                    cadastroBo.inserir(cadastro);
-                    bot.execute(new SendMessage(chatId, "Cadastro concluído com sucesso!"));
+                    contato.setTelefone(telefoneLimpo);
+                    tempUsers.put(chatId, contato);
+                    userStates.put(chatId, "awaiting_segmento");
+                    bot.execute(new SendMessage(chatId, "Digite seu segmento:"));
+                    break;
+                case "awaiting_segmento":
+                    contato.setSegmento(userText);
+                    tempUsers.put(chatId, contato);
+                    userStates.put(chatId, "awaiting_cargo");
+                    bot.execute(new SendMessage(chatId, "Digite seu cargo:"));
+                    break;
+                case "awaiting_cargo":
+                    contato.setCargo(userText);
+                    tempUsers.put(chatId, contato);
+                    userStates.put(chatId, "awaiting_mensagem");
+                    bot.execute(new SendMessage(chatId, "Digite sua mensagem:"));
+                    break;
+                case "awaiting_mensagem":
+                    contato.setMensagem(userText);
+                    tempUsers.put(chatId, contato);
+                    userStates.put(chatId, "awaiting_produto");
+                    bot.execute(new SendMessage(chatId, "Escolha o produto de interesse:")
+                            .replyMarkup(new InlineKeyboardMarkup(
+                                    new InlineKeyboardButton("Atendimento").callbackData("produto_1"),
+                                    new InlineKeyboardButton("Cloud").callbackData("produto_2"),
+                                    new InlineKeyboardButton("Slack").callbackData("produto_3"),
+                                    new InlineKeyboardButton("Einstein").callbackData("produto_4"),
+                                    new InlineKeyboardButton("Vendas").callbackData("produto_5"),
+                                    new InlineKeyboardButton("Marketing").callbackData("produto_6")
+                            )));
+                    break;
+                case "awaiting_produto":
+                    if (!userText.startsWith("produto_")) {
+                        bot.execute(new SendMessage(chatId, "Erro: Selecione uma opção válida."));
+                        return;
+                    }
+                    int produtoId = Integer.parseInt(userText.split("_")[1]);
+                    contato.setProdutoId(produtoId);
+                    tempUsers.put(chatId, contato);
+                    userStates.put(chatId, "awaiting_tamanho_empresa");
+                    bot.execute(new SendMessage(chatId, "Escolha o tamanho da empresa:")
+                            .replyMarkup(new InlineKeyboardMarkup(
+                                    new InlineKeyboardButton("Pequena").callbackData("tamanho_1"),
+                                    new InlineKeyboardButton("Média").callbackData("tamanho_2"),
+                                    new InlineKeyboardButton("Grande").callbackData("tamanho_3"),
+                                    new InlineKeyboardButton("Multinacional").callbackData("tamanho_4")
+                            )));
+                    break;
+                case "awaiting_tamanho_empresa":
+                    if (!userText.startsWith("tamanho_")) {
+                        bot.execute(new SendMessage(chatId, "Erro: Selecione uma opção válida."));
+                        return;
+                    }
+                    int tamanhoEmpresaId = Integer.parseInt(userText.split("_")[1]);
+                    contato.setTamanhoEmpresaId(tamanhoEmpresaId);
+                    contatoBo.inserir(contato);
+                    bot.execute(new SendMessage(chatId, "Contato concluído com sucesso!"));
                     tempUsers.remove(chatId);
                     userStates.remove(chatId);
                     break;
             }
         } catch (SQLException e) {
-            System.err.println("Erro ao registrar usuário: " + e.getMessage());
-            bot.execute(new SendMessage(chatId, "Erro: Tivemos um problema ao fazer seu cadastro!"));
+            System.err.println("Erro ao registrar contato: " + e.getMessage());
+            bot.execute(new SendMessage(chatId, "Erro: Tivemos um problema ao registrar seu contato!"));
             tempUsers.remove(chatId);
             userStates.remove(chatId);
         }
     }
 
-    private void opcaoProdutos(String chatId) {
+
+    private void opcaoConsulta(String chatId) {
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Texto").callbackData("texto"),
-                new InlineKeyboardButton("Áudio").callbackData("audio")
+                new InlineKeyboardButton("Texto").callbackData("consulta_texto"),
+                new InlineKeyboardButton("Áudio").callbackData("consulta_audio")
         );
         bot.execute(new SendMessage(chatId, "Você gostaria de receber a resposta em texto ou áudio?").replyMarkup(keyboard));
-        userStates.put(chatId, "awaiting_produtos_response_type");
+        userStates.put(chatId, "awaiting_consulta_response_type");
     }
 
-    private void fluxoProdutos(String chatId, String userText) {
+    private void fluxoConsulta(String chatId, String userText) {
         boolean isAudio = userText.equals("audio");
-        userStates.put(chatId, isAudio ? "awaiting_produtos_audio_query" : "awaiting_produtos_text_query");
-        bot.execute(new SendMessage(chatId, "Escreva a sua pergunta sobre produtos da Salesforce:"));
+        userStates.put(chatId, isAudio ? "awaiting_consulta_audio_query" : "awaiting_consulta_text_query");
+        bot.execute(new SendMessage(chatId, "Escreva a sua pergunta sobre a Salesforce:"));
     }
 
-    private void handleProdutoQuery(String chatId, String userText, boolean isAudio) {
-        ConsultaProduto consulta = new ConsultaProduto();
+    private void handleConsultaQuery(String chatId, String userText, boolean isAudio) {
+        Consulta consulta = new Consulta();
         consulta.setPergunta(userText);
         String responseText = openAiService.gerarInformacao(userText);
         consulta.setResposta(responseText);
 
         try {
-            consultaProdutoBo.inserir(consulta);
+            consultaBo.inserir(consulta);
         } catch (SQLException e) {
             System.err.println("Erro ao armazenar consulta: " + e.getMessage());
         }
@@ -260,6 +300,7 @@ public class TelegramService {
 
         userStates.remove(chatId);
     }
+
 
     private void perguntarFeedback(String chatId) {
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
@@ -339,21 +380,24 @@ public class TelegramService {
         if (state != null) {
             try {
                 switch (state) {
-                    case "awaiting_first_name":
-                    case "awaiting_last_name":
+                    case "awaiting_nome":
                     case "awaiting_email":
-                    case "awaiting_password":
-                    case "awaiting_telephone":
-                        fluxoCadastro(chatId, userText);
+                    case "awaiting_telefone":
+                    case "awaiting_segmento":
+                    case "awaiting_cargo":
+                    case "awaiting_mensagem":
+                    case "awaiting_produto":
+                    case "awaiting_tamanho_empresa":
+                        fluxoContato(chatId, userText);
                         break;
-                    case "awaiting_produtos_response_type":
-                        fluxoProdutos(chatId, userText);
+                    case "awaiting_consulta_response_type":
+                        fluxoConsulta(chatId, userText);
                         break;
-                    case "awaiting_produtos_text_query":
-                        handleProdutoQuery(chatId, userText, false);
+                    case "awaiting_consulta_text_query":
+                        handleConsultaQuery(chatId, userText, false);
                         break;
-                    case "awaiting_produtos_audio_query":
-                        handleProdutoQuery(chatId, userText, true);
+                    case "awaiting_consulta_audio_query":
+                        handleConsultaQuery(chatId, userText, true);
                         break;
                     case "awaiting_feedback_name":
                     case "awaiting_feedback_email":
@@ -373,6 +417,8 @@ public class TelegramService {
             opcaoDefault(chatId);
         }
     }
+
+
 
     /**
      * Configura o listener para receber atualizações do bot do Telegram e processá-las.

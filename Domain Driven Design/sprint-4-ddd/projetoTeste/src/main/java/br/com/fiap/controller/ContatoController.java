@@ -1,6 +1,7 @@
 package br.com.fiap.controller;
 
 import br.com.fiap.model.bo.ContatoBo;
+import br.com.fiap.model.dao.impl.ContatoDaoImpl;
 import br.com.fiap.model.vo.Contato;
 
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class ContatoController {
      * Inicializa a camada de negócio (ContatoBo).
      */
     public ContatoController() {
-        this.contatoBo = new ContatoBo();
+        this.contatoBo = new ContatoBo(new ContatoDaoImpl());
     }
 
     /**

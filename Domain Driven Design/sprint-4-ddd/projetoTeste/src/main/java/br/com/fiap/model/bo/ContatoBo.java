@@ -18,8 +18,8 @@ public class ContatoBo {
 	 * Construtor da classe ContatoBo.
 	 * Inicializa a camada de negócios com a implementação DAO padrão.
 	 */
-	public ContatoBo() {
-		this.contatoDao = new ContatoDaoImpl();
+	public ContatoBo(ContatoDao contatoDao) {
+		this.contatoDao = contatoDao;
 	}
 
 	/**
