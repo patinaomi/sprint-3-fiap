@@ -2,15 +2,18 @@ package br.com.fiap.service;
 
 import br.com.fiap.config.Config;
 import br.com.fiap.model.bo.ContatoBo;
-import br.com.fiap.model.bo.ConsultaBo;
+import br.com.fiap.model.bo.DuvidaBo;
 import br.com.fiap.model.bo.QuestFeedbackBo;
 import br.com.fiap.model.bo.Validacoes;
-import br.com.fiap.model.dao.impl.ConsultaDaoImpl;
+import br.com.fiap.model.dao.impl.DuvidaDaoImpl;
 import br.com.fiap.model.dao.impl.ContatoDaoImpl;
 import br.com.fiap.model.dao.impl.QuestFeedbackDaoImpl;
-import br.com.fiap.model.vo.Consulta;
+import br.com.fiap.model.vo.Duvida;
 import br.com.fiap.model.vo.Contato;
 import br.com.fiap.model.vo.QuestFeedback;
+import br.com.fiap.model.vo.Cadastro;
+import br.com.fiap.model.dao.impl.CadastroDaoImpl;
+import br.com.fiap.model.bo.CadastroBo;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.CallbackQuery;
@@ -33,13 +36,13 @@ public class TelegramService {
     private TelegramBot bot;
     private OpenAiService openAiService;
     private TextToSpeechService textToSpeechService;
-
     private ContatoBo contatoBo;
-    private ConsultaBo consultaBo;
+    private DuvidaBo duvidaBo;
     private QuestFeedbackBo questFeedbackBo;
-
+    private CadastroBo cadastroBo;
     private Map<String, String> userStates = new HashMap<>();
     private Map<Object, Contato> tempUsers = new HashMap<Object, Contato>();
+    private Map<Object, Cadastro> tempCadastros = new HashMap<Object, Cadastro>();
     private Map<String, QuestFeedback> tempFeedbacks = new HashMap<>();
 
     /**
@@ -53,8 +56,9 @@ public class TelegramService {
         this.openAiService = openAiService;
         this.textToSpeechService = new TextToSpeechService();
         this.contatoBo = new ContatoBo(new ContatoDaoImpl());
-        this.consultaBo = new ConsultaBo(new ConsultaDaoImpl());
+        this.duvidaBo = new DuvidaBo(new DuvidaDaoImpl());
         this.questFeedbackBo = new QuestFeedbackBo(new QuestFeedbackDaoImpl());
+        this.cadastroBo = new CadastroBo(new CadastroDaoImpl());
     }
 
     /**
@@ -99,11 +103,14 @@ public class TelegramService {
                 case "/start":
                     opcaoStart(chatId);
                     break;
+                case "/cadastro":
+                    opcaoCadastro(chatId);
+                    break;
                 case "/contato":
                     opcaoContato(chatId);
                     break;
-                case "/consulta":
-                    opcaoConsulta(chatId);
+                case "/duvida":
+                    opcaoDuvida(chatId);
                     break;
                 case "/feedback":
                     opcaoFeedback(chatId);
@@ -134,9 +141,12 @@ public class TelegramService {
             fluxoContato(chatId, data);
         } else if (data.startsWith("tamanho_")) {
             fluxoContato(chatId, data);
+        } else if (data.startsWith("genero_")) {
+            fluxoCadastro(chatId, data);
+        } else if (data.startsWith("empresa_")) {
+            fluxoCadastro(chatId, data);
         }
     }
-
 
     private void opcaoStart(String chatId) {
         String welcomeMessage = "Bem-vindo ao SalesBot! Utilize o menu inferior à esquerda para acessar as opções.";
@@ -250,8 +260,112 @@ public class TelegramService {
         }
     }
 
+    private void opcaoCadastro(String chatId) {
+        bot.execute(new SendMessage(chatId, "Digite seu nome:"));
+        userStates.put(chatId, "awaiting_cadastro_nome");
+    }
 
-    private void opcaoConsulta(String chatId) {
+    private void fluxoCadastro(String chatId, String userText) {
+        String state = userStates.get(chatId);
+        Cadastro cadastro = tempCadastros.getOrDefault(chatId, new Cadastro());
+
+        try {
+            switch (state) {
+                case "awaiting_cadastro_nome":
+                    if (!Validacoes.validarUsuario(userText)) {
+                        bot.execute(new SendMessage(chatId, "Erro: Nome inválido. O nome deve ter entre 2 e 30 caracteres."));
+                        return;
+                    }
+                    cadastro.setNome(userText);
+                    tempCadastros.put(chatId, cadastro);
+                    userStates.put(chatId, "awaiting_cadastro_sobrenome");
+                    bot.execute(new SendMessage(chatId, "Digite seu sobrenome:"));
+                    break;
+                case "awaiting_cadastro_sobrenome":
+                    if (!Validacoes.validarUsuario(userText)) {
+                        bot.execute(new SendMessage(chatId, "Erro: Sobrenome inválido. O sobrenome deve ter entre 2 e 30 caracteres."));
+                        return;
+                    }
+                    cadastro.setSobrenome(userText);
+                    tempCadastros.put(chatId, cadastro);
+                    userStates.put(chatId, "awaiting_cadastro_email");
+                    bot.execute(new SendMessage(chatId, "Digite seu e-mail:"));
+                    break;
+                case "awaiting_cadastro_email":
+                    if (!Validacoes.validarEmail(userText)) {
+                        bot.execute(new SendMessage(chatId, "Erro: Email inválido. Por favor, insira um email válido."));
+                        return;
+                    }
+                    cadastro.setEmail(userText);
+                    tempCadastros.put(chatId, cadastro);
+                    userStates.put(chatId, "awaiting_cadastro_telefone");
+                    bot.execute(new SendMessage(chatId, "Digite seu telefone:"));
+                    break;
+                case "awaiting_cadastro_telefone":
+                    String telefoneLimpo = userText.replaceAll("[^0-9]", "");
+                    if (!Validacoes.validarTelefone(telefoneLimpo)) {
+                        bot.execute(new SendMessage(chatId, "Erro: Telefone inválido. Use apenas números."));
+                        return;
+                    }
+                    cadastro.setCelular(telefoneLimpo);
+                    tempCadastros.put(chatId, cadastro);
+                    userStates.put(chatId, "awaiting_cadastro_senha");
+                    bot.execute(new SendMessage(chatId, "Crie uma senha:"));
+                    break;
+                case "awaiting_cadastro_senha":
+                    if (!Validacoes.validarSenha(userText)) {
+                        bot.execute(new SendMessage(chatId, "Erro: A senha deve conter no mínimo 6 caracteres, incluindo pelo menos um número, uma letra maiúscula, uma letra minúscula e um caractere especial."));
+                        return;
+                    }
+                    cadastro.setSenha(userText);
+                    tempCadastros.put(chatId, cadastro);
+                    userStates.put(chatId, "awaiting_cadastro_genero");
+                    bot.execute(new SendMessage(chatId, "Escolha seu gênero:")
+                            .replyMarkup(new InlineKeyboardMarkup(
+                                    new InlineKeyboardButton("Feminino").callbackData("genero_1"),
+                                    new InlineKeyboardButton("Masculino").callbackData("genero_2"),
+                                    new InlineKeyboardButton("Prefiro não dizer").callbackData("genero_3")
+                            )));
+                    break;
+                case "awaiting_cadastro_genero":
+                    if (!userText.startsWith("genero_")) {
+                        bot.execute(new SendMessage(chatId, "Erro: Selecione uma opção válida."));
+                        return;
+                    }
+                    int generoId = Integer.parseInt(userText.split("_")[1]);
+                    cadastro.setGeneroId(generoId);
+                    tempCadastros.put(chatId, cadastro);
+                    userStates.put(chatId, "awaiting_cadastro_sobre_empresa");
+                    bot.execute(new SendMessage(chatId, "Sobre a empresa:")
+                            .replyMarkup(new InlineKeyboardMarkup(
+                                    new InlineKeyboardButton("Funcionário").callbackData("empresa_1"),
+                                    new InlineKeyboardButton("Proprietário").callbackData("empresa_2"),
+                                    new InlineKeyboardButton("Filiado").callbackData("empresa_3"),
+                                    new InlineKeyboardButton("Estudante").callbackData("empresa_4")
+                            )));
+                    break;
+                case "awaiting_cadastro_sobre_empresa":
+                    if (!userText.startsWith("empresa_")) {
+                        bot.execute(new SendMessage(chatId, "Erro: Selecione uma opção válida."));
+                        return;
+                    }
+                    int empresaId = Integer.parseInt(userText.split("_")[1]);
+                    cadastro.setSobreEmpresaId(empresaId);
+                    cadastroBo.inserir(cadastro);
+                    bot.execute(new SendMessage(chatId, "Cadastro concluído com sucesso!"));
+                    tempCadastros.remove(chatId);
+                    userStates.remove(chatId);
+                    break;
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao registrar cadastro: " + e.getMessage());
+            bot.execute(new SendMessage(chatId, "Erro: Tivemos um problema ao fazer seu cadastro!"));
+            tempCadastros.remove(chatId);
+            userStates.remove(chatId);
+        }
+    }
+
+    private void opcaoDuvida(String chatId) {
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
                 new InlineKeyboardButton("Texto").callbackData("consulta_texto"),
                 new InlineKeyboardButton("Áudio").callbackData("consulta_audio")
@@ -260,20 +374,20 @@ public class TelegramService {
         userStates.put(chatId, "awaiting_consulta_response_type");
     }
 
-    private void fluxoConsulta(String chatId, String userText) {
+    private void fluxoDuvida(String chatId, String userText) {
         boolean isAudio = userText.equals("audio");
         userStates.put(chatId, isAudio ? "awaiting_consulta_audio_query" : "awaiting_consulta_text_query");
         bot.execute(new SendMessage(chatId, "Escreva a sua pergunta sobre a Salesforce:"));
     }
 
     private void handleConsultaQuery(String chatId, String userText, boolean isAudio) {
-        Consulta consulta = new Consulta();
-        consulta.setPergunta(userText);
+        Duvida duvida = new Duvida();
+        duvida.setPergunta(userText);
         String responseText = openAiService.gerarInformacao(userText);
-        consulta.setResposta(responseText);
+        duvida.setResposta(responseText);
 
         try {
-            consultaBo.inserir(consulta);
+            duvidaBo.inserir(duvida);
         } catch (SQLException e) {
             System.err.println("Erro ao armazenar consulta: " + e.getMessage());
         }
@@ -300,7 +414,6 @@ public class TelegramService {
 
         userStates.remove(chatId);
     }
-
 
     private void perguntarFeedback(String chatId) {
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
@@ -369,7 +482,7 @@ public class TelegramService {
     private void opcaoSite(String chatId) {
         String messageText = "Você pode visitar nosso site para mais informações.";
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup(
-                new InlineKeyboardButton("Visite nosso site").url("https://homologacao-challenge-salesforce.vercel.app/")
+                new InlineKeyboardButton("Visite nosso site").url("https://challenge-salesforce.vercel.app/")
         );
 
         bot.execute(new SendMessage(chatId, messageText).replyMarkup(keyboard));
@@ -390,8 +503,18 @@ public class TelegramService {
                     case "awaiting_tamanho_empresa":
                         fluxoContato(chatId, userText);
                         break;
+                    case "awaiting_cadastro_nome":
+                    case "awaiting_cadastro_sobrenome":
+                    case "awaiting_cadastro_email":
+                    case "awaiting_cadastro_telefone":
+                    case "awaiting_cadastro_senha":
+                    case "awaiting_cadastro_data":
+                    case "awaiting_cadastro_genero":
+                    case "awaiting_cadastro_sobre_empresa":
+                        fluxoCadastro(chatId, userText);
+                        break;
                     case "awaiting_consulta_response_type":
-                        fluxoConsulta(chatId, userText);
+                        fluxoDuvida(chatId, userText);
                         break;
                     case "awaiting_consulta_text_query":
                         handleConsultaQuery(chatId, userText, false);
@@ -417,8 +540,6 @@ public class TelegramService {
             opcaoDefault(chatId);
         }
     }
-
-
 
     /**
      * Configura o listener para receber atualizações do bot do Telegram e processá-las.
