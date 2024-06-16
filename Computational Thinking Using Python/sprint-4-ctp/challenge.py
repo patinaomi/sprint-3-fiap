@@ -1,6 +1,6 @@
 import json
 import oracledb
-from openai import OpenAI
+import requests
 
 # Funções para trabalhar com JSON
 def carregar_dados(dados):
@@ -82,12 +82,18 @@ def consulta_db(comando, secret, params=None):
         print(f'Erro: {e}')
         return None
 
-def consultar_feedback(secret):
-    comando = """
-    SELECT id_feedback, nome_feedback, email_feedback, avaliacao_feedback, msg_feedback, sentimento_feedback
-    FROM QUEST_FEEDBACK
-    WHERE avaliacao_feedback <= 3
-    """
+def consultar_feedback(secret, only_unanalyzed=False):
+    if only_unanalyzed:
+        comando = """
+        SELECT id_feedback, nome_feedback, email_feedback, avaliacao_feedback, msg_feedback, sentimento_feedback
+        FROM QUEST_FEEDBACK
+        WHERE sentimento_feedback IS NULL
+        """
+    else:
+        comando = """
+        SELECT id_feedback, nome_feedback, email_feedback, avaliacao_feedback, msg_feedback, sentimento_feedback
+        FROM QUEST_FEEDBACK
+        """
     return consulta_db(comando, secret)
 
 def atualizar_sentimento(secret, feedback_id, sentimento):
@@ -100,7 +106,7 @@ def atualizar_sentimento(secret, feedback_id, sentimento):
     return operacao_db(comando, secret, params)
 
 def analisar_sentimentos(feedbacks, secret):
-    client = OpenAI(api_key='chave-api')  # substitua com sua chave de API do OpenAI
+    api_key = 'sk-proj-qYLceiDdSCkAXV0ujfkcT3BlbkFJHknF8zf3yGKeeUPyWKtX'  # chave de API do OpenAI
 
     resultados = []
 
@@ -108,54 +114,113 @@ def analisar_sentimentos(feedbacks, secret):
         feedback_id = feedback[0]
         texto = feedback[4]  # Mensagem do feedback
 
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Você é um analista de sentimentos."},
-                {"role": "user", "content": f"Analise o sentimento do seguinte texto:\n\n{texto}\n\nResponda com positivo, negativo ou neutro."}
-            ]
+        response = requests.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": "gpt-3.5-turbo",
+                "messages": [
+                    {"role": "system", "content": "Você é um analista de sentimentos."},
+                    {"role": "user", "content": f"Analise o sentimento do seguinte texto:\n\n{texto}\n\nResponda somente com a palavra Promotor, Detrator ou Neutro."}
+                ],
+                "max_tokens": 50
+            }
         )
 
-        sentimento = response.choices[0].message.content.strip().lower()
-        resultados.append((feedback_id, feedback[1], feedback[2], feedback[3], texto, sentimento))
-        atualizar_sentimento(secret, feedback_id, sentimento)
+        if response.status_code == 200:
+            response_data = response.json()
+            if 'choices' in response_data:
+                sentimento = response_data['choices'][0]['message']['content'].strip().lower()
+                resultados.append((feedback_id, feedback[1], feedback[2], feedback[3], texto, sentimento))
+                atualizar_sentimento(secret, feedback_id, sentimento)
+            else:
+                print(f"Resposta inesperada da API: {response_data}")
+        else:
+            print(f"Erro na chamada da API: {response.status_code} - {response.text}")
 
     return resultados
 
 def obter_insights(feedbacks_analisados):
-    client = OpenAI(api_key='chave-api')  # substitua com sua chave de API do OpenAI
+    api_key = 'sk-proj-qYLceiDdSCkAXV0ujfkcT3BlbkFJHknF8zf3yGKeeUPyWKtX'  # chave de API do OpenAI
 
     todas_mensagens = " ".join([f"{feedback[4]}" for feedback in feedbacks_analisados])
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "Você é um consultor especializado em melhorias de sites."},
-            {"role": "user", "content": f"Com base nos seguintes feedbacks de clientes:\n\n{todas_mensagens}\n\nQue melhorias você sugere para o site?"}
-        ]
+    response = requests.post(
+        "https://api.openai.com/v1/chat/completions",
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        },
+        json={
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                {"role": "system", "content": "Você é um consultor especializado em melhorias de sites."},
+                {"role": "user", "content": f"Com base nos seguintes feedbacks de clientes:\n\n{todas_mensagens}\n\nQue melhorias você sugere para o site?"}
+            ],
+            "max_tokens": 300  # Aumentado para garantir que toda a resposta seja capturada
+        }
     )
 
-    insights = response.choices[0].message.content.strip()
+    if response.status_code == 200:
+        response_data = response.json()
+        if 'choices' in response_data:
+            insights = response_data['choices'][0]['message']['content'].strip()
+        else:
+            print(f"Resposta inesperada da API: {response_data}")
+            insights = "Nenhum insight disponível."
+    else:
+        print(f"Erro na chamada da API: {response.status_code} - {response.text}")
+        insights = "Erro ao obter insights."
+
     return insights
+
+def menu():
+    print("Escolha uma opção:")
+    print("1. Analisar sentimentos")
+    print("2. Obter insights")
+    print("3. Mostrar feedbacks")
+    print("4. Sair")
+    return input("Digite o número da opção desejada: ")
 
 def main():
     secret = carregar_dados('secret.json')
     if not secret:
         secret = configurar_credenciais()
 
-    feedbacks = consultar_feedback(secret)
-    if feedbacks:
-        feedbacks_analisados = analisar_sentimentos(feedbacks, secret)
-        insights = obter_insights(feedbacks_analisados)
+    while True:
+        opcao = menu()
 
-        print("Feedbacks analisados:")
-        for feedback in feedbacks_analisados:
-            print(
-                f"Nome: {feedback[1]}, Email: {feedback[2]}, Avaliação: {feedback[3]}, Mensagem: {feedback[4]}, Sentimento: {feedback[5]}")
-
-        print("\nInsights para melhorias no site:")
-        print(insights)
-    else:
-        print("Nenhum feedback considerado regular ou negativo encontrado.")
+        if opcao == '1':
+            print("Analisando sentimentos...")
+            feedbacks = consultar_feedback(secret, only_unanalyzed=True)
+            if feedbacks:
+                feedbacks_analisados = analisar_sentimentos(feedbacks, secret)
+                print("Análise de sentimentos concluída com sucesso!")
+            else:
+                print("Nenhum feedback para analisar.")
+        elif opcao == '2':
+            feedbacks = consultar_feedback(secret)
+            if feedbacks:
+                feedbacks_analisados = analisar_sentimentos(feedbacks, secret)
+                insights = obter_insights(feedbacks_analisados)
+                print("\nInsights para melhorias no site:")
+                print(insights)
+            else:
+                print("Nenhum feedback disponível.")
+        elif opcao == '3':
+            feedbacks = consultar_feedback(secret)
+            if feedbacks:
+                print("Feedbacks:")
+                for feedback in feedbacks:
+                    print(f"Nome: {feedback[1]}, Email: {feedback[2]}, Avaliação: {feedback[3]}, Mensagem: {feedback[4]}, Sentimento: {feedback[5]}")
+            else:
+                print("Nenhum feedback encontrado.")
+        elif opcao == '4':
+            break
+        else:
+            print("Opção inválida. Por favor, tente novamente.")
 
 if __name__ == "__main__":
     main()
