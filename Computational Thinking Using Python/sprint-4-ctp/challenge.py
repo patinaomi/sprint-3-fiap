@@ -143,38 +143,90 @@ def analisar_sentimentos(feedbacks, secret):
 
     return resultados
 
-def obter_insights(feedbacks_analisados):
+def obter_insights(secret):
+    feedbacks = consultar_feedback(secret)
+    if not feedbacks:
+        print("Nenhum feedback disponível.")
+        return
+
+    feedbacks_analisados = [feedback for feedback in feedbacks if feedback[5] is not None]
+
+    if not feedbacks_analisados:
+        print("Nenhum feedback analisado disponível para gerar insights.")
+        return
+
+    detratores = [f for f in feedbacks_analisados if f[5] == 'detrator']
+    promotores = [f for f in feedbacks_analisados if f[5] == 'promotor']
+
     api_key = 'sk-proj-qYLceiDdSCkAXV0ujfkcT3BlbkFJHknF8zf3yGKeeUPyWKtX'  # chave de API do OpenAI
 
-    todas_mensagens = " ".join([f"{feedback[4]}" for feedback in feedbacks_analisados])
-    response = requests.post(
-        "https://api.openai.com/v1/chat/completions",
-        headers={
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
-        },
-        json={
-            "model": "gpt-3.5-turbo",
-            "messages": [
-                {"role": "system", "content": "Você é um consultor especializado em melhorias de sites."},
-                {"role": "user", "content": f"Com base nos seguintes feedbacks de clientes:\n\n{todas_mensagens}\n\nQue melhorias você sugere para o site?"}
-            ],
-            "max_tokens": 300  # Aumentado para garantir que toda a resposta seja capturada
-        }
-    )
+    if detratores:
+        todas_mensagens_detratores = " ".join([f"{feedback[4]}" for feedback in detratores])
+        response_detratores = requests.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": "gpt-3.5-turbo",
+                "messages": [
+                    {"role": "system", "content": "Você é um consultor especializado em melhorias de sites."},
+                    {"role": "user", "content": f"Com base nos seguintes feedbacks de clientes detratores:\n\n{todas_mensagens_detratores}\n\nQue melhorias você sugere para o site?"}
+                ],
+                "max_tokens": 600  # Aumentado para garantir que toda a resposta seja capturada
+            }
+        )
 
-    if response.status_code == 200:
-        response_data = response.json()
-        if 'choices' in response_data:
-            insights = response_data['choices'][0]['message']['content'].strip()
+        if response_detratores.status_code == 200:
+            response_data_detratores = response_detratores.json()
+            if 'choices' in response_data_detratores:
+                insights_detratores = response_data_detratores['choices'][0]['message']['content'].strip()
+            else:
+                print(f"Resposta inesperada da API: {response_data_detratores}")
+                insights_detratores = "Nenhum insight disponível."
         else:
-            print(f"Resposta inesperada da API: {response_data}")
-            insights = "Nenhum insight disponível."
-    else:
-        print(f"Erro na chamada da API: {response.status_code} - {response.text}")
-        insights = "Erro ao obter insights."
+            print(f"Erro na chamada da API: {response_detratores.status_code} - {response_detratores.text}")
+            insights_detratores = "Erro ao obter insights dos detratores."
 
-    return insights
+        print("\nInsights para melhorias no site (com base nos detratores):")
+        print(insights_detratores)
+    else:
+        print("\nNenhum feedback detrator disponível para gerar insights de melhorias.")
+
+    if promotores:
+        todas_mensagens_promotores = " ".join([f"{feedback[4]}" for feedback in promotores])
+        response_promotores = requests.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": "gpt-3.5-turbo",
+                "messages": [
+                    {"role": "system", "content": "Você é um consultor especializado em melhorias de sites."},
+                    {"role": "user", "content": f"Com base nos seguintes feedbacks de clientes promotores:\n\n{todas_mensagens_promotores}\n\nO que devemos manter no site?"}
+                ],
+                "max_tokens": 600
+            }
+        )
+
+        if response_promotores.status_code == 200:
+            response_data_promotores = response_promotores.json()
+            if 'choices' in response_data_promotores:
+                insights_promotores = response_data_promotores['choices'][0]['message']['content'].strip()
+            else:
+                print(f"Resposta inesperada da API: {response_data_promotores}")
+                insights_promotores = "Nenhum insight disponível."
+        else:
+            print(f"Erro na chamada da API: {response_promotores.status_code} - {response_promotores.text}")
+            insights_promotores = "Erro ao obter insights dos promotores."
+
+        print("\nInsights sobre o que manter no site (com base nos promotores):")
+        print(insights_promotores)
+    else:
+        print("\nNenhum feedback promotor disponível para gerar insights sobre o que manter.")
 
 def menu():
     print("Escolha uma opção:")
@@ -201,14 +253,7 @@ def main():
             else:
                 print("Nenhum feedback para analisar.")
         elif opcao == '2':
-            feedbacks = consultar_feedback(secret)
-            if feedbacks:
-                feedbacks_analisados = analisar_sentimentos(feedbacks, secret)
-                insights = obter_insights(feedbacks_analisados)
-                print("\nInsights para melhorias no site:")
-                print(insights)
-            else:
-                print("Nenhum feedback disponível.")
+            obter_insights(secret)
         elif opcao == '3':
             feedbacks = consultar_feedback(secret)
             if feedbacks:
